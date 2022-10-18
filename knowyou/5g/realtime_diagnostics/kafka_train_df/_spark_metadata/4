@@ -1,0 +1,4 @@
+v1
+{"path":"file:///root/sk/5gdata/realtime_diagnostics/kafka_train_df/part-00000-5d647990-281a-4239-8ba0-406a3b07a487-c000.csv","size":0,"isDir":false,"modificationTime":1656037143000,"blockReplication":1,"blockSize":33554432,"action":"add"}
+{"path":"file:///root/sk/5gdata/realtime_diagnostics/kafka_train_df/part-00076-99bb2839-b5e4-4f0e-8bc2-9323860e97dd-c000.csv","size":2450,"isDir":false,"modificationTime":1656037144000,"blockReplication":1,"blockSize":33554432,"action":"add"}
+{"path":"file:///root/sk/5gdata/realtime_diagnostics/kafka_train_df/part-00093-74912057-0f61-4bb8-93d0-45ad5d957012-c000.csv","size":163,"isDir":false,"modificationTime":1656037144000,"blockReplication":1,"blockSize":33554432,"action":"add"}

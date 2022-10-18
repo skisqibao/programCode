@@ -1,0 +1,3 @@
+v1
+{"path":"file:///root/sk/5gdata/realtime_diagnostics/kafka_train_df/part-00000-d41e298b-523c-47e4-9641-aec8fdb6329a-c000.csv","size":0,"isDir":false,"modificationTime":1656036660000,"blockReplication":1,"blockSize":33554432,"action":"add"}
+{"path":"file:///root/sk/5gdata/realtime_diagnostics/kafka_train_df/part-00076-02e7798e-7e50-4cd5-a1ee-89ecca0ff4d5-c000.csv","size":490,"isDir":false,"modificationTime":1656036661000,"blockReplication":1,"blockSize":33554432,"action":"add"}
