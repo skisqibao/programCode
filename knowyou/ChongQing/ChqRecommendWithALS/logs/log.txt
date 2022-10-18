@@ -1,0 +1,70 @@
+2021-12-28 22:41:18,649 [main] INFO [org.apache.spark.SparkContext] - Running Spark version 2.3.0
+2021-12-28 22:41:19,021 [main] INFO [org.apache.spark.SparkContext] - Submitted application: ValidationListSize
+2021-12-28 22:41:19,147 [main] INFO [org.apache.spark.SecurityManager] - Changing view acls to: ACER,root
+2021-12-28 22:41:19,147 [main] INFO [org.apache.spark.SecurityManager] - Changing modify acls to: ACER,root
+2021-12-28 22:41:19,147 [main] INFO [org.apache.spark.SecurityManager] - Changing view acls groups to: 
+2021-12-28 22:41:19,148 [main] INFO [org.apache.spark.SecurityManager] - Changing modify acls groups to: 
+2021-12-28 22:41:19,148 [main] INFO [org.apache.spark.SecurityManager] - SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(ACER, root); groups with view permissions: Set(); users  with modify permissions: Set(ACER, root); groups with modify permissions: Set()
+2021-12-28 22:41:19,790 [main] INFO [org.apache.spark.util.Utils] - Successfully started service 'sparkDriver' on port 64108.
+2021-12-28 22:41:19,807 [main] INFO [org.apache.spark.SparkEnv] - Registering MapOutputTracker
+2021-12-28 22:41:19,821 [main] INFO [org.apache.spark.SparkEnv] - Registering BlockManagerMaster
+2021-12-28 22:41:19,823 [main] INFO [org.apache.spark.storage.BlockManagerMasterEndpoint] - Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+2021-12-28 22:41:19,824 [main] INFO [org.apache.spark.storage.BlockManagerMasterEndpoint] - BlockManagerMasterEndpoint up
+2021-12-28 22:41:19,831 [main] INFO [org.apache.spark.storage.DiskBlockManager] - Created local directory at C:\Users\ACER\AppData\Local\Temp\blockmgr-befd163a-75ab-465f-adcf-894c4e9887b7
+2021-12-28 22:41:19,847 [main] INFO [org.apache.spark.storage.memory.MemoryStore] - MemoryStore started with capacity 1990.8 MB
+2021-12-28 22:41:19,856 [main] INFO [org.apache.spark.SparkEnv] - Registering OutputCommitCoordinator
+2021-12-28 22:41:19,909 [main] INFO [org.spark_project.jetty.util.log] - Logging initialized @11228ms
+2021-12-28 22:41:19,958 [main] INFO [org.spark_project.jetty.server.Server] - jetty-9.3.z-SNAPSHOT
+2021-12-28 22:41:19,974 [main] INFO [org.spark_project.jetty.server.Server] - Started @11293ms
+2021-12-28 22:41:20,011 [main] INFO [org.spark_project.jetty.server.AbstractConnector] - Started ServerConnector@2e185cd7{HTTP/1.1,[http/1.1]}{0.0.0.0:4040}
+2021-12-28 22:41:20,012 [main] INFO [org.apache.spark.util.Utils] - Successfully started service 'SparkUI' on port 4040.
+2021-12-28 22:41:20,038 [main] INFO [org.spark_project.jetty.server.handler.ContextHandler] - Started o.s.j.s.ServletContextHandler@4fcee388{/jobs,null,AVAILABLE,@Spark}
+2021-12-28 22:41:20,038 [main] INFO [org.spark_project.jetty.server.handler.ContextHandler] - Started o.s.j.s.ServletContextHandler@40dd3977{/jobs/json,null,AVAILABLE,@Spark}
+2021-12-28 22:41:20,039 [main] INFO [org.spark_project.jetty.server.handler.ContextHandler] - Started o.s.j.s.ServletContextHandler@2f94c4db{/jobs/job,null,AVAILABLE,@Spark}
+2021-12-28 22:41:20,041 [main] INFO [org.spark_project.jetty.server.handler.ContextHandler] - Started o.s.j.s.ServletContextHandler@64bc21ac{/jobs/job/json,null,AVAILABLE,@Spark}
+2021-12-28 22:41:20,042 [main] INFO [org.spark_project.jetty.server.handler.ContextHandler] - Started o.s.j.s.ServletContextHandler@4a8a60bc{/stages,null,AVAILABLE,@Spark}
+2021-12-28 22:41:20,043 [main] INFO [org.spark_project.jetty.server.handler.ContextHandler] - Started o.s.j.s.ServletContextHandler@314b8f2d{/stages/json,null,AVAILABLE,@Spark}
+2021-12-28 22:41:20,044 [main] INFO [org.spark_project.jetty.server.handler.ContextHandler] - Started o.s.j.s.ServletContextHandler@4a3e3e8b{/stages/stage,null,AVAILABLE,@Spark}
+2021-12-28 22:41:20,046 [main] INFO [org.spark_project.jetty.server.handler.ContextHandler] - Started o.s.j.s.ServletContextHandler@72f46e16{/stages/stage/json,null,AVAILABLE,@Spark}
+2021-12-28 22:41:20,047 [main] INFO [org.spark_project.jetty.server.handler.ContextHandler] - Started o.s.j.s.ServletContextHandler@32232e55{/stages/pool,null,AVAILABLE,@Spark}
+2021-12-28 22:41:20,049 [main] INFO [org.spark_project.jetty.server.handler.ContextHandler] - Started o.s.j.s.ServletContextHandler@2416a51{/stages/pool/json,null,AVAILABLE,@Spark}
+2021-12-28 22:41:20,050 [main] INFO [org.spark_project.jetty.server.handler.ContextHandler] - Started o.s.j.s.ServletContextHandler@47874b25{/storage,null,AVAILABLE,@Spark}
+2021-12-28 22:41:20,051 [main] INFO [org.spark_project.jetty.server.handler.ContextHandler] - Started o.s.j.s.ServletContextHandler@209775a9{/storage/json,null,AVAILABLE,@Spark}
+2021-12-28 22:41:20,053 [main] INFO [org.spark_project.jetty.server.handler.ContextHandler] - Started o.s.j.s.ServletContextHandler@4f8969b0{/storage/rdd,null,AVAILABLE,@Spark}
+2021-12-28 22:41:20,054 [main] INFO [org.spark_project.jetty.server.handler.ContextHandler] - Started o.s.j.s.ServletContextHandler@c65a5ef{/storage/rdd/json,null,AVAILABLE,@Spark}
+2021-12-28 22:41:20,055 [main] INFO [org.spark_project.jetty.server.handler.ContextHandler] - Started o.s.j.s.ServletContextHandler@29cfd92b{/environment,null,AVAILABLE,@Spark}
+2021-12-28 22:41:20,057 [main] INFO [org.spark_project.jetty.server.handler.ContextHandler] - Started o.s.j.s.ServletContextHandler@460f76a6{/environment/json,null,AVAILABLE,@Spark}
+2021-12-28 22:41:20,057 [main] INFO [org.spark_project.jetty.server.handler.ContextHandler] - Started o.s.j.s.ServletContextHandler@644c78d4{/executors,null,AVAILABLE,@Spark}
+2021-12-28 22:41:20,058 [main] INFO [org.spark_project.jetty.server.handler.ContextHandler] - Started o.s.j.s.ServletContextHandler@7cbee484{/executors/json,null,AVAILABLE,@Spark}
+2021-12-28 22:41:20,059 [main] INFO [org.spark_project.jetty.server.handler.ContextHandler] - Started o.s.j.s.ServletContextHandler@7807ac2c{/executors/threadDump,null,AVAILABLE,@Spark}
+2021-12-28 22:41:20,061 [main] INFO [org.spark_project.jetty.server.handler.ContextHandler] - Started o.s.j.s.ServletContextHandler@4fd4cae3{/executors/threadDump/json,null,AVAILABLE,@Spark}
+2021-12-28 22:41:20,068 [main] INFO [org.spark_project.jetty.server.handler.ContextHandler] - Started o.s.j.s.ServletContextHandler@2baa8d82{/static,null,AVAILABLE,@Spark}
+2021-12-28 22:41:20,069 [main] INFO [org.spark_project.jetty.server.handler.ContextHandler] - Started o.s.j.s.ServletContextHandler@114a85c2{/,null,AVAILABLE,@Spark}
+2021-12-28 22:41:20,070 [main] INFO [org.spark_project.jetty.server.handler.ContextHandler] - Started o.s.j.s.ServletContextHandler@c9413d8{/api,null,AVAILABLE,@Spark}
+2021-12-28 22:41:20,071 [main] INFO [org.spark_project.jetty.server.handler.ContextHandler] - Started o.s.j.s.ServletContextHandler@5ae81e1{/jobs/job/kill,null,AVAILABLE,@Spark}
+2021-12-28 22:41:20,072 [main] INFO [org.spark_project.jetty.server.handler.ContextHandler] - Started o.s.j.s.ServletContextHandler@54709809{/stages/stage/kill,null,AVAILABLE,@Spark}
+2021-12-28 22:41:20,074 [main] INFO [org.apache.spark.ui.SparkUI] - Bound SparkUI to 0.0.0.0, and started at http://qb:4040
+2021-12-28 22:41:20,171 [main] INFO [org.apache.spark.executor.Executor] - Starting executor ID driver on host localhost
+2021-12-28 22:41:20,234 [main] INFO [org.apache.spark.util.Utils] - Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 64149.
+2021-12-28 22:41:20,235 [main] INFO [org.apache.spark.network.netty.NettyBlockTransferService] - Server created on qb:64149
+2021-12-28 22:41:20,236 [main] INFO [org.apache.spark.storage.BlockManager] - Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+2021-12-28 22:41:20,237 [main] INFO [org.apache.spark.storage.BlockManagerMaster] - Registering BlockManager BlockManagerId(driver, qb, 64149, None)
+2021-12-28 22:41:20,240 [dispatcher-event-loop-10] INFO [org.apache.spark.storage.BlockManagerMasterEndpoint] - Registering block manager qb:64149 with 1990.8 MB RAM, BlockManagerId(driver, qb, 64149, None)
+2021-12-28 22:41:20,242 [main] INFO [org.apache.spark.storage.BlockManagerMaster] - Registered BlockManager BlockManagerId(driver, qb, 64149, None)
+2021-12-28 22:41:20,242 [main] INFO [org.apache.spark.storage.BlockManager] - Initialized BlockManager: BlockManagerId(driver, qb, 64149, None)
+2021-12-28 22:41:20,373 [main] INFO [org.spark_project.jetty.server.handler.ContextHandler] - Started o.s.j.s.ServletContextHandler@591fd34d{/metrics/json,null,AVAILABLE,@Spark}
+2021-12-28 22:41:20,944 [main] INFO [org.apache.spark.storage.memory.MemoryStore] - Block broadcast_0 stored as values in memory (estimated size 307.0 KB, free 1990.5 MB)
+2021-12-28 22:41:21,154 [main] INFO [org.apache.spark.storage.memory.MemoryStore] - Block broadcast_0_piece0 stored as bytes in memory (estimated size 27.0 KB, free 1990.5 MB)
+2021-12-28 22:41:21,156 [dispatcher-event-loop-0] INFO [org.apache.spark.storage.BlockManagerInfo] - Added broadcast_0_piece0 in memory on qb:64149 (size: 27.0 KB, free: 1990.8 MB)
+2021-12-28 22:41:21,159 [main] INFO [org.apache.spark.SparkContext] - Created broadcast 0 from textFile at ValidationListSize.scala:21
+2021-12-28 22:41:23,539 [Thread-1] INFO [org.apache.spark.SparkContext] - Invoking stop() from shutdown hook
+2021-12-28 22:41:23,544 [Thread-1] INFO [org.spark_project.jetty.server.AbstractConnector] - Stopped Spark@2e185cd7{HTTP/1.1,[http/1.1]}{0.0.0.0:4040}
+2021-12-28 22:41:23,545 [Thread-1] INFO [org.apache.spark.ui.SparkUI] - Stopped Spark web UI at http://qb:4040
+2021-12-28 22:41:23,555 [dispatcher-event-loop-4] INFO [org.apache.spark.MapOutputTrackerMasterEndpoint] - MapOutputTrackerMasterEndpoint stopped!
+2021-12-28 22:41:23,567 [Thread-1] INFO [org.apache.spark.storage.memory.MemoryStore] - MemoryStore cleared
+2021-12-28 22:41:23,567 [Thread-1] INFO [org.apache.spark.storage.BlockManager] - BlockManager stopped
+2021-12-28 22:41:23,572 [Thread-1] INFO [org.apache.spark.storage.BlockManagerMaster] - BlockManagerMaster stopped
+2021-12-28 22:41:23,575 [dispatcher-event-loop-8] INFO [org.apache.spark.scheduler.OutputCommitCoordinator$OutputCommitCoordinatorEndpoint] - OutputCommitCoordinator stopped!
+2021-12-28 22:41:23,577 [Thread-1] INFO [org.apache.spark.SparkContext] - Successfully stopped SparkContext
+2021-12-28 22:41:23,578 [Thread-1] INFO [org.apache.spark.util.ShutdownHookManager] - Shutdown hook called
+2021-12-28 22:41:23,579 [Thread-1] INFO [org.apache.spark.util.ShutdownHookManager] - Deleting directory C:\Users\ACER\AppData\Local\Temp\spark-a4bbffff-b76d-41ef-ac86-03a5235829bc

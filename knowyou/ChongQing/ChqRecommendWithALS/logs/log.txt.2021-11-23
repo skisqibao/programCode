@@ -1,0 +1,4 @@
+2021-11-23 10:14:11,066 [main] INFO [HelloTest$] - Hello
+2021-11-23 10:14:11,067 [main] ERROR [HelloTest$] - BUG
+2021-11-23 10:14:35,107 [main] INFO [HelloTest$] - Hello
+2021-11-23 10:14:35,107 [main] ERROR [HelloTest$] - BUG

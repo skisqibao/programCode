@@ -1,0 +1,49 @@
+2021-11-26 19:32:52,317 [main] INFO [PaidPromotion$] - 初始化配置
+2021-11-26 19:33:29,733 [main] INFO [PaidPromotion$] - 初始化配置
+2021-11-26 19:56:07,707 [main] INFO [org.apache.spark.SparkContext] - Running Spark version 2.3.0
+2021-11-26 19:56:08,042 [main] ERROR [org.apache.spark.SparkContext] - Error initializing SparkContext.
+org.apache.spark.SparkException: A master URL must be set in your configuration
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:367)
+	at org.apache.spark.SparkContext$.getOrCreate(SparkContext.scala:2486)
+	at org.apache.spark.sql.SparkSession$Builder$$anonfun$7.apply(SparkSession.scala:930)
+	at org.apache.spark.sql.SparkSession$Builder$$anonfun$7.apply(SparkSession.scala:921)
+	at scala.Option.getOrElse(Option.scala:121)
+	at org.apache.spark.sql.SparkSession$Builder.getOrCreate(SparkSession.scala:921)
+	at PaidPromotion$.main(PaidPromotion.scala:28)
+	at PaidPromotion.main(PaidPromotion.scala)
+2021-11-26 19:56:08,047 [main] ERROR [org.apache.spark.util.Utils] - Uncaught exception in thread main
+java.lang.NullPointerException
+	at org.apache.spark.SparkContext.org$apache$spark$SparkContext$$postApplicationEnd(SparkContext.scala:2382)
+	at org.apache.spark.SparkContext$$anonfun$stop$1.apply$mcV$sp(SparkContext.scala:1897)
+	at org.apache.spark.util.Utils$.tryLogNonFatalError(Utils.scala:1357)
+	at org.apache.spark.SparkContext.stop(SparkContext.scala:1896)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:578)
+	at org.apache.spark.SparkContext$.getOrCreate(SparkContext.scala:2486)
+	at org.apache.spark.sql.SparkSession$Builder$$anonfun$7.apply(SparkSession.scala:930)
+	at org.apache.spark.sql.SparkSession$Builder$$anonfun$7.apply(SparkSession.scala:921)
+	at scala.Option.getOrElse(Option.scala:121)
+	at org.apache.spark.sql.SparkSession$Builder.getOrCreate(SparkSession.scala:921)
+	at PaidPromotion$.main(PaidPromotion.scala:28)
+	at PaidPromotion.main(PaidPromotion.scala)
+2021-11-26 19:56:08,051 [main] INFO [org.apache.spark.SparkContext] - Successfully stopped SparkContext
+2021-11-26 21:05:19,599 [main] INFO [org.apache.spark.SparkContext] - Running Spark version 2.3.0
+2021-11-26 21:05:19,862 [main] INFO [org.apache.spark.SparkContext] - Submitted application: PaidPromotion
+2021-11-26 21:05:19,929 [main] INFO [org.apache.spark.SecurityManager] - Changing view acls to: ACER
+2021-11-26 21:05:19,929 [main] INFO [org.apache.spark.SecurityManager] - Changing modify acls to: ACER
+2021-11-26 21:05:19,930 [main] INFO [org.apache.spark.SecurityManager] - Changing view acls groups to: 
+2021-11-26 21:05:19,930 [main] INFO [org.apache.spark.SecurityManager] - Changing modify acls groups to: 
+2021-11-26 21:05:19,931 [main] INFO [org.apache.spark.SecurityManager] - SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(ACER); groups with view permissions: Set(); users  with modify permissions: Set(ACER); groups with modify permissions: Set()
+2021-11-26 21:15:15,383 [main] INFO [org.apache.spark.SparkContext] - Running Spark version 2.3.0
+2021-11-26 21:15:15,643 [main] INFO [org.apache.spark.SparkContext] - Submitted application: PaidPromotion
+2021-11-26 21:15:15,686 [main] INFO [org.apache.spark.SecurityManager] - Changing view acls to: ACER
+2021-11-26 21:15:15,686 [main] INFO [org.apache.spark.SecurityManager] - Changing modify acls to: ACER
+2021-11-26 21:15:15,686 [main] INFO [org.apache.spark.SecurityManager] - Changing view acls groups to: 
+2021-11-26 21:15:15,687 [main] INFO [org.apache.spark.SecurityManager] - Changing modify acls groups to: 
+2021-11-26 21:15:15,687 [main] INFO [org.apache.spark.SecurityManager] - SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(ACER); groups with view permissions: Set(); users  with modify permissions: Set(ACER); groups with modify permissions: Set()
+2021-11-26 21:15:37,328 [main] INFO [org.apache.spark.SparkContext] - Running Spark version 2.3.0
+2021-11-26 21:15:37,584 [main] INFO [org.apache.spark.SparkContext] - Submitted application: PaidPromotion
+2021-11-26 21:15:37,628 [main] INFO [org.apache.spark.SecurityManager] - Changing view acls to: ACER
+2021-11-26 21:15:37,628 [main] INFO [org.apache.spark.SecurityManager] - Changing modify acls to: ACER
+2021-11-26 21:15:37,628 [main] INFO [org.apache.spark.SecurityManager] - Changing view acls groups to: 
+2021-11-26 21:15:37,629 [main] INFO [org.apache.spark.SecurityManager] - Changing modify acls groups to: 
+2021-11-26 21:15:37,629 [main] INFO [org.apache.spark.SecurityManager] - SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(ACER); groups with view permissions: Set(); users  with modify permissions: Set(ACER); groups with modify permissions: Set()

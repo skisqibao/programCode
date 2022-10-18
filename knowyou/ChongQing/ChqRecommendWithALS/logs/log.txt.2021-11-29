@@ -1,0 +1,10 @@
+2021-11-29 19:27:21,448 [main] INFO [HelloTest$] - Hello
+2021-11-29 19:27:21,449 [main] ERROR [HelloTest$] - BUG
+2021-11-29 20:35:03,938 [main] INFO [HelloTest$] - Hello
+2021-11-29 20:35:03,938 [main] ERROR [HelloTest$] - BUG
+2021-11-29 20:35:17,811 [main] INFO [HelloTest$] - Hello
+2021-11-29 20:35:17,812 [main] ERROR [HelloTest$] - BUG
+2021-11-29 22:18:25,275 [main] INFO [HelloTest$] - Hello
+2021-11-29 22:18:25,275 [main] ERROR [HelloTest$] - BUG
+2021-11-29 22:18:43,457 [main] INFO [HelloTest$] - Hello
+2021-11-29 22:18:43,457 [main] ERROR [HelloTest$] - BUG
