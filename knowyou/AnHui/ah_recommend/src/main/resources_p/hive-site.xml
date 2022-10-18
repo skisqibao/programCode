@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+    <property>
+        <name>hive.exec.scratchdir</name>
+        <value>hdfs://hdp2:8020/tmp/hive</value>
+<!--        <value>hdfs://hdp1:8020/tmp/hive</value>-->
+    </property>
+    <property>
+        <name>hive.metastore.warehouse.dir</name>
+        <value>hdfs://hdp2:8020/apps/hive/warehouse</value>
+<!--        <value>hdfs://hdp1:8020/apps/hive/warehouse</value>-->
+    </property>
+    <property>
+        <name>hive.querylog.location</name>
+        <value>hdfs://hdp2:8020/hive/log</value>
+<!--        <value>hdfs://hdp1:8020/hive/log</value>-->
+    </property>
+    <property>
+        <name>hive.metastore.uris</name>
+        <value>thrift://hdp3:9083</value>
+<!--        <value>thrift://hdp2:9083</value>-->
+    </property>
+    <property>
+        <name>hive.metastore.local</name>
+        <value>false</value>
+    </property>
+    <property>
+        <name>hive.server2.thrift.port</name>
+        <value>10000</value>
+    </property>
+    <property>
+        <name>hive.metastore.schema.verification</name>
+        <value>false</value>
+    </property>
+    <property>
+        <name>javax.jdo.option.ConnectionURL</name>
+        <value>jdbc:mysql://192.168.112.218/hive</value>
+<!--        <value>jdbc:mysql://hdp1/hive?createDatabaseIfNotExist=true</value>-->
+    </property>
+    <property>
+        <name>javax.jdo.option.ConnectionDriverName</name>
+        <value>com.mysql.jdbc.Driver</value>
+    </property>
+    <property>
+        <name>javax.jdo.option.ConnectionUserName</name>
+        <value>hive</value>
+    </property>
+    <property>
+        <name>javax.jdo.option.ConnectionPassword</name>
+        <value></value>
+    </property>
+</configuration>
