@@ -10,7 +10,6 @@ import time
 # svn log -v -r {2022-01-01}:{2022-11-01} svn://172.16.1.2/Repo1/MobileBox/Sources/RecommAlgorithm/SparkStandardRecommend --username songk --password "sK&5HiGkqislq*19*x"
 # svn log -v -r {2022-01-01}:{2022-11-01} svn://218.80.1.114:6689/Repo1/CMCDP/Sources/ --username qianym --password "Ou2*35&1.5H1Bbwq1zhY"
 
-
 class BaseLog:
     def __init__(self):
         self.revision = ""
