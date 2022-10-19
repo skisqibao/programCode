@@ -1,0 +1,9 @@
+[Core]
+Name = Chat 
+Module = chat
+
+[Documentation]
+Description = Some conversation content.
+
+[Python]
+Version = 2+

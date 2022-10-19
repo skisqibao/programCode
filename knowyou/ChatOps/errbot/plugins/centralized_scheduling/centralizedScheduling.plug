@@ -1,0 +1,10 @@
+[Core]
+Name = CentralizedScheduling 
+Module = centralizedScheduling
+
+[Documentation]
+Description = This is the plugin which query alert.
+
+[Python]
+Version = 2+
+

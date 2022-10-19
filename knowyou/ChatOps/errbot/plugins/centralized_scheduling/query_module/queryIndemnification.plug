@@ -1,0 +1,10 @@
+[Core]
+Name = QueryIndemnification 
+Module = queryIndemnification 
+
+[Documentation]
+Description = This is the plugin which query indemnification.
+
+[Python]
+Version = 2+
+

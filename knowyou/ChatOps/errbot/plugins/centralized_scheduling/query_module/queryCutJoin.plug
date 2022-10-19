@@ -1,0 +1,10 @@
+[Core]
+Name = QueryCutJoin 
+Module = queryCutJoin 
+
+[Documentation]
+Description = This is the plugin which query CutJoin.
+
+[Python]
+Version = 2+
+

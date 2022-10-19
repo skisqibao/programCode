@@ -1,0 +1,10 @@
+[Core]
+Name = QueryAlert 
+Module = queryAlert
+
+[Documentation]
+Description = This is the plugin which query alert.
+
+[Python]
+Version = 2+
+
