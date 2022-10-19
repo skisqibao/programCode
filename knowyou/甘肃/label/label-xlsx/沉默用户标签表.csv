@@ -1,0 +1,11 @@
+表名：knowyou_ott.HTV_SLIENCE_DM,,,,,
+沉默用户标签表,,,,,
+字段,类型（gbase）,说明,,,
+deviceid,varchar,设备id,,,
+pre7_slience_user,varchar,前7日沉默用户标签,,,
+pre14_slience_user,varchar,前14日沉默用户标签,,,
+pre30_slience_user,varchar,前30日沉默用户标签,,,
+pre_month_slience_user,varchar,上月沉默用户标签,,,
+date_time,varchar,日期,,,
+,,,,,
+deviceid,pre7_slience_user,pre14_slience_user,pre30_slience_user,pre_month_slience_user,date_time

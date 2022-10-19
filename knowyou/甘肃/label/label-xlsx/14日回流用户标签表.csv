@@ -1,0 +1,7 @@
+表名：knowyou_ott.HTV_BACK_FLOW_LV14,,
+14日回流用户标签表,,
+字段,类型（gbase）,说明
+deviceid,varchar,设备id
+date_time,varchar,日期
+,,
+deviceid,date_time,

@@ -1,0 +1,25 @@
+item_code	item_name	display_level	selectable	sort_sequence
+AA0	All items - old base 	0	T	2
+AA0R	 Purchasing power of the consumer dollar - old base 	0	T	400
+SA0	All items	0	T	1
+SA0E	 Energy 	1	T	375
+SA0L1	All items less food	1	T	359
+SA0L12	 All items less food and shelter	1	T	362
+SA0L12E	All items less food, shelter, and energy 	1	T	363
+SA0L12E4	 All items less food, shelter, energy, and used cars and trucks 	1	T	364
+SA0L1E	 All items less food and energy 	1	T	360
+SA0L2	All items less shelter 	1	T	361
+SA0L5	All items less medical care	1	T	357
+SA0LE	All items less energy	1	T	358
+SA0R	 Purchasing power of the consumer dollar	0	T	399
+SA311	Apparel less footwear	1	T	365
+SAA	Apparel	0	T	187
+SAA1	 Men's and boys' apparel	1	T	188
+SAA2	 Women's and girls' apparel 	1	T	195
+SAC	Commodities	1	T	366
+SACE	 Energy commodities 	1	T	376
+SACL1	Commodities less food	1	T	367
+SACL11	 Commodities less food and beverages	1	T	368
+SACL1E	 Commodities less food and energy commodities 	1	T	369
+SACL1E4	Commodities less food, energy, and used cars and trucks	1	T	370
+SAD	Durables 	1	T	372

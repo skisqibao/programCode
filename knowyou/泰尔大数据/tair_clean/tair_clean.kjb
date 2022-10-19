@@ -1,0 +1,3350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job>
+  <name>tair_clean</name>
+  <description />
+  <extended_description />
+  <job_version />
+  <directory>/</directory>
+  <created_user>-</created_user>
+  <created_date>2022/04/14 14:06:11.853</created_date>
+  <modified_user>-</modified_user>
+  <modified_date>2022/04/14 14:06:11.853</modified_date>
+  <parameters>
+    </parameters>
+  <connection>
+    <name>HIVE2_TEST</name>
+    <server>${HIVE_HOST}</server>
+    <type>HIVE2</type>
+    <access>Native</access>
+    <database>${HIVE_DATABASE}</database>
+    <port>10000</port>
+    <username>hive</username>
+    <password>Encrypted </password>
+    <servername />
+    <data_tablespace />
+    <index_tablespace />
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>10000</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SQL_CONNECT</code>
+        <attribute>set hive.exec.dynamic.partition.mode=nostrick;
+set mapred.max.split.size=256000000;
+set mapred.min.split.size.per.node=100000000; 
+set mapred.min.split.size.per.rack=100000000; 
+set hive.input.format=org.apache.Hadoop.hive.ql.io.CombineHiveInputFormat;</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
+  <slaveservers>
+    </slaveservers>
+  <job-log-table>
+    <connection />
+    <schema />
+    <table />
+    <size_limit_lines />
+    <interval />
+    <timeout_days />
+    <field>
+      <id>ID_JOB</id>
+      <enabled>Y</enabled>
+      <name>ID_JOB</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>JOBNAME</id>
+      <enabled>Y</enabled>
+      <name>JOBNAME</name>
+    </field>
+    <field>
+      <id>STATUS</id>
+      <enabled>Y</enabled>
+      <name>STATUS</name>
+    </field>
+    <field>
+      <id>LINES_READ</id>
+      <enabled>Y</enabled>
+      <name>LINES_READ</name>
+    </field>
+    <field>
+      <id>LINES_WRITTEN</id>
+      <enabled>Y</enabled>
+      <name>LINES_WRITTEN</name>
+    </field>
+    <field>
+      <id>LINES_UPDATED</id>
+      <enabled>Y</enabled>
+      <name>LINES_UPDATED</name>
+    </field>
+    <field>
+      <id>LINES_INPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_INPUT</name>
+    </field>
+    <field>
+      <id>LINES_OUTPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_OUTPUT</name>
+    </field>
+    <field>
+      <id>LINES_REJECTED</id>
+      <enabled>Y</enabled>
+      <name>LINES_REJECTED</name>
+    </field>
+    <field>
+      <id>ERRORS</id>
+      <enabled>Y</enabled>
+      <name>ERRORS</name>
+    </field>
+    <field>
+      <id>STARTDATE</id>
+      <enabled>Y</enabled>
+      <name>STARTDATE</name>
+    </field>
+    <field>
+      <id>ENDDATE</id>
+      <enabled>Y</enabled>
+      <name>ENDDATE</name>
+    </field>
+    <field>
+      <id>LOGDATE</id>
+      <enabled>Y</enabled>
+      <name>LOGDATE</name>
+    </field>
+    <field>
+      <id>DEPDATE</id>
+      <enabled>Y</enabled>
+      <name>DEPDATE</name>
+    </field>
+    <field>
+      <id>REPLAYDATE</id>
+      <enabled>Y</enabled>
+      <name>REPLAYDATE</name>
+    </field>
+    <field>
+      <id>LOG_FIELD</id>
+      <enabled>Y</enabled>
+      <name>LOG_FIELD</name>
+    </field>
+    <field>
+      <id>EXECUTING_SERVER</id>
+      <enabled>N</enabled>
+      <name>EXECUTING_SERVER</name>
+    </field>
+    <field>
+      <id>EXECUTING_USER</id>
+      <enabled>N</enabled>
+      <name>EXECUTING_USER</name>
+    </field>
+    <field>
+      <id>START_JOB_ENTRY</id>
+      <enabled>N</enabled>
+      <name>START_JOB_ENTRY</name>
+    </field>
+    <field>
+      <id>CLIENT</id>
+      <enabled>N</enabled>
+      <name>CLIENT</name>
+    </field>
+  </job-log-table>
+  <jobentry-log-table>
+    <connection />
+    <schema />
+    <table />
+    <timeout_days />
+    <field>
+      <id>ID_BATCH</id>
+      <enabled>Y</enabled>
+      <name>ID_BATCH</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>LOG_DATE</id>
+      <enabled>Y</enabled>
+      <name>LOG_DATE</name>
+    </field>
+    <field>
+      <id>JOBNAME</id>
+      <enabled>Y</enabled>
+      <name>TRANSNAME</name>
+    </field>
+    <field>
+      <id>JOBENTRYNAME</id>
+      <enabled>Y</enabled>
+      <name>STEPNAME</name>
+    </field>
+    <field>
+      <id>LINES_READ</id>
+      <enabled>Y</enabled>
+      <name>LINES_READ</name>
+    </field>
+    <field>
+      <id>LINES_WRITTEN</id>
+      <enabled>Y</enabled>
+      <name>LINES_WRITTEN</name>
+    </field>
+    <field>
+      <id>LINES_UPDATED</id>
+      <enabled>Y</enabled>
+      <name>LINES_UPDATED</name>
+    </field>
+    <field>
+      <id>LINES_INPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_INPUT</name>
+    </field>
+    <field>
+      <id>LINES_OUTPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_OUTPUT</name>
+    </field>
+    <field>
+      <id>LINES_REJECTED</id>
+      <enabled>Y</enabled>
+      <name>LINES_REJECTED</name>
+    </field>
+    <field>
+      <id>ERRORS</id>
+      <enabled>Y</enabled>
+      <name>ERRORS</name>
+    </field>
+    <field>
+      <id>RESULT</id>
+      <enabled>Y</enabled>
+      <name>RESULT</name>
+    </field>
+    <field>
+      <id>NR_RESULT_ROWS</id>
+      <enabled>Y</enabled>
+      <name>NR_RESULT_ROWS</name>
+    </field>
+    <field>
+      <id>NR_RESULT_FILES</id>
+      <enabled>Y</enabled>
+      <name>NR_RESULT_FILES</name>
+    </field>
+    <field>
+      <id>LOG_FIELD</id>
+      <enabled>N</enabled>
+      <name>LOG_FIELD</name>
+    </field>
+    <field>
+      <id>COPY_NR</id>
+      <enabled>N</enabled>
+      <name>COPY_NR</name>
+    </field>
+  </jobentry-log-table>
+  <channel-log-table>
+    <connection />
+    <schema />
+    <table />
+    <timeout_days />
+    <field>
+      <id>ID_BATCH</id>
+      <enabled>Y</enabled>
+      <name>ID_BATCH</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>LOG_DATE</id>
+      <enabled>Y</enabled>
+      <name>LOG_DATE</name>
+    </field>
+    <field>
+      <id>LOGGING_OBJECT_TYPE</id>
+      <enabled>Y</enabled>
+      <name>LOGGING_OBJECT_TYPE</name>
+    </field>
+    <field>
+      <id>OBJECT_NAME</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_NAME</name>
+    </field>
+    <field>
+      <id>OBJECT_COPY</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_COPY</name>
+    </field>
+    <field>
+      <id>REPOSITORY_DIRECTORY</id>
+      <enabled>Y</enabled>
+      <name>REPOSITORY_DIRECTORY</name>
+    </field>
+    <field>
+      <id>FILENAME</id>
+      <enabled>Y</enabled>
+      <name>FILENAME</name>
+    </field>
+    <field>
+      <id>OBJECT_ID</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_ID</name>
+    </field>
+    <field>
+      <id>OBJECT_REVISION</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_REVISION</name>
+    </field>
+    <field>
+      <id>PARENT_CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>PARENT_CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>ROOT_CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>ROOT_CHANNEL_ID</name>
+    </field>
+  </channel-log-table>
+  <pass_batchid>N</pass_batchid>
+  <shared_objects_file />
+  <entries>
+    <entry>
+      <name>START</name>
+      <description />
+      <type>SPECIAL</type>
+      <start>Y</start>
+      <dummy>N</dummy>
+      <repeat>N</repeat>
+      <schedulerType>0</schedulerType>
+      <intervalSeconds>0</intervalSeconds>
+      <intervalMinutes>60</intervalMinutes>
+      <hour>12</hour>
+      <minutes>0</minutes>
+      <weekDay>1</weekDay>
+      <DayOfMonth>1</DayOfMonth>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>64</xloc>
+      <yloc>368</yloc>
+    </entry>
+    <entry>
+      <name>SQL</name>
+      <description />
+      <type>SQL</type>
+      <sql>CREATE TABLE IF NOT EXISTS knowyou_ott_ods.odm_tair_info_tmp(
+deviceid 				string,
+ftp_group_info_list 	string,
+ftp_list 				string,
+http_bower_info_list 	string,
+ping_info_list 			string,
+video_info_list 		string,
+dt_info_list 			string,
+app_info_list 			string,
+voice_info_list 		string,
+tiktok_info_list 		string,
+sampling_point_list     string,
+msgtype					string,
+process_time			string,
+reportdate 				string
+)
+PARTITIONED BY (dt string,ht string)
+STORED AS orc tblproperties("orc.compress"="SNAPPY")
+</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>HIVE2_TEST</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>288</xloc>
+      <yloc>368</yloc>
+    </entry>
+    <entry>
+      <name>转换</name>
+      <description />
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id />
+      <filename>${Internal.Entry.Current.Directory}/sys_date.ktr</filename>
+      <transname />
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile />
+      <logext />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name />
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>192</xloc>
+      <yloc>368</yloc>
+    </entry>
+    <entry>
+      <name>odm_tair_info_tmp</name>
+      <description />
+      <type>SQL</type>
+      <sql>INSERT overwrite TABLE knowyou_ott_ods.odm_tair_info_tmp partition(dt,ht)
+SELECT  a.deviceid,
+		get_json_object(a.datalist,'$.ftpGroupInfolist') AS ftp_group_info_list,
+		get_json_object(a.datalist,'$.ftplist') AS ftp_list,
+		get_json_object(a.datalist,'$.httpbowerinfolist') AS http_bower_info_list,
+		get_json_object(a.datalist,'$.pingInfolist') AS ping_info_list,
+		get_json_object(a.datalist,'$.videoInfolist') AS video_info_list,
+		get_json_object(a.datalist,'$.dtInfoList') AS dt_info_list,
+		get_json_object(a.datalist,'$.appInfoList') AS app_info_list,
+		get_json_object(a.datalist,'$.voiceInfoList') AS voice_info_list,
+		get_json_object(a.datalist,'$.tiktokInfoList') AS tiktok_info_list,
+		get_json_object(a.datalist,'$.samplingPointList') AS sampling_point_list,
+		a.msgtype,a.process_time,a.reportdate,a.dt,a.ht
+FROM(
+	SELECT 
+		get_json_object(json_data,'$.deviceid') AS deviceid,
+		get_json_object(json_data,'$.datalist') AS datalist,
+		get_json_object(json_data,'$.msgtype') AS msgtype,
+		get_json_object(json_data,'$.process_time') AS process_time,
+		get_json_object(json_data,'$.reportdate') AS reportdate,
+		dt,
+		ht
+	FROM knowyou_ott_ods.ods_tair_dm
+WHERE dt='${C_DAY}' and ht='${CURRENT_HOUR}'
+  
+)a</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>HIVE2_TEST</connection>
+      <parallel>Y</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>384</xloc>
+      <yloc>368</yloc>
+    </entry>
+    <entry>
+      <name>odm_tair_paramdt_dm</name>
+      <description />
+      <type>SQL</type>
+      <sql>
+CREATE TABLE IF NOT EXISTS knowyou_ott_ods.odm_tair_paramdt_dm(
+deviceid 			string,
+id					int,
+device_type 		int,
+port 				int,
+group_id 			int,
+task_name 			string,
+task_type 			int,
+test_plan_id 		int,
+test_type 			int,
+scene_type 			int,
+scene_name 			string,
+scene_mark 			string,
+handset_time		string,
+operator_id			int,
+mcc					int,
+mnc					int,
+network_class		int,
+network_type		int,
+internal_ip			string,
+external_ip			string,
+app_list			string,
+point_id			bigint,
+sp_type				int,
+sp_seqid			int,
+msg_type			int,
+msg_id				int,
+msg_entity			string,
+server_name			string,
+app_dlrate			string,
+app_ulrate			string,
+delay				int,
+vmos				float,
+is_real				int,
+cell_name			string,
+cell_distance		int,
+is_interference		int,
+is_overlap			int,
+is_no_major_cell	int,
+is_cross_coverage	int,
+lte_tac				bigint,
+lte_eci				bigint,
+lte_earfcn			bigint,
+lte_enod_bid		bigint,
+lte_cellid			int,
+lte_pci				int,
+lte_rsrp			int,
+lte_sinr			float,
+lte_rsrq			int,
+lte_nbrlist			string,
+nr_type				int,
+nr_tac				bigint,
+nr_eci				bigint,
+nr_earfcn			bigint,
+nr_enod_bid			bigint,
+nr_cellid			int,
+nr_pci				int,
+nr_rsrp				int,
+nr_sinr				float,
+nr_rsrq				int,
+nr_nbrlist			string,
+wifi_manufacturer	string,
+wifi_name			string,
+wifi_mac			string,
+wifi_freq			int,
+wifi_strenth		int,
+wifi_operator_id	int,
+latitude			string,
+longitude			string,
+grid_id				string,
+grid_length			int,
+grid_lefttop_x		string,
+grid_lefttop_y		string,
+grid_rightbottom_x	string,
+grid_rightbottom_y	string,
+loctype				int,
+network_loctype		int,
+loc_where			int,
+accuracy			float,
+altitude			float,
+sate_number			int,
+pressure			float,
+speed				float,
+direction			float,
+province			string,
+city				string,
+district			string,
+address				string,
+is_indoor			int,
+msgtype				string,
+process_time		string,
+reportdate			string
+)
+PARTITIONED BY (dt string,ht string)
+STORED AS orc tblproperties("orc.compress"="SNAPPY")</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>HIVE2_TEST</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>800</xloc>
+      <yloc>80</yloc>
+    </entry>
+    <entry>
+      <name>SQL 4</name>
+      <description />
+      <type>SQL</type>
+      <sql>
+INSERT overwrite TABLE knowyou_ott_ods.odm_tair_paramdt_dm partition(dt,ht)
+SELECT  
+    a.deviceid,
+    get_json_object(j.info,'$.id') AS id,
+    get_json_object(j.info,'$.deviceType') AS device_type,
+    get_json_object(j.info,'$.port') AS port,
+    get_json_object(j.info,'$.groupId') AS group_id,
+    get_json_object(j.info,'$.taskName') AS task_name,
+    get_json_object(j.info,'$.taskType') AS task_type,
+    get_json_object(j.info,'$.testPlanId') AS test_plan_id,
+    get_json_object(j.info,'$.testType') AS test_type,
+    get_json_object(j.info,'$.scene_type') AS scene_type,
+    get_json_object(j.info,'$.scene_name') AS scene_name,
+    get_json_object(j.info,'$.scene_mark') AS scene_mark,
+    get_json_object(j.info,'$.handsetTime') AS handset_time,
+    get_json_object(j.info,'$.operatorId') AS operator_id,
+    get_json_object(j.info,'$.mcc') AS mcc,
+    get_json_object(j.info,'$.mnc') AS mnc,
+    get_json_object(j.info,'$.network_Class') AS network_class,
+    get_json_object(j.info,'$.network_Type') AS network_type,
+    get_json_object(j.info,'$.internalIp') AS internal_ip,
+    get_json_object(j.info,'$.externalIp') AS external_ip,
+    get_json_object(j.info,'$.app_list') AS app_list,
+    get_json_object(j.info,'$.pointId') AS point_id,
+    get_json_object(j.info,'$.sp_type') AS sp_type,
+    get_json_object(j.info,'$.sp_seqid') AS sp_seqid,
+    get_json_object(j.info,'$.msg_type') AS msg_type,
+    get_json_object(j.info,'$.msg_id') AS msg_id,
+    get_json_object(j.info,'$.msg_entity') AS msg_entity,
+    get_json_object(j.info,'$.serverName') AS server_name,
+    get_json_object(j.info,'$.app_dlrate') AS app_dlrate,
+    get_json_object(j.info,'$.app_ulrate') AS app_ulrate,
+    get_json_object(j.info,'$.delay') AS delay,
+    get_json_object(j.info,'$.vmos') AS vmos,
+    get_json_object(j.info,'$.isReal') AS is_real,
+    get_json_object(j.info,'$.cellName') AS cell_name,
+    get_json_object(j.info,'$.cellDistance') AS cell_distance,
+    get_json_object(j.info,'$.isInterference') AS is_interference,
+    get_json_object(j.info,'$.isOverlap') AS is_overlap,
+    get_json_object(j.info,'$.isNoMajorCell') AS is_no_major_cell,
+    get_json_object(j.info,'$.isCrossCoverage') AS is_cross_coverage,
+    get_json_object(j.info,'$.lte_tac') AS lte_tac,
+    get_json_object(j.info,'$.lte_eci') AS lte_eci,
+    get_json_object(j.info,'$.lte_earfcn') AS lte_earfcn,
+    get_json_object(j.info,'$.lte_enodBID') AS lte_enod_bid,
+    get_json_object(j.info,'$.lte_cellid') AS lte_cellid,
+    get_json_object(j.info,'$.lte_pci') AS lte_pci,
+    get_json_object(j.info,'$.lte_rsrp') AS lte_rsrp,
+    get_json_object(j.info,'$.lte_sinr') AS lte_sinr,
+    get_json_object(j.info,'$.lte_rsrq') AS lte_rsrq,
+    get_json_object(j.info,'$.lte_nbrlist') AS lte_nbrlist,
+    get_json_object(j.info,'$.nr_type') AS nr_type,
+    get_json_object(j.info,'$.nr_tac') AS nr_tac,
+    get_json_object(j.info,'$.nr_eci') AS nr_eci,
+    get_json_object(j.info,'$.nr_earfcn') AS nr_earfcn,
+    get_json_object(j.info,'$.nr_enodBID') AS nr_enod_bid,
+    get_json_object(j.info,'$.nr_cellid') AS nr_cellid,
+    get_json_object(j.info,'$.nr_pci') AS nr_pci,
+    get_json_object(j.info,'$.nr_rsrp') AS nr_rsrp,
+    get_json_object(j.info,'$.nr_sinr') AS nr_sinr,
+    get_json_object(j.info,'$.nr_rsrq') AS nr_rsrq,
+    get_json_object(j.info,'$.nr_nbrlist') AS nr_nbrlist,
+    get_json_object(j.info,'$.wifi_manufacturer') AS wifi_manufacturer,
+    get_json_object(j.info,'$.wifi_name') AS wifi_name,
+    get_json_object(j.info,'$.wifi_mac') AS wifi_mac,
+    get_json_object(j.info,'$.wifi_freq') AS wifi_freq,
+    get_json_object(j.info,'$.wifi_strenth') AS wifi_strenth,
+    get_json_object(j.info,'$.wifi_operatorId') AS wifi_operator_id,
+    get_json_object(j.info,'$.latitude') AS latitude,
+    get_json_object(j.info,'$.longitude') AS longitude,
+    get_json_object(j.info,'$.grid_id') AS grid_id,
+    get_json_object(j.info,'$.grid_length') AS grid_length,
+    get_json_object(j.info,'$.grid_lefttop_x') AS grid_lefttop_x,
+    get_json_object(j.info,'$.grid_lefttop_y') AS grid_lefttop_y,
+    get_json_object(j.info,'$.grid_rightbottom_x') AS grid_rightbottom_x,
+    get_json_object(j.info,'$.grid_rightbottom_y') AS grid_rightbottom_y,
+    get_json_object(j.info,'$.loctype') AS loctype,
+    get_json_object(j.info,'$.network_loctype') AS network_loctype,
+    get_json_object(j.info,'$.loc_where') AS loc_where,
+    get_json_object(j.info,'$.accuracy') AS accuracy,
+    get_json_object(j.info,'$.altitude') AS altitude,
+    get_json_object(j.info,'$.sate_number') AS sate_number,
+    get_json_object(j.info,'$.pressure') AS pressure,
+    get_json_object(j.info,'$.speed') AS speed,
+    get_json_object(j.info,'$.direction') AS direction,
+    get_json_object(j.info,'$.province') AS province,
+    get_json_object(j.info,'$.city') AS city,
+    get_json_object(j.info,'$.district') AS district,
+    get_json_object(j.info,'$.address') AS address,
+    get_json_object(j.info,'$.isIndoor') AS is_indoor,
+    a.msgtype,
+    a.process_time,
+    a.reportdate,
+    a.dt,a.ht
+FROM
+(
+    SELECT  
+        deviceid,
+        dt_info_list,
+        msgtype,
+        process_time,
+        reportdate,
+        dt,ht
+    FROM knowyou_ott_ods.odm_tair_info_tmp
+    WHERE dt='${C_DAY}' AND ht='${CURRENT_HOUR}' 
+    AND length(dt_info_list) > 2
+)a
+lateral view explode(split(regexp_replace(regexp_replace(a.dt_info_list,'\\[|\\]',''),'\\}\\,\\{','\\}\\;\\{'),'\\;')) j as info;
+</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>HIVE2_TEST</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>992</xloc>
+      <yloc>80</yloc>
+    </entry>
+    <entry>
+      <name>odm_tair_app_dm</name>
+      <description />
+      <type>SQL</type>
+      <sql>
+CREATE TABLE IF NOT EXISTS knowyou_ott_ods.odm_tair_app_dm(
+deviceid 			string,
+id					int,
+device_type 		int,
+port 				int,
+group_id 			int,
+task_name 			string,
+task_type 			int,
+test_plan_id 		int,
+test_type 			int,
+scene_type 			int,
+scene_name 			string,
+scene_mark 			string,
+begin_time			string,
+end_time			string,
+operator_id			int,
+mcc					int,
+mnc					int,
+network_class		int,
+network_type		int,
+internal_ip			string,
+external_ip			string,
+app_list			string,
+server_name			string,
+server_ip           string,
+url       			string,
+provider			string,
+filesize			int,
+thread_count		int,
+connect_delay		int,
+avg_speed			string,
+duration			int,
+result				int,
+lte_tac				bigint,
+lte_eci				bigint,
+lte_earfcn			bigint,
+lte_enod_bid		bigint,
+lte_cellid			int,
+lte_pci				int,
+lte_rsrp			int,
+lte_sinr			float,
+lte_rsrq			int,
+lte_nbrlist			string,
+nr_type				int,
+nr_tac				bigint,
+nr_eci				bigint,
+nr_earfcn			bigint,
+nr_enod_bid			bigint,
+nr_cellid			int,
+nr_pci				int,
+nr_rsrp				int,
+nr_sinr				float,
+nr_rsrq				int,
+nr_nbrlist			string,
+wifi_manufacturer	string,
+wifi_name			string,
+wifi_mac			string,
+wifi_freq			int,
+wifi_strenth		int,
+wifi_operator_id	int,
+latitude			string,
+longitude			string,
+grid_id				string,
+grid_length			int,
+grid_lefttop_x		string,
+grid_lefttop_y		string,
+grid_rightbottom_x	string,
+grid_rightbottom_y	string,
+loctype				int,
+network_loctype		int,
+loc_where			int,
+accuracy			float,
+altitude			float,
+sate_number			int,
+pressure			float,
+speed				float,
+direction			float,
+province			string,
+city				string,
+district			string,
+address				string,
+is_indoor			int,
+msgtype				string,
+process_time		string,
+reportdate			string
+)
+PARTITIONED BY (dt string,ht string)
+STORED AS orc tblproperties("orc.compress"="SNAPPY")</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>HIVE2_TEST</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>800</xloc>
+      <yloc>176</yloc>
+    </entry>
+    <entry>
+      <name>SQL 6</name>
+      <description />
+      <type>SQL</type>
+      <sql>
+INSERT overwrite TABLE knowyou_ott_ods.odm_tair_app_dm partition(dt,ht)
+SELECT  
+    a.deviceid,
+    get_json_object(j.info,'$.id') AS id,
+    get_json_object(j.info,'$.deviceType') AS device_type,
+    get_json_object(j.info,'$.port') AS port,
+    get_json_object(j.info,'$.groupId') AS group_id,
+    get_json_object(j.info,'$.taskName') AS task_name,
+    get_json_object(j.info,'$.taskType') AS task_type,
+    get_json_object(j.info,'$.testPlanId') AS test_plan_id,
+    get_json_object(j.info,'$.testType') AS test_type,
+    get_json_object(j.info,'$.scene_type') AS scene_type,
+    get_json_object(j.info,'$.scene_name') AS scene_name,
+    get_json_object(j.info,'$.scene_mark') AS scene_mark,
+    get_json_object(j.info,'$.beginTime') AS begin_time,
+    get_json_object(j.info,'$.endTime') AS end_time,
+    get_json_object(j.info,'$.operatorId') AS operator_id,
+    get_json_object(j.info,'$.mcc') AS mcc,
+    get_json_object(j.info,'$.mnc') AS mnc,
+    get_json_object(j.info,'$.network_Class') AS network_class,
+    get_json_object(j.info,'$.network_Type') AS network_type,
+    get_json_object(j.info,'$.internalIp') AS internal_ip,
+    get_json_object(j.info,'$.externalIp') AS external_ip,
+    get_json_object(j.info,'$.app_list') AS app_list,
+    get_json_object(j.info,'$.serverName') AS server_name,
+    get_json_object(j.info,'$.serverIp') AS server_ip,
+    get_json_object(j.info,'$.url') AS url,
+    get_json_object(j.info,'$.provider') AS provider,
+    get_json_object(j.info,'$.filesize') AS filesize,
+    get_json_object(j.info,'$.threadCount') AS thread_count,
+    get_json_object(j.info,'$.connectDelay') AS connect_delay,
+    get_json_object(j.info,'$.avgSpeed') AS avg_speed,
+    get_json_object(j.info,'$.duration') AS duration,
+    get_json_object(j.info,'$.result') AS result,
+    get_json_object(j.info,'$.lte_tac') AS lte_tac,
+    get_json_object(j.info,'$.lte_eci') AS lte_eci,
+    get_json_object(j.info,'$.lte_earfcn') AS lte_earfcn,
+    get_json_object(j.info,'$.lte_enodBID') AS lte_enod_bid,
+    get_json_object(j.info,'$.lte_cellid') AS lte_cellid,
+    get_json_object(j.info,'$.lte_pci') AS lte_pci,
+    get_json_object(j.info,'$.lte_rsrp') AS lte_rsrp,
+    get_json_object(j.info,'$.lte_sinr') AS lte_sinr,
+    get_json_object(j.info,'$.lte_rsrq') AS lte_rsrq,
+    get_json_object(j.info,'$.lte_nbrlist') AS lte_nbrlist,
+    get_json_object(j.info,'$.nr_type') AS nr_type,
+    get_json_object(j.info,'$.nr_tac') AS nr_tac,
+    get_json_object(j.info,'$.nr_eci') AS nr_eci,
+    get_json_object(j.info,'$.nr_earfcn') AS nr_earfcn,
+    get_json_object(j.info,'$.nr_enodBID') AS nr_enod_bid,
+    get_json_object(j.info,'$.nr_cellid') AS nr_cellid,
+    get_json_object(j.info,'$.nr_pci') AS nr_pci,
+    get_json_object(j.info,'$.nr_rsrp') AS nr_rsrp,
+    get_json_object(j.info,'$.nr_sinr') AS nr_sinr,
+    get_json_object(j.info,'$.nr_rsrq') AS nr_rsrq,
+    get_json_object(j.info,'$.nr_nbrlist') AS nr_nbrlist,
+    get_json_object(j.info,'$.wifi_manufacturer') AS wifi_manufacturer,
+    get_json_object(j.info,'$.wifi_name') AS wifi_name,
+    get_json_object(j.info,'$.wifi_mac') AS wifi_mac,
+    get_json_object(j.info,'$.wifi_freq') AS wifi_freq,
+    get_json_object(j.info,'$.wifi_strenth') AS wifi_strenth,
+    get_json_object(j.info,'$.wifi_operatorId') AS wifi_operator_id,
+    get_json_object(j.info,'$.latitude') AS latitude,
+    get_json_object(j.info,'$.longitude') AS longitude,
+    get_json_object(j.info,'$.grid_id') AS grid_id,
+    get_json_object(j.info,'$.grid_length') AS grid_length,
+    get_json_object(j.info,'$.grid_lefttop_x') AS grid_lefttop_x,
+    get_json_object(j.info,'$.grid_lefttop_y') AS grid_lefttop_y,
+    get_json_object(j.info,'$.grid_rightbottom_x') AS grid_rightbottom_x,
+    get_json_object(j.info,'$.grid_rightbottom_y') AS grid_rightbottom_y,
+    get_json_object(j.info,'$.loctype') AS loctype,
+    get_json_object(j.info,'$.network_loctype') AS network_loctype,
+    get_json_object(j.info,'$.loc_where') AS loc_where,
+    get_json_object(j.info,'$.accuracy') AS accuracy,
+    get_json_object(j.info,'$.altitude') AS altitude,
+    get_json_object(j.info,'$.sate_number') AS sate_number,
+    get_json_object(j.info,'$.pressure') AS pressure,
+    get_json_object(j.info,'$.speed') AS speed,
+    get_json_object(j.info,'$.direction') AS direction,
+    get_json_object(j.info,'$.province') AS province,
+    get_json_object(j.info,'$.city') AS city,
+    get_json_object(j.info,'$.district') AS district,
+    get_json_object(j.info,'$.address') AS address,
+    get_json_object(j.info,'$.isIndoor') AS is_indoor,
+    a.msgtype,
+    a.process_time,
+    a.reportdate,
+    a.dt,a.ht
+FROM
+(
+    SELECT  
+        deviceid,
+        app_info_list,
+        msgtype,
+        process_time,
+        reportdate,
+        dt,ht
+    FROM knowyou_ott_ods.odm_tair_info_tmp
+    WHERE dt='${C_DAY}' AND ht='${CURRENT_HOUR}'
+    AND length(app_info_list) > 2
+)a
+lateral view explode(split(regexp_replace(regexp_replace(a.app_info_list,'\\[|\\]',''),'\\}\\,\\{','\\}\\;\\{'),'\\;')) j as info;
+</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>HIVE2_TEST</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>992</xloc>
+      <yloc>176</yloc>
+    </entry>
+    <entry>
+      <name>odm_tair_speed_dm</name>
+      <description />
+      <type>SQL</type>
+      <sql>
+CREATE TABLE IF NOT EXISTS knowyou_ott_ods.odm_tair_speed_dm(
+deviceid 			string,
+id					int,
+device_type 		int,
+port 				int,
+group_id 			int,
+task_name 			string,
+task_type 			int,
+test_plan_id 		int,
+test_type 			int,
+scene_type 			int,
+scene_name 			string,
+scene_mark 			string,
+begin_time			string,
+end_time			string,
+operator_id			int,
+mcc					int,
+mnc					int,
+network_class		int,
+network_type		int,
+internal_ip			string,
+external_ip			string,
+app_list			string,
+protocol_type		int,
+threads				int,
+server_name			string,
+server_ip           string,
+url       			string,
+dl_avg_speed		string,
+dl_max_speed		string,
+dl_duration			int,
+dl_total_bytes		bigint,
+ul_avg_speed		string,
+ul_max_speed		string,
+ul_duration			int,
+ul_total_bytes		bigint,
+ping_delay			int,
+score				string,
+score2				string,
+result				int,
+lte_tac				bigint,
+lte_eci				bigint,
+lte_earfcn			bigint,
+lte_enod_bid		bigint,
+lte_cellid			int,
+lte_pci				int,
+lte_rsrp			int,
+lte_sinr			float,
+lte_rsrq			int,
+lte_nbrlist			string,
+nr_type				int,
+nr_tac				bigint,
+nr_eci				bigint,
+nr_earfcn			bigint,
+nr_enod_bid			bigint,
+nr_cellid			int,
+nr_pci				int,
+nr_rsrp				int,
+nr_sinr				float,
+nr_rsrq				int,
+nr_nbrlist			string,
+wifi_manufacturer	string,
+wifi_name			string,
+wifi_mac			string,
+wifi_freq			int,
+wifi_strenth		int,
+wifi_operator_id	int,
+latitude			string,
+longitude			string,
+grid_id				string,
+grid_length			int,
+grid_lefttop_x		string,
+grid_lefttop_y		string,
+grid_rightbottom_x	string,
+grid_rightbottom_y	string,
+loctype				int,
+network_loctype		int,
+loc_where			int,
+accuracy			float,
+altitude			float,
+sate_number			int,
+pressure			float,
+speed				float,
+direction			float,
+province			string,
+city				string,
+district			string,
+address				string,
+is_indoor			int,
+msgtype				string,
+process_time		string,
+reportdate			string
+)
+PARTITIONED BY (dt string,ht string)
+STORED AS orc tblproperties("orc.compress"="SNAPPY")</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>HIVE2_TEST</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>800</xloc>
+      <yloc>272</yloc>
+    </entry>
+    <entry>
+      <name>SQL 8</name>
+      <description />
+      <type>SQL</type>
+      <sql>INSERT overwrite TABLE knowyou_ott_ods.odm_tair_speed_dm partition(dt,ht)
+SELECT  
+    a.deviceid,
+    get_json_object(j.info,'$.id') AS id,
+    get_json_object(j.info,'$.deviceType') AS device_type,
+    get_json_object(j.info,'$.port') AS port,
+    get_json_object(j.info,'$.groupId') AS group_id,
+    get_json_object(j.info,'$.taskName') AS task_name,
+    get_json_object(j.info,'$.taskType') AS task_type,
+    get_json_object(j.info,'$.testPlanId') AS test_plan_id,
+    get_json_object(j.info,'$.testType') AS test_type,
+    get_json_object(j.info,'$.scene_type') AS scene_type,
+    get_json_object(j.info,'$.scene_name') AS scene_name,
+    get_json_object(j.info,'$.scene_mark') AS scene_mark,
+    get_json_object(j.info,'$.beginTime') AS begin_time,
+    get_json_object(j.info,'$.endTime') AS end_time,
+    get_json_object(j.info,'$.operatorId') AS operator_id,
+    get_json_object(j.info,'$.mcc') AS mcc,
+    get_json_object(j.info,'$.mnc') AS mnc,
+    get_json_object(j.info,'$.network_Class') AS network_class,
+    get_json_object(j.info,'$.network_Type') AS network_type,
+    get_json_object(j.info,'$.internalIp') AS internal_ip,
+    get_json_object(j.info,'$.externalIp') AS external_ip,
+    get_json_object(j.info,'$.app_list') AS app_list,
+    get_json_object(j.info,'$.protocolType') AS protocol_type,
+    get_json_object(j.info,'$.threads') AS threads,
+    get_json_object(j.info,'$.serverName') AS server_name,
+    get_json_object(j.info,'$.serverIp') AS server_ip,
+    get_json_object(j.info,'$.url') AS url,
+    get_json_object(j.info,'$.dlAvgSpeed') AS dl_avg_speed,
+    get_json_object(j.info,'$.dlMaxSpeed') AS dl_max_speed,
+    get_json_object(j.info,'$.dlDuration') AS dl_duration,
+    get_json_object(j.info,'$.dlTotalBytes') AS dl_total_bytes,
+    get_json_object(j.info,'$.ulAvgSpeed') AS ul_avg_speed,
+    get_json_object(j.info,'$.ulMaxSpeed') AS ul_max_speed,
+    get_json_object(j.info,'$.ulDuration') AS ul_duration,
+    get_json_object(j.info,'$.ulTotalBytes') AS ul_total_bytes,
+    get_json_object(j.info,'$.pingDelay') AS ping_delay,
+    get_json_object(j.info,'$.score') AS score,
+    get_json_object(j.info,'$.score2') AS score2,
+    get_json_object(j.info,'$.result') AS result,
+    get_json_object(j.info,'$.lte_tac') AS lte_tac,
+    get_json_object(j.info,'$.lte_eci') AS lte_eci,
+    get_json_object(j.info,'$.lte_earfcn') AS lte_earfcn,
+    get_json_object(j.info,'$.lte_enodBID') AS lte_enod_bid,
+    get_json_object(j.info,'$.lte_cellid') AS lte_cellid,
+    get_json_object(j.info,'$.lte_pci') AS lte_pci,
+    get_json_object(j.info,'$.lte_rsrp') AS lte_rsrp,
+    get_json_object(j.info,'$.lte_sinr') AS lte_sinr,
+    get_json_object(j.info,'$.lte_rsrq') AS lte_rsrq,
+    get_json_object(j.info,'$.lte_nbrlist') AS lte_nbrlist,
+    get_json_object(j.info,'$.nr_type') AS nr_type,
+    get_json_object(j.info,'$.nr_tac') AS nr_tac,
+    get_json_object(j.info,'$.nr_eci') AS nr_eci,
+    get_json_object(j.info,'$.nr_earfcn') AS nr_earfcn,
+    get_json_object(j.info,'$.nr_enodBID') AS nr_enod_bid,
+    get_json_object(j.info,'$.nr_cellid') AS nr_cellid,
+    get_json_object(j.info,'$.nr_pci') AS nr_pci,
+    get_json_object(j.info,'$.nr_rsrp') AS nr_rsrp,
+    get_json_object(j.info,'$.nr_sinr') AS nr_sinr,
+    get_json_object(j.info,'$.nr_rsrq') AS nr_rsrq,
+    get_json_object(j.info,'$.nr_nbrlist') AS nr_nbrlist,
+    get_json_object(j.info,'$.wifi_manufacturer') AS wifi_manufacturer,
+    get_json_object(j.info,'$.wifi_name') AS wifi_name,
+    get_json_object(j.info,'$.wifi_mac') AS wifi_mac,
+    get_json_object(j.info,'$.wifi_freq') AS wifi_freq,
+    get_json_object(j.info,'$.wifi_strenth') AS wifi_strenth,
+    get_json_object(j.info,'$.wifi_operatorId') AS wifi_operator_id,
+    get_json_object(j.info,'$.latitude') AS latitude,
+    get_json_object(j.info,'$.longitude') AS longitude,
+    get_json_object(j.info,'$.grid_id') AS grid_id,
+    get_json_object(j.info,'$.grid_length') AS grid_length,
+    get_json_object(j.info,'$.grid_lefttop_x') AS grid_lefttop_x,
+    get_json_object(j.info,'$.grid_lefttop_y') AS grid_lefttop_y,
+    get_json_object(j.info,'$.grid_rightbottom_x') AS grid_rightbottom_x,
+    get_json_object(j.info,'$.grid_rightbottom_y') AS grid_rightbottom_y,
+    get_json_object(j.info,'$.loctype') AS loctype,
+    get_json_object(j.info,'$.network_loctype') AS network_loctype,
+    get_json_object(j.info,'$.loc_where') AS loc_where,
+    get_json_object(j.info,'$.accuracy') AS accuracy,
+    get_json_object(j.info,'$.altitude') AS altitude,
+    get_json_object(j.info,'$.sate_number') AS sate_number,
+    get_json_object(j.info,'$.pressure') AS pressure,
+    get_json_object(j.info,'$.speed') AS speed,
+    get_json_object(j.info,'$.direction') AS direction,
+    get_json_object(j.info,'$.province') AS province,
+    get_json_object(j.info,'$.city') AS city,
+    get_json_object(j.info,'$.district') AS district,
+    get_json_object(j.info,'$.address') AS address,
+    get_json_object(j.info,'$.isIndoor') AS is_indoor,
+    a.msgtype,
+    a.process_time,
+    a.reportdate,
+    a.dt,a.ht
+FROM
+(
+    SELECT  
+        deviceid,
+        ftp_group_info_list,
+        msgtype,
+        process_time,
+        reportdate,
+        dt,ht
+    FROM knowyou_ott_ods.odm_tair_info_tmp
+    WHERE dt='${C_DAY}' AND ht='${CURRENT_HOUR}'
+    AND length(ftp_group_info_list) > 2 
+)a
+lateral view explode(split(regexp_replace(regexp_replace(a.ftp_group_info_list,'\\[|\\]',''),'\\}\\,\\{','\\}\\;\\{'),'\\;')) j as info;
+</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>HIVE2_TEST</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>992</xloc>
+      <yloc>272</yloc>
+    </entry>
+    <entry>
+      <name>odm_tair_ftp_dm</name>
+      <description />
+      <type>SQL</type>
+      <sql>
+CREATE TABLE IF NOT EXISTS knowyou_ott_ods.odm_tair_ftp_dm(
+deviceid 			string,
+id					int,
+device_type 		int,
+port 				int,
+group_id 			int,
+task_name 			string,
+task_type 			int,
+test_plan_id 		int,
+test_type 			int,
+scene_type 			int,
+scene_name 			string,
+scene_mark 			string,
+begin_time			string,
+end_time			string,
+operator_id			int,
+mcc					int,
+mnc					int,
+network_class		int,
+network_type		int,
+internal_ip			string,
+external_ip			string,
+app_list			string,
+
+sp_type				int,
+server_name			string,
+server_ip			string,
+avg_speed			string,
+max_speed			string,
+duration			int,
+total_bytes			bigint,
+
+result				int,
+lte_tac				bigint,
+lte_eci				bigint,
+lte_earfcn			bigint,
+lte_enod_bid		bigint,
+lte_cellid			int,
+lte_pci				int,
+lte_rsrp			int,
+lte_sinr			float,
+lte_rsrq			int,
+lte_nbrlist			string,
+nr_type				int,
+nr_tac				bigint,
+nr_eci				bigint,
+nr_earfcn			bigint,
+nr_enod_bid			bigint,
+nr_cellid			int,
+nr_pci				int,
+nr_rsrp				int,
+nr_sinr				float,
+nr_rsrq				int,
+nr_nbrlist			string,
+wifi_manufacturer	string,
+wifi_name			string,
+wifi_mac			string,
+wifi_freq			int,
+wifi_strenth		int,
+wifi_operator_id	int,
+latitude			string,
+longitude			string,
+grid_id				string,
+grid_length			int,
+grid_lefttop_x		string,
+grid_lefttop_y		string,
+grid_rightbottom_x	string,
+grid_rightbottom_y	string,
+loctype				int,
+network_loctype		int,
+loc_where			int,
+accuracy			float,
+altitude			float,
+sate_number			int,
+pressure			float,
+speed				float,
+direction			float,
+province			string,
+city				string,
+district			string,
+address				string,
+is_indoor			int,
+msgtype				string,
+process_time		string,
+reportdate			string
+)
+PARTITIONED BY (dt string,ht string)
+STORED AS orc tblproperties("orc.compress"="SNAPPY")</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>HIVE2_TEST</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>800</xloc>
+      <yloc>352</yloc>
+    </entry>
+    <entry>
+      <name>SQL 5</name>
+      <description />
+      <type>SQL</type>
+      <sql>
+INSERT overwrite TABLE knowyou_ott_ods.odm_tair_ftp_dm partition(dt,ht)
+SELECT  
+    a.deviceid,
+    get_json_object(j.info,'$.id') AS id,
+    get_json_object(j.info,'$.deviceType') AS device_type,
+    get_json_object(j.info,'$.port') AS port,
+    get_json_object(j.info,'$.groupId') AS group_id,
+    get_json_object(j.info,'$.taskName') AS task_name,
+    get_json_object(j.info,'$.taskType') AS task_type,
+    get_json_object(j.info,'$.testPlanId') AS test_plan_id,
+    get_json_object(j.info,'$.testType') AS test_type,
+    get_json_object(j.info,'$.scene_type') AS scene_type,
+    get_json_object(j.info,'$.scene_name') AS scene_name,
+    get_json_object(j.info,'$.scene_mark') AS scene_mark,
+    get_json_object(j.info,'$.beginTime') AS begin_time,
+    get_json_object(j.info,'$.endTime') AS end_time,
+    get_json_object(j.info,'$.operatorId') AS operator_id,
+    get_json_object(j.info,'$.mcc') AS mcc,
+    get_json_object(j.info,'$.mnc') AS mnc,
+    get_json_object(j.info,'$.network_Class') AS network_class,
+    get_json_object(j.info,'$.network_Type') AS network_type,
+    get_json_object(j.info,'$.internalIp') AS internal_ip,
+    get_json_object(j.info,'$.externalIp') AS external_ip,
+    get_json_object(j.info,'$.app_list') AS app_list,
+    
+    get_json_object(j.info,'$.sp_type') AS sp_type,
+    get_json_object(j.info,'$.serverName') AS server_name,
+    get_json_object(j.info,'$.serverIp') AS server_ip,
+    get_json_object(j.info,'$.avgSpeed') AS avg_speed,
+    get_json_object(j.info,'$.maxSpeed') AS max_speed,
+    get_json_object(j.info,'$.duration') AS duration,
+    get_json_object(j.info,'$.totalBytes') AS total_bytes,
+    
+    get_json_object(j.info,'$.result') AS result,
+    get_json_object(j.info,'$.lte_tac') AS lte_tac,
+    get_json_object(j.info,'$.lte_eci') AS lte_eci,
+    get_json_object(j.info,'$.lte_earfcn') AS lte_earfcn,
+    get_json_object(j.info,'$.lte_enodBID') AS lte_enod_bid,
+    get_json_object(j.info,'$.lte_cellid') AS lte_cellid,
+    get_json_object(j.info,'$.lte_pci') AS lte_pci,
+    get_json_object(j.info,'$.lte_rsrp') AS lte_rsrp,
+    get_json_object(j.info,'$.lte_sinr') AS lte_sinr,
+    get_json_object(j.info,'$.lte_rsrq') AS lte_rsrq,
+    get_json_object(j.info,'$.lte_nbrlist') AS lte_nbrlist,
+    get_json_object(j.info,'$.nr_type') AS nr_type,
+    get_json_object(j.info,'$.nr_tac') AS nr_tac,
+    get_json_object(j.info,'$.nr_eci') AS nr_eci,
+    get_json_object(j.info,'$.nr_earfcn') AS nr_earfcn,
+    get_json_object(j.info,'$.nr_enodBID') AS nr_enod_bid,
+    get_json_object(j.info,'$.nr_cellid') AS nr_cellid,
+    get_json_object(j.info,'$.nr_pci') AS nr_pci,
+    get_json_object(j.info,'$.nr_rsrp') AS nr_rsrp,
+    get_json_object(j.info,'$.nr_sinr') AS nr_sinr,
+    get_json_object(j.info,'$.nr_rsrq') AS nr_rsrq,
+    get_json_object(j.info,'$.nr_nbrlist') AS nr_nbrlist,
+    get_json_object(j.info,'$.wifi_manufacturer') AS wifi_manufacturer,
+    get_json_object(j.info,'$.wifi_name') AS wifi_name,
+    get_json_object(j.info,'$.wifi_mac') AS wifi_mac,
+    get_json_object(j.info,'$.wifi_freq') AS wifi_freq,
+    get_json_object(j.info,'$.wifi_strenth') AS wifi_strenth,
+    get_json_object(j.info,'$.wifi_operatorId') AS wifi_operator_id,
+    get_json_object(j.info,'$.latitude') AS latitude,
+    get_json_object(j.info,'$.longitude') AS longitude,
+    get_json_object(j.info,'$.grid_id') AS grid_id,
+    get_json_object(j.info,'$.grid_length') AS grid_length,
+    get_json_object(j.info,'$.grid_lefttop_x') AS grid_lefttop_x,
+    get_json_object(j.info,'$.grid_lefttop_y') AS grid_lefttop_y,
+    get_json_object(j.info,'$.grid_rightbottom_x') AS grid_rightbottom_x,
+    get_json_object(j.info,'$.grid_rightbottom_y') AS grid_rightbottom_y,
+    get_json_object(j.info,'$.loctype') AS loctype,
+    get_json_object(j.info,'$.network_loctype') AS network_loctype,
+    get_json_object(j.info,'$.loc_where') AS loc_where,
+    get_json_object(j.info,'$.accuracy') AS accuracy,
+    get_json_object(j.info,'$.altitude') AS altitude,
+    get_json_object(j.info,'$.sate_number') AS sate_number,
+    get_json_object(j.info,'$.pressure') AS pressure,
+    get_json_object(j.info,'$.speed') AS speed,
+    get_json_object(j.info,'$.direction') AS direction,
+    get_json_object(j.info,'$.province') AS province,
+    get_json_object(j.info,'$.city') AS city,
+    get_json_object(j.info,'$.district') AS district,
+    get_json_object(j.info,'$.address') AS address,
+    get_json_object(j.info,'$.isIndoor') AS is_indoor,
+    a.msgtype,
+    a.process_time,
+    a.reportdate,
+    a.dt,a.ht
+FROM
+(
+    SELECT  
+        deviceid,
+        ftp_list,
+        msgtype,
+        process_time,
+        reportdate,
+        dt,ht
+    FROM knowyou_ott_ods.odm_tair_info_tmp
+    WHERE dt='${C_DAY}' AND ht='${CURRENT_HOUR}'
+    AND length(ftp_list) > 2
+)a
+lateral view explode(split(regexp_replace(regexp_replace(a.ftp_list,'\\[|\\]',''),'\\}\\,\\{','\\}\\;\\{'),'\\;')) j as info;
+</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>HIVE2_TEST</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>992</xloc>
+      <yloc>352</yloc>
+    </entry>
+    <entry>
+      <name>odm_tair_http_dm</name>
+      <description />
+      <type>SQL</type>
+      <sql>CREATE TABLE IF NOT EXISTS knowyou_ott_ods.odm_tair_http_dm(
+deviceid 			string,
+id					int,
+device_type 		int,
+port 				int,
+group_id 			int,
+task_name 			string,
+task_type 			int,
+test_plan_id 		int,
+test_type 			int,
+scene_type 			int,
+scene_name 			string,
+scene_mark 			string,
+begin_time			string,
+end_time			string,
+operator_id			int,
+mcc					int,
+mnc					int,
+network_class		int,
+network_type		int,
+internal_ip			string,
+external_ip			string,
+app_list			string,
+server_name			string,
+server_ip			string,
+
+url			string,
+dns_delay			int,
+connect_delay			int,
+request_delay			int,
+first_pkg_delay			int,
+first_screen_delay			int,
+load_delay			int,
+dl_avg_rate			bigint,
+
+
+result				int,
+lte_tac				bigint,
+lte_eci				bigint,
+lte_earfcn			bigint,
+lte_enod_bid		bigint,
+lte_cellid			int,
+lte_pci				int,
+lte_rsrp			int,
+lte_sinr			float,
+lte_rsrq			int,
+lte_nbrlist			string,
+nr_type				int,
+nr_tac				bigint,
+nr_eci				bigint,
+nr_earfcn			bigint,
+nr_enod_bid			bigint,
+nr_cellid			int,
+nr_pci				int,
+nr_rsrp				int,
+nr_sinr				float,
+nr_rsrq				int,
+nr_nbrlist			string,
+wifi_manufacturer	string,
+wifi_name			string,
+wifi_mac			string,
+wifi_freq			int,
+wifi_strenth		int,
+wifi_operator_id	int,
+latitude			string,
+longitude			string,
+grid_id				string,
+grid_length			int,
+grid_lefttop_x		string,
+grid_lefttop_y		string,
+grid_rightbottom_x	string,
+grid_rightbottom_y	string,
+loctype				int,
+network_loctype		int,
+loc_where			int,
+accuracy			float,
+altitude			float,
+sate_number			int,
+pressure			float,
+speed				float,
+direction			float,
+province			string,
+city				string,
+district			string,
+address				string,
+is_indoor			int,
+msgtype				string,
+process_time		string,
+reportdate			string
+)
+PARTITIONED BY (dt string,ht string)
+STORED AS orc tblproperties("orc.compress"="SNAPPY")</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>HIVE2_TEST</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>800</xloc>
+      <yloc>448</yloc>
+    </entry>
+    <entry>
+      <name>SQL 7</name>
+      <description />
+      <type>SQL</type>
+      <sql>
+INSERT overwrite TABLE knowyou_ott_ods.odm_tair_http_dm partition(dt,ht)
+SELECT  
+    a.deviceid,
+    get_json_object(j.info,'$.id') AS id,
+    get_json_object(j.info,'$.deviceType') AS device_type,
+    get_json_object(j.info,'$.port') AS port,
+    get_json_object(j.info,'$.groupId') AS group_id,
+    get_json_object(j.info,'$.taskName') AS task_name,
+    get_json_object(j.info,'$.taskType') AS task_type,
+    get_json_object(j.info,'$.testPlanId') AS test_plan_id,
+    get_json_object(j.info,'$.testType') AS test_type,
+    get_json_object(j.info,'$.scene_type') AS scene_type,
+    get_json_object(j.info,'$.scene_name') AS scene_name,
+    get_json_object(j.info,'$.scene_mark') AS scene_mark,
+    get_json_object(j.info,'$.beginTime') AS begin_time,
+    get_json_object(j.info,'$.endTime') AS end_time,
+    get_json_object(j.info,'$.operatorId') AS operator_id,
+    get_json_object(j.info,'$.mcc') AS mcc,
+    get_json_object(j.info,'$.mnc') AS mnc,
+    get_json_object(j.info,'$.network_Class') AS network_class,
+    get_json_object(j.info,'$.network_Type') AS network_type,
+    get_json_object(j.info,'$.internalIp') AS internal_ip,
+    get_json_object(j.info,'$.externalIp') AS external_ip,
+    get_json_object(j.info,'$.app_list') AS app_list,
+    
+    get_json_object(j.info,'$.serverName') AS server_name,
+    get_json_object(j.info,'$.serverIp') AS server_ip,
+    get_json_object(j.info,'$.url') AS url,
+    get_json_object(j.info,'$.dnsDelay') AS dns_delay,
+    get_json_object(j.info,'$.connectDelay') AS connect_delay,
+    get_json_object(j.info,'$.requestDelay') AS request_delay,
+    get_json_object(j.info,'$.firstPkgDelay') AS first_pkg_delay,
+    get_json_object(j.info,'$.firstScreenDelay') AS first_screen_delay,
+    get_json_object(j.info,'$.loadDelay') AS load_delay,
+    get_json_object(j.info,'$.dlAvgRate') AS dl_avg_rate,
+    
+    get_json_object(j.info,'$.result') AS result,
+    get_json_object(j.info,'$.lte_tac') AS lte_tac,
+    get_json_object(j.info,'$.lte_eci') AS lte_eci,
+    get_json_object(j.info,'$.lte_earfcn') AS lte_earfcn,
+    get_json_object(j.info,'$.lte_enodBID') AS lte_enod_bid,
+    get_json_object(j.info,'$.lte_cellid') AS lte_cellid,
+    get_json_object(j.info,'$.lte_pci') AS lte_pci,
+    get_json_object(j.info,'$.lte_rsrp') AS lte_rsrp,
+    get_json_object(j.info,'$.lte_sinr') AS lte_sinr,
+    get_json_object(j.info,'$.lte_rsrq') AS lte_rsrq,
+    get_json_object(j.info,'$.lte_nbrlist') AS lte_nbrlist,
+    get_json_object(j.info,'$.nr_type') AS nr_type,
+    get_json_object(j.info,'$.nr_tac') AS nr_tac,
+    get_json_object(j.info,'$.nr_eci') AS nr_eci,
+    get_json_object(j.info,'$.nr_earfcn') AS nr_earfcn,
+    get_json_object(j.info,'$.nr_enodBID') AS nr_enod_bid,
+    get_json_object(j.info,'$.nr_cellid') AS nr_cellid,
+    get_json_object(j.info,'$.nr_pci') AS nr_pci,
+    get_json_object(j.info,'$.nr_rsrp') AS nr_rsrp,
+    get_json_object(j.info,'$.nr_sinr') AS nr_sinr,
+    get_json_object(j.info,'$.nr_rsrq') AS nr_rsrq,
+    get_json_object(j.info,'$.nr_nbrlist') AS nr_nbrlist,
+    get_json_object(j.info,'$.wifi_manufacturer') AS wifi_manufacturer,
+    get_json_object(j.info,'$.wifi_name') AS wifi_name,
+    get_json_object(j.info,'$.wifi_mac') AS wifi_mac,
+    get_json_object(j.info,'$.wifi_freq') AS wifi_freq,
+    get_json_object(j.info,'$.wifi_strenth') AS wifi_strenth,
+    get_json_object(j.info,'$.wifi_operatorId') AS wifi_operator_id,
+    get_json_object(j.info,'$.latitude') AS latitude,
+    get_json_object(j.info,'$.longitude') AS longitude,
+    get_json_object(j.info,'$.grid_id') AS grid_id,
+    get_json_object(j.info,'$.grid_length') AS grid_length,
+    get_json_object(j.info,'$.grid_lefttop_x') AS grid_lefttop_x,
+    get_json_object(j.info,'$.grid_lefttop_y') AS grid_lefttop_y,
+    get_json_object(j.info,'$.grid_rightbottom_x') AS grid_rightbottom_x,
+    get_json_object(j.info,'$.grid_rightbottom_y') AS grid_rightbottom_y,
+    get_json_object(j.info,'$.loctype') AS loctype,
+    get_json_object(j.info,'$.network_loctype') AS network_loctype,
+    get_json_object(j.info,'$.loc_where') AS loc_where,
+    get_json_object(j.info,'$.accuracy') AS accuracy,
+    get_json_object(j.info,'$.altitude') AS altitude,
+    get_json_object(j.info,'$.sate_number') AS sate_number,
+    get_json_object(j.info,'$.pressure') AS pressure,
+    get_json_object(j.info,'$.speed') AS speed,
+    get_json_object(j.info,'$.direction') AS direction,
+    get_json_object(j.info,'$.province') AS province,
+    get_json_object(j.info,'$.city') AS city,
+    get_json_object(j.info,'$.district') AS district,
+    get_json_object(j.info,'$.address') AS address,
+    get_json_object(j.info,'$.isIndoor') AS is_indoor,
+    a.msgtype,
+    a.process_time,
+    a.reportdate,
+    a.dt,a.ht
+FROM
+(
+    SELECT  
+        deviceid,
+        http_bower_info_list,
+        msgtype,
+        process_time,
+        reportdate,
+        dt,ht
+    FROM knowyou_ott_ods.odm_tair_info_tmp
+    WHERE dt='${C_DAY}' AND ht='${CURRENT_HOUR}'
+    AND length(http_bower_info_list) > 2
+)a
+lateral view explode(split(regexp_replace(regexp_replace(a.http_bower_info_list,'\\[|\\]',''),'\\}\\,\\{','\\}\\;\\{'),'\\;')) j as info;
+</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>HIVE2_TEST</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>992</xloc>
+      <yloc>448</yloc>
+    </entry>
+    <entry>
+      <name>odm_tair_ping_dm</name>
+      <description />
+      <type>SQL</type>
+      <sql>
+CREATE TABLE IF NOT EXISTS knowyou_ott_ods.odm_tair_ping_dm(
+deviceid 			string,
+id					int,
+device_type 		int,
+port 				int,
+group_id 			int,
+task_name 			string,
+task_type 			int,
+test_plan_id 		int,
+test_type 			int,
+scene_type 			int,
+scene_name 			string,
+scene_mark 			string,
+begin_time			string,
+end_time			string,
+operator_id			int,
+mcc					int,
+mnc					int,
+network_class		int,
+network_type		int,
+internal_ip			string,
+external_ip			string,
+app_list			string,
+server_name			string,
+server_ip			string,
+
+url			string,
+ping_type			int,
+packet_count			int,
+packet_size			int,
+min_delay			int,
+max_delay			int,
+avg_delay			int,
+jitter			int,
+
+
+result				int,
+lte_tac				bigint,
+lte_eci				bigint,
+lte_earfcn			bigint,
+lte_enod_bid		bigint,
+lte_cellid			int,
+lte_pci				int,
+lte_rsrp			int,
+lte_sinr			float,
+lte_rsrq			int,
+lte_nbrlist			string,
+nr_type				int,
+nr_tac				bigint,
+nr_eci				bigint,
+nr_earfcn			bigint,
+nr_enod_bid			bigint,
+nr_cellid			int,
+nr_pci				int,
+nr_rsrp				int,
+nr_sinr				float,
+nr_rsrq				int,
+nr_nbrlist			string,
+wifi_manufacturer	string,
+wifi_name			string,
+wifi_mac			string,
+wifi_freq			int,
+wifi_strenth		int,
+wifi_operator_id	int,
+latitude			string,
+longitude			string,
+grid_id				string,
+grid_length			int,
+grid_lefttop_x		string,
+grid_lefttop_y		string,
+grid_rightbottom_x	string,
+grid_rightbottom_y	string,
+loctype				int,
+network_loctype		int,
+loc_where			int,
+accuracy			float,
+altitude			float,
+sate_number			int,
+pressure			float,
+speed				float,
+direction			float,
+province			string,
+city				string,
+district			string,
+address				string,
+is_indoor			int,
+msgtype				string,
+process_time		string,
+reportdate			string
+)
+PARTITIONED BY (dt string,ht string)
+STORED AS orc tblproperties("orc.compress"="SNAPPY")</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>HIVE2_TEST</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>800</xloc>
+      <yloc>544</yloc>
+    </entry>
+    <entry>
+      <name>SQL 9</name>
+      <description />
+      <type>SQL</type>
+      <sql>
+INSERT overwrite TABLE knowyou_ott_ods.odm_tair_ping_dm partition(dt,ht)
+SELECT  
+    a.deviceid,
+    get_json_object(j.info,'$.id') AS id,
+    get_json_object(j.info,'$.deviceType') AS device_type,
+    get_json_object(j.info,'$.port') AS port,
+    get_json_object(j.info,'$.groupId') AS group_id,
+    get_json_object(j.info,'$.taskName') AS task_name,
+    get_json_object(j.info,'$.taskType') AS task_type,
+    get_json_object(j.info,'$.testPlanId') AS test_plan_id,
+    get_json_object(j.info,'$.testType') AS test_type,
+    get_json_object(j.info,'$.scene_type') AS scene_type,
+    get_json_object(j.info,'$.scene_name') AS scene_name,
+    get_json_object(j.info,'$.scene_mark') AS scene_mark,
+    get_json_object(j.info,'$.beginTime') AS begin_time,
+    get_json_object(j.info,'$.endTime') AS end_time,
+    get_json_object(j.info,'$.operatorId') AS operator_id,
+    get_json_object(j.info,'$.mcc') AS mcc,
+    get_json_object(j.info,'$.mnc') AS mnc,
+    get_json_object(j.info,'$.network_Class') AS network_class,
+    get_json_object(j.info,'$.network_Type') AS network_type,
+    get_json_object(j.info,'$.internalIp') AS internal_ip,
+    get_json_object(j.info,'$.externalIp') AS external_ip,
+    get_json_object(j.info,'$.app_list') AS app_list,
+    
+    get_json_object(j.info,'$.serverName') AS server_name,
+    get_json_object(j.info,'$.serverIp') AS server_ip,
+    get_json_object(j.info,'$.url') AS url,
+    get_json_object(j.info,'$.pingType') AS ping_type,
+    get_json_object(j.info,'$.packetCount') AS packet_count,
+    get_json_object(j.info,'$.packetSize') AS packet_size,
+    get_json_object(j.info,'$.minDelay') AS min_delay,
+    get_json_object(j.info,'$.maxDelay') AS max_delay,
+    get_json_object(j.info,'$.avgDelay') AS avg_delay,
+    get_json_object(j.info,'$.jitter') AS jitter,
+    
+    get_json_object(j.info,'$.result') AS result,
+    get_json_object(j.info,'$.lte_tac') AS lte_tac,
+    get_json_object(j.info,'$.lte_eci') AS lte_eci,
+    get_json_object(j.info,'$.lte_earfcn') AS lte_earfcn,
+    get_json_object(j.info,'$.lte_enodBID') AS lte_enod_bid,
+    get_json_object(j.info,'$.lte_cellid') AS lte_cellid,
+    get_json_object(j.info,'$.lte_pci') AS lte_pci,
+    get_json_object(j.info,'$.lte_rsrp') AS lte_rsrp,
+    get_json_object(j.info,'$.lte_sinr') AS lte_sinr,
+    get_json_object(j.info,'$.lte_rsrq') AS lte_rsrq,
+    get_json_object(j.info,'$.lte_nbrlist') AS lte_nbrlist,
+    get_json_object(j.info,'$.nr_type') AS nr_type,
+    get_json_object(j.info,'$.nr_tac') AS nr_tac,
+    get_json_object(j.info,'$.nr_eci') AS nr_eci,
+    get_json_object(j.info,'$.nr_earfcn') AS nr_earfcn,
+    get_json_object(j.info,'$.nr_enodBID') AS nr_enod_bid,
+    get_json_object(j.info,'$.nr_cellid') AS nr_cellid,
+    get_json_object(j.info,'$.nr_pci') AS nr_pci,
+    get_json_object(j.info,'$.nr_rsrp') AS nr_rsrp,
+    get_json_object(j.info,'$.nr_sinr') AS nr_sinr,
+    get_json_object(j.info,'$.nr_rsrq') AS nr_rsrq,
+    get_json_object(j.info,'$.nr_nbrlist') AS nr_nbrlist,
+    get_json_object(j.info,'$.wifi_manufacturer') AS wifi_manufacturer,
+    get_json_object(j.info,'$.wifi_name') AS wifi_name,
+    get_json_object(j.info,'$.wifi_mac') AS wifi_mac,
+    get_json_object(j.info,'$.wifi_freq') AS wifi_freq,
+    get_json_object(j.info,'$.wifi_strenth') AS wifi_strenth,
+    get_json_object(j.info,'$.wifi_operatorId') AS wifi_operator_id,
+    get_json_object(j.info,'$.latitude') AS latitude,
+    get_json_object(j.info,'$.longitude') AS longitude,
+    get_json_object(j.info,'$.grid_id') AS grid_id,
+    get_json_object(j.info,'$.grid_length') AS grid_length,
+    get_json_object(j.info,'$.grid_lefttop_x') AS grid_lefttop_x,
+    get_json_object(j.info,'$.grid_lefttop_y') AS grid_lefttop_y,
+    get_json_object(j.info,'$.grid_rightbottom_x') AS grid_rightbottom_x,
+    get_json_object(j.info,'$.grid_rightbottom_y') AS grid_rightbottom_y,
+    get_json_object(j.info,'$.loctype') AS loctype,
+    get_json_object(j.info,'$.network_loctype') AS network_loctype,
+    get_json_object(j.info,'$.loc_where') AS loc_where,
+    get_json_object(j.info,'$.accuracy') AS accuracy,
+    get_json_object(j.info,'$.altitude') AS altitude,
+    get_json_object(j.info,'$.sate_number') AS sate_number,
+    get_json_object(j.info,'$.pressure') AS pressure,
+    get_json_object(j.info,'$.speed') AS speed,
+    get_json_object(j.info,'$.direction') AS direction,
+    get_json_object(j.info,'$.province') AS province,
+    get_json_object(j.info,'$.city') AS city,
+    get_json_object(j.info,'$.district') AS district,
+    get_json_object(j.info,'$.address') AS address,
+    get_json_object(j.info,'$.isIndoor') AS is_indoor,
+    a.msgtype,
+    a.process_time,
+    a.reportdate,
+    a.dt,a.ht
+FROM
+(
+    SELECT  
+        deviceid,
+        ping_info_list,
+        msgtype,
+        process_time,
+        reportdate,
+        dt,ht
+    FROM knowyou_ott_ods.odm_tair_info_tmp
+    WHERE dt='${C_DAY}' AND ht='${CURRENT_HOUR}'
+    AND length(ping_info_list) > 2
+)a
+lateral view explode(split(regexp_replace(regexp_replace(a.ping_info_list,'\\[|\\]',''),'\\}\\,\\{','\\}\\;\\{'),'\\;')) j as info;
+</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>HIVE2_TEST</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>992</xloc>
+      <yloc>544</yloc>
+    </entry>
+    <entry>
+      <name>odm_tair_spdouyin_dm</name>
+      <description />
+      <type>SQL</type>
+      <sql>
+CREATE TABLE IF NOT EXISTS knowyou_ott_ods.odm_tair_spdouyin_dm(
+deviceid            string,
+id                  int,
+device_type         int,
+port                int,
+group_id            int,
+task_name           string,
+task_type           int,
+test_plan_id        int,
+test_type           int,
+scene_type          int,
+scene_name          string,
+scene_mark          string,
+begin_time          string,
+end_time            string,
+operator_id         int,
+mcc                 int,
+mnc                 int,
+network_class       int,
+network_type        int,
+internal_ip         string,
+external_ip         string,
+app_list            string,
+hot_search_delay    int,
+recommend_delay     int,
+play_attempt        int,
+play_failured       int,
+play_droped         int,
+initialbuffertime   int,
+duration            int,
+rbuffer_count       int,
+rbuffer_time        int,
+max_rbuffer_time    int,
+buffer_ratio        float,
+avg_bitrate         string,
+max_bitrate         string,
+vmos                float,
+result              int,
+lte_tac             bigint,
+lte_eci             bigint,
+lte_earfcn          bigint,
+lte_enod_bid        bigint,
+lte_cellid          int,
+lte_pci             int,
+lte_rsrp            int,
+lte_sinr            float,
+lte_rsrq            int,
+lte_nbrlist         string,
+nr_type             int,
+nr_tac              bigint,
+nr_eci              bigint,
+nr_earfcn           bigint,
+nr_enod_bid         bigint,
+nr_cellid           int,
+nr_pci              int,
+nr_rsrp             int,
+nr_sinr             float,
+nr_rsrq             int,
+nr_nbrlist          string,
+wifi_manufacturer   string,
+wifi_name           string,
+wifi_mac            string,
+wifi_freq           int,
+wifi_strenth        int,
+wifi_operator_id    int,
+latitude            string,
+longitude           string,
+grid_id             string,
+grid_length         int,
+grid_lefttop_x      string,
+grid_lefttop_y      string,
+grid_rightbottom_x  string,
+grid_rightbottom_y  string,
+loctype             int,
+network_loctype     int,
+loc_where           int,
+accuracy            float,
+altitude            float,
+sate_number         int,
+pressure            float,
+speed               float,
+direction           float,
+province            string,
+city                string,
+district            string,
+address             string,
+is_indoor           int,
+msgtype             string,
+process_time        string,
+reportdate          string, 
+avg_frame_rate      string, 
+total_bitrate       float, 
+video_width         int, 
+video_height        int, 
+video_decoder       string, 
+audio_decoder       string
+)
+PARTITIONED BY (dt string,ht string)
+STORED AS orc tblproperties("orc.compress"="SNAPPY")</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>HIVE2_TEST</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>800</xloc>
+      <yloc>640</yloc>
+    </entry>
+    <entry>
+      <name>SQL 10</name>
+      <description />
+      <type>SQL</type>
+      <sql>
+INSERT overwrite TABLE knowyou_ott_ods.odm_tair_spdouyin_dm partition(dt,ht)
+SELECT  
+    a.deviceid,
+    get_json_object(j.info,'$.id') AS id,
+    get_json_object(j.info,'$.deviceType') AS device_type,
+    get_json_object(j.info,'$.port') AS port,
+    get_json_object(j.info,'$.groupId') AS group_id,
+    get_json_object(j.info,'$.taskName') AS task_name,
+    get_json_object(j.info,'$.taskType') AS task_type,
+    get_json_object(j.info,'$.testPlanId') AS test_plan_id,
+    get_json_object(j.info,'$.testType') AS test_type,
+    get_json_object(j.info,'$.scene_type') AS scene_type,
+    get_json_object(j.info,'$.scene_name') AS scene_name,
+    get_json_object(j.info,'$.scene_mark') AS scene_mark,
+    get_json_object(j.info,'$.beginTime') AS begin_time,
+    get_json_object(j.info,'$.endTime') AS end_time,
+    get_json_object(j.info,'$.operatorId') AS operator_id,
+    get_json_object(j.info,'$.mcc') AS mcc,
+    get_json_object(j.info,'$.mnc') AS mnc,
+    get_json_object(j.info,'$.network_Class') AS network_class,
+    get_json_object(j.info,'$.network_Type') AS network_type,
+    get_json_object(j.info,'$.internalIp') AS internal_ip,
+    get_json_object(j.info,'$.externalIp') AS external_ip,
+    get_json_object(j.info,'$.app_list') AS app_list,
+    
+    get_json_object(j.info,'$.hotSearchDelay') AS hot_search_delay,
+    get_json_object(j.info,'$.recommendDelay') AS recommend_delay,
+    get_json_object(j.info,'$.playAttempt') AS play_attempt,
+    get_json_object(j.info,'$.playFailured') AS play_failured,
+    get_json_object(j.info,'$.playDroped') AS play_droped,
+    get_json_object(j.info,'$.initialbuffertime') AS initialbuffertime,
+    get_json_object(j.info,'$.duration') AS duration,
+    get_json_object(j.info,'$.rbufferCount') AS rbuffer_count,
+    get_json_object(j.info,'$.rbufferTime') AS rbuffer_time,
+    get_json_object(j.info,'$.maxRbufferTime') AS max_rbuffer_time,
+    get_json_object(j.info,'$.bufferRatio') AS buffer_ratio,
+    get_json_object(j.info,'$.avgBitrate') AS avg_bitrate,
+    get_json_object(j.info,'$.maxBitrate') AS max_bitrate,
+    get_json_object(j.info,'$.vmos') AS vmos,
+    
+    get_json_object(j.info,'$.result') AS result,
+    get_json_object(j.info,'$.lte_tac') AS lte_tac,
+    get_json_object(j.info,'$.lte_eci') AS lte_eci,
+    get_json_object(j.info,'$.lte_earfcn') AS lte_earfcn,
+    get_json_object(j.info,'$.lte_enodBID') AS lte_enod_bid,
+    get_json_object(j.info,'$.lte_cellid') AS lte_cellid,
+    get_json_object(j.info,'$.lte_pci') AS lte_pci,
+    get_json_object(j.info,'$.lte_rsrp') AS lte_rsrp,
+    get_json_object(j.info,'$.lte_sinr') AS lte_sinr,
+    get_json_object(j.info,'$.lte_rsrq') AS lte_rsrq,
+    get_json_object(j.info,'$.lte_nbrlist') AS lte_nbrlist,
+    get_json_object(j.info,'$.nr_type') AS nr_type,
+    get_json_object(j.info,'$.nr_tac') AS nr_tac,
+    get_json_object(j.info,'$.nr_eci') AS nr_eci,
+    get_json_object(j.info,'$.nr_earfcn') AS nr_earfcn,
+    get_json_object(j.info,'$.nr_enodBID') AS nr_enod_bid,
+    get_json_object(j.info,'$.nr_cellid') AS nr_cellid,
+    get_json_object(j.info,'$.nr_pci') AS nr_pci,
+    get_json_object(j.info,'$.nr_rsrp') AS nr_rsrp,
+    get_json_object(j.info,'$.nr_sinr') AS nr_sinr,
+    get_json_object(j.info,'$.nr_rsrq') AS nr_rsrq,
+    get_json_object(j.info,'$.nr_nbrlist') AS nr_nbrlist,
+    get_json_object(j.info,'$.wifi_manufacturer') AS wifi_manufacturer,
+    get_json_object(j.info,'$.wifi_name') AS wifi_name,
+    get_json_object(j.info,'$.wifi_mac') AS wifi_mac,
+    get_json_object(j.info,'$.wifi_freq') AS wifi_freq,
+    get_json_object(j.info,'$.wifi_strenth') AS wifi_strenth,
+    get_json_object(j.info,'$.wifi_operatorId') AS wifi_operator_id,
+    get_json_object(j.info,'$.latitude') AS latitude,
+    get_json_object(j.info,'$.longitude') AS longitude,
+    get_json_object(j.info,'$.grid_id') AS grid_id,
+    get_json_object(j.info,'$.grid_length') AS grid_length,
+    get_json_object(j.info,'$.grid_lefttop_x') AS grid_lefttop_x,
+    get_json_object(j.info,'$.grid_lefttop_y') AS grid_lefttop_y,
+    get_json_object(j.info,'$.grid_rightbottom_x') AS grid_rightbottom_x,
+    get_json_object(j.info,'$.grid_rightbottom_y') AS grid_rightbottom_y,
+    get_json_object(j.info,'$.loctype') AS loctype,
+    get_json_object(j.info,'$.network_loctype') AS network_loctype,
+    get_json_object(j.info,'$.loc_where') AS loc_where,
+    get_json_object(j.info,'$.accuracy') AS accuracy,
+    get_json_object(j.info,'$.altitude') AS altitude,
+    get_json_object(j.info,'$.sate_number') AS sate_number,
+    get_json_object(j.info,'$.pressure') AS pressure,
+    get_json_object(j.info,'$.speed') AS speed,
+    get_json_object(j.info,'$.direction') AS direction,
+    get_json_object(j.info,'$.province') AS province,
+    get_json_object(j.info,'$.city') AS city,
+    get_json_object(j.info,'$.district') AS district,
+    get_json_object(j.info,'$.address') AS address,
+    get_json_object(j.info,'$.isIndoor') AS is_indoor,
+    a.msgtype,
+    a.process_time,
+    a.reportdate,
+    get_json_object(j.info,'$.avgFrameRate') AS avg_frame_rate,
+    get_json_object(j.info,'$.sumBitrate') AS total_bitrate,
+    get_json_object(j.info,'$.videoWidth') AS video_width,
+    get_json_object(j.info,'$.videoHeight') AS video_height,
+    get_json_object(j.info,'$.videoDecoder') AS video_decoder,
+    get_json_object(j.info,'$.audioDecoder') AS audio_decoder,
+    a.dt,
+    a.ht
+FROM
+(
+    SELECT  
+        deviceid,
+        tiktok_info_list,
+        msgtype,
+        process_time,
+        reportdate,
+        dt,ht
+    FROM knowyou_ott_ods.odm_tair_info_tmp
+    WHERE dt='${C_DAY}' AND ht='${CURRENT_HOUR}'
+    AND length(tiktok_info_list) > 2
+)a
+lateral view explode(split(regexp_replace(regexp_replace(a.tiktok_info_list,'\\[|\\]',''),'\\}\\,\\{','\\}\\;\\{'),'\\;')) j as info;
+</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>HIVE2_TEST</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>992</xloc>
+      <yloc>640</yloc>
+    </entry>
+    <entry>
+      <name>odm_tair_video_dm</name>
+      <description />
+      <type>SQL</type>
+      <sql>
+CREATE TABLE IF NOT EXISTS knowyou_ott_ods.odm_tair_video_dm(
+deviceid 			string,
+id					int,
+device_type 		int,
+port 				int,
+group_id 			int,
+task_name 			string,
+task_type 			int,
+test_plan_id 		int,
+test_type 			int,
+scene_type 			int,
+scene_name 			string,
+scene_mark 			string,
+begin_time			string,
+end_time			string,
+operator_id			int,
+mcc					int,
+mnc					int,
+network_class		int,
+network_type		int,
+internal_ip			string,
+external_ip			string,
+app_list			string,
+
+server_name		string,
+server_ip		string,
+url				string,
+rbuffer_count			int,
+rbuffer_time			int,
+max_rbuffer_time			int,
+avg_bitrate			string,
+max_bitrate			string,
+initialbuffertime			int,
+video_play_duration			int,
+video_bitrate			string,
+video_resolution			int,
+video_codec			int,
+vmos				float,
+
+result				int,
+lte_tac				bigint,
+lte_eci				bigint,
+lte_earfcn			bigint,
+lte_enod_bid		bigint,
+lte_cellid			int,
+lte_pci				int,
+lte_rsrp			int,
+lte_sinr			float,
+lte_rsrq			int,
+lte_nbrlist			string,
+nr_type				int,
+nr_tac				bigint,
+nr_eci				bigint,
+nr_earfcn			bigint,
+nr_enod_bid			bigint,
+nr_cellid			int,
+nr_pci				int,
+nr_rsrp				int,
+nr_sinr				float,
+nr_rsrq				int,
+nr_nbrlist			string,
+wifi_manufacturer	string,
+wifi_name			string,
+wifi_mac			string,
+wifi_freq			int,
+wifi_strenth		int,
+wifi_operator_id	int,
+latitude			string,
+longitude			string,
+grid_id				string,
+grid_length			int,
+grid_lefttop_x		string,
+grid_lefttop_y		string,
+grid_rightbottom_x	string,
+grid_rightbottom_y	string,
+loctype				int,
+network_loctype		int,
+loc_where			int,
+accuracy			float,
+altitude			float,
+sate_number			int,
+pressure			float,
+speed				float,
+direction			float,
+province			string,
+city				string,
+district			string,
+address				string,
+is_indoor			int,
+msgtype				string,
+process_time		string,
+reportdate			string
+)
+PARTITIONED BY (dt string,ht string)
+STORED AS orc tblproperties("orc.compress"="SNAPPY")</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>HIVE2_TEST</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>800</xloc>
+      <yloc>720</yloc>
+    </entry>
+    <entry>
+      <name>SQL 11</name>
+      <description />
+      <type>SQL</type>
+      <sql>INSERT overwrite TABLE knowyou_ott_ods.odm_tair_video_dm partition(dt,ht)
+SELECT  
+    a.deviceid,
+    get_json_object(j.info,'$.id') AS id,
+    get_json_object(j.info,'$.deviceType') AS device_type,
+    get_json_object(j.info,'$.port') AS port,
+    get_json_object(j.info,'$.groupId') AS group_id,
+    get_json_object(j.info,'$.taskName') AS task_name,
+    get_json_object(j.info,'$.taskType') AS task_type,
+    get_json_object(j.info,'$.testPlanId') AS test_plan_id,
+    get_json_object(j.info,'$.testType') AS test_type,
+    get_json_object(j.info,'$.scene_type') AS scene_type,
+    get_json_object(j.info,'$.scene_name') AS scene_name,
+    get_json_object(j.info,'$.scene_mark') AS scene_mark,
+    get_json_object(j.info,'$.beginTime') AS begin_time,
+    get_json_object(j.info,'$.endTime') AS end_time,
+    get_json_object(j.info,'$.operatorId') AS operator_id,
+    get_json_object(j.info,'$.mcc') AS mcc,
+    get_json_object(j.info,'$.mnc') AS mnc,
+    get_json_object(j.info,'$.network_Class') AS network_class,
+    get_json_object(j.info,'$.network_Type') AS network_type,
+    get_json_object(j.info,'$.internalIp') AS internal_ip,
+    get_json_object(j.info,'$.externalIp') AS external_ip,
+    get_json_object(j.info,'$.app_list') AS app_list,
+    
+    get_json_object(j.info,'$.serverName') AS server_name,
+    get_json_object(j.info,'$.serverIp') AS server_ip,
+    get_json_object(j.info,'$.url') AS url,
+    get_json_object(j.info,'$.rbufferCount') AS rbuffer_count,
+    get_json_object(j.info,'$.rbufferTime') AS rbuffer_time,
+    get_json_object(j.info,'$.maxRbufferTime') AS max_rbuffer_time,
+    get_json_object(j.info,'$.avgBitrate') AS avg_bitrate,
+    get_json_object(j.info,'$.maxBitrate') AS max_bitrate,
+    get_json_object(j.info,'$.initialbuffertime') AS initialbuffertime,
+    get_json_object(j.info,'$.videoPlayduration') AS video_play_duration,
+    get_json_object(j.info,'$.videoBitrate') AS video_bitrate,
+    get_json_object(j.info,'$.video_Resolution') AS video_resolution,
+    get_json_object(j.info,'$.videoCodec') AS video_codec,
+    get_json_object(j.info,'$.vmos') AS vmos,
+    
+    get_json_object(j.info,'$.result') AS result,
+    get_json_object(j.info,'$.lte_tac') AS lte_tac,
+    get_json_object(j.info,'$.lte_eci') AS lte_eci,
+    get_json_object(j.info,'$.lte_earfcn') AS lte_earfcn,
+    get_json_object(j.info,'$.lte_enodBID') AS lte_enod_bid,
+    get_json_object(j.info,'$.lte_cellid') AS lte_cellid,
+    get_json_object(j.info,'$.lte_pci') AS lte_pci,
+    get_json_object(j.info,'$.lte_rsrp') AS lte_rsrp,
+    get_json_object(j.info,'$.lte_sinr') AS lte_sinr,
+    get_json_object(j.info,'$.lte_rsrq') AS lte_rsrq,
+    get_json_object(j.info,'$.lte_nbrlist') AS lte_nbrlist,
+    get_json_object(j.info,'$.nr_type') AS nr_type,
+    get_json_object(j.info,'$.nr_tac') AS nr_tac,
+    get_json_object(j.info,'$.nr_eci') AS nr_eci,
+    get_json_object(j.info,'$.nr_earfcn') AS nr_earfcn,
+    get_json_object(j.info,'$.nr_enodBID') AS nr_enod_bid,
+    get_json_object(j.info,'$.nr_cellid') AS nr_cellid,
+    get_json_object(j.info,'$.nr_pci') AS nr_pci,
+    get_json_object(j.info,'$.nr_rsrp') AS nr_rsrp,
+    get_json_object(j.info,'$.nr_sinr') AS nr_sinr,
+    get_json_object(j.info,'$.nr_rsrq') AS nr_rsrq,
+    get_json_object(j.info,'$.nr_nbrlist') AS nr_nbrlist,
+    get_json_object(j.info,'$.wifi_manufacturer') AS wifi_manufacturer,
+    get_json_object(j.info,'$.wifi_name') AS wifi_name,
+    get_json_object(j.info,'$.wifi_mac') AS wifi_mac,
+    get_json_object(j.info,'$.wifi_freq') AS wifi_freq,
+    get_json_object(j.info,'$.wifi_strenth') AS wifi_strenth,
+    get_json_object(j.info,'$.wifi_operatorId') AS wifi_operator_id,
+    get_json_object(j.info,'$.latitude') AS latitude,
+    get_json_object(j.info,'$.longitude') AS longitude,
+    get_json_object(j.info,'$.grid_id') AS grid_id,
+    get_json_object(j.info,'$.grid_length') AS grid_length,
+    get_json_object(j.info,'$.grid_lefttop_x') AS grid_lefttop_x,
+    get_json_object(j.info,'$.grid_lefttop_y') AS grid_lefttop_y,
+    get_json_object(j.info,'$.grid_rightbottom_x') AS grid_rightbottom_x,
+    get_json_object(j.info,'$.grid_rightbottom_y') AS grid_rightbottom_y,
+    get_json_object(j.info,'$.loctype') AS loctype,
+    get_json_object(j.info,'$.network_loctype') AS network_loctype,
+    get_json_object(j.info,'$.loc_where') AS loc_where,
+    get_json_object(j.info,'$.accuracy') AS accuracy,
+    get_json_object(j.info,'$.altitude') AS altitude,
+    get_json_object(j.info,'$.sate_number') AS sate_number,
+    get_json_object(j.info,'$.pressure') AS pressure,
+    get_json_object(j.info,'$.speed') AS speed,
+    get_json_object(j.info,'$.direction') AS direction,
+    get_json_object(j.info,'$.province') AS province,
+    get_json_object(j.info,'$.city') AS city,
+    get_json_object(j.info,'$.district') AS district,
+    get_json_object(j.info,'$.address') AS address,
+    get_json_object(j.info,'$.isIndoor') AS is_indoor,
+    a.msgtype,
+    a.process_time,
+    a.reportdate,
+    a.dt,a.ht
+FROM
+(
+    SELECT  
+        deviceid,
+        video_info_list,
+        msgtype,
+        process_time,
+        reportdate,
+        dt,ht
+    FROM knowyou_ott_ods.odm_tair_info_tmp
+    WHERE dt='${C_DAY}' AND ht='${CURRENT_HOUR}'
+    AND length(video_info_list) > 2
+)a
+lateral view explode(split(regexp_replace(regexp_replace(a.video_info_list,'\\[|\\]',''),'\\}\\,\\{','\\}\\;\\{'),'\\;')) j as info;
+</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>HIVE2_TEST</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>992</xloc>
+      <yloc>720</yloc>
+    </entry>
+    <entry>
+      <name>odm_tair_voice_dm</name>
+      <description />
+      <type>SQL</type>
+      <sql>
+CREATE TABLE IF NOT EXISTS knowyou_ott_ods.odm_tair_voice_dm(
+deviceid 			string,
+id					int,
+device_type 		int,
+port 				int,
+group_id 			int,
+task_name 			string,
+task_type 			int,
+test_plan_id 		int,
+test_type 			int,
+scene_type 			int,
+scene_name 			string,
+scene_mark 			string,
+begin_time			string,
+end_time			string,
+operator_id			int,
+mcc					int,
+mnc					int,
+network_class		int,
+network_type		int,
+internal_ip			string,
+external_ip			string,
+app_list			string,
+
+number		string,
+call_type		int,
+voice_type				int,
+dial_time			string,
+request_time			string,
+alerting_time			string,
+connect_complete_time			string,
+csfb_request_time			string,
+csfb_complete_time			string,
+disconnect_time			string,
+hangup_time			string,
+con_delay			int,
+duration			int,
+
+result				int,
+lte_tac				bigint,
+lte_eci				bigint,
+lte_earfcn			bigint,
+lte_enod_bid		bigint,
+lte_cellid			int,
+lte_pci				int,
+lte_rsrp			int,
+lte_sinr			float,
+lte_rsrq			int,
+lte_nbrlist			string,
+nr_type				int,
+nr_tac				bigint,
+nr_eci				bigint,
+nr_earfcn			bigint,
+nr_enod_bid			bigint,
+nr_cellid			int,
+nr_pci				int,
+nr_rsrp				int,
+nr_sinr				float,
+nr_rsrq				int,
+nr_nbrlist			string,
+wifi_manufacturer	string,
+wifi_name			string,
+wifi_mac			string,
+wifi_freq			int,
+wifi_strenth		int,
+wifi_operator_id	int,
+latitude			string,
+longitude			string,
+grid_id				string,
+grid_length			int,
+grid_lefttop_x		string,
+grid_lefttop_y		string,
+grid_rightbottom_x	string,
+grid_rightbottom_y	string,
+loctype				int,
+network_loctype		int,
+loc_where			int,
+accuracy			float,
+altitude			float,
+sate_number			int,
+pressure			float,
+speed				float,
+direction			float,
+province			string,
+city				string,
+district			string,
+address				string,
+is_indoor			int,
+msgtype				string,
+process_time		string,
+reportdate			string
+)
+PARTITIONED BY (dt string,ht string)
+STORED AS orc tblproperties("orc.compress"="SNAPPY")</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>HIVE2_TEST</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>800</xloc>
+      <yloc>816</yloc>
+    </entry>
+    <entry>
+      <name>SQL 12</name>
+      <description />
+      <type>SQL</type>
+      <sql>
+INSERT overwrite TABLE knowyou_ott_ods.odm_tair_voice_dm partition(dt,ht)
+SELECT  
+    a.deviceid,
+    get_json_object(j.info,'$.id') AS id,
+    get_json_object(j.info,'$.deviceType') AS device_type,
+    get_json_object(j.info,'$.port') AS port,
+    get_json_object(j.info,'$.groupId') AS group_id,
+    get_json_object(j.info,'$.taskName') AS task_name,
+    get_json_object(j.info,'$.taskType') AS task_type,
+    get_json_object(j.info,'$.testPlanId') AS test_plan_id,
+    get_json_object(j.info,'$.testType') AS test_type,
+    get_json_object(j.info,'$.scene_type') AS scene_type,
+    get_json_object(j.info,'$.scene_name') AS scene_name,
+    get_json_object(j.info,'$.scene_mark') AS scene_mark,
+    get_json_object(j.info,'$.beginTime') AS begin_time,
+    get_json_object(j.info,'$.endTime') AS end_time,
+    get_json_object(j.info,'$.operatorId') AS operator_id,
+    get_json_object(j.info,'$.mcc') AS mcc,
+    get_json_object(j.info,'$.mnc') AS mnc,
+    get_json_object(j.info,'$.network_Class') AS network_class,
+    get_json_object(j.info,'$.network_Type') AS network_type,
+    get_json_object(j.info,'$.internalIp') AS internal_ip,
+    get_json_object(j.info,'$.externalIp') AS external_ip,
+    get_json_object(j.info,'$.app_list') AS app_list,
+    
+    get_json_object(j.info,'$.number') AS number,
+    get_json_object(j.info,'$.call_type') AS call_type,
+    get_json_object(j.info,'$.voice_type') AS voice_type,
+    get_json_object(j.info,'$.dial_time') AS dial_time,
+    get_json_object(j.info,'$.request_time') AS request_time,
+    get_json_object(j.info,'$.alerting_time') AS alerting_time,
+    get_json_object(j.info,'$.connect_complete_time') AS connect_complete_time,
+    get_json_object(j.info,'$.csfb_request_time') AS csfb_request_time,
+    get_json_object(j.info,'$.csfb_complete_time') AS csfb_complete_time,
+    get_json_object(j.info,'$.Disconnect_time') AS disconnect_time,
+    get_json_object(j.info,'$.hangup_time') AS hangup_time,
+    get_json_object(j.info,'$.con_delay') AS con_delay,
+    get_json_object(j.info,'$.duration') AS duration,
+    
+    get_json_object(j.info,'$.result') AS result,
+    get_json_object(j.info,'$.lte_tac') AS lte_tac,
+    get_json_object(j.info,'$.lte_eci') AS lte_eci,
+    get_json_object(j.info,'$.lte_earfcn') AS lte_earfcn,
+    get_json_object(j.info,'$.lte_enodBID') AS lte_enod_bid,
+    get_json_object(j.info,'$.lte_cellid') AS lte_cellid,
+    get_json_object(j.info,'$.lte_pci') AS lte_pci,
+    get_json_object(j.info,'$.lte_rsrp') AS lte_rsrp,
+    get_json_object(j.info,'$.lte_sinr') AS lte_sinr,
+    get_json_object(j.info,'$.lte_rsrq') AS lte_rsrq,
+    get_json_object(j.info,'$.lte_nbrlist') AS lte_nbrlist,
+    get_json_object(j.info,'$.nr_type') AS nr_type,
+    get_json_object(j.info,'$.nr_tac') AS nr_tac,
+    get_json_object(j.info,'$.nr_eci') AS nr_eci,
+    get_json_object(j.info,'$.nr_earfcn') AS nr_earfcn,
+    get_json_object(j.info,'$.nr_enodBID') AS nr_enod_bid,
+    get_json_object(j.info,'$.nr_cellid') AS nr_cellid,
+    get_json_object(j.info,'$.nr_pci') AS nr_pci,
+    get_json_object(j.info,'$.nr_rsrp') AS nr_rsrp,
+    get_json_object(j.info,'$.nr_sinr') AS nr_sinr,
+    get_json_object(j.info,'$.nr_rsrq') AS nr_rsrq,
+    get_json_object(j.info,'$.nr_nbrlist') AS nr_nbrlist,
+    get_json_object(j.info,'$.wifi_manufacturer') AS wifi_manufacturer,
+    get_json_object(j.info,'$.wifi_name') AS wifi_name,
+    get_json_object(j.info,'$.wifi_mac') AS wifi_mac,
+    get_json_object(j.info,'$.wifi_freq') AS wifi_freq,
+    get_json_object(j.info,'$.wifi_strenth') AS wifi_strenth,
+    get_json_object(j.info,'$.wifi_operatorId') AS wifi_operator_id,
+    get_json_object(j.info,'$.latitude') AS latitude,
+    get_json_object(j.info,'$.longitude') AS longitude,
+    get_json_object(j.info,'$.grid_id') AS grid_id,
+    get_json_object(j.info,'$.grid_length') AS grid_length,
+    get_json_object(j.info,'$.grid_lefttop_x') AS grid_lefttop_x,
+    get_json_object(j.info,'$.grid_lefttop_y') AS grid_lefttop_y,
+    get_json_object(j.info,'$.grid_rightbottom_x') AS grid_rightbottom_x,
+    get_json_object(j.info,'$.grid_rightbottom_y') AS grid_rightbottom_y,
+    get_json_object(j.info,'$.loctype') AS loctype,
+    get_json_object(j.info,'$.network_loctype') AS network_loctype,
+    get_json_object(j.info,'$.loc_where') AS loc_where,
+    get_json_object(j.info,'$.accuracy') AS accuracy,
+    get_json_object(j.info,'$.altitude') AS altitude,
+    get_json_object(j.info,'$.sate_number') AS sate_number,
+    get_json_object(j.info,'$.pressure') AS pressure,
+    get_json_object(j.info,'$.speed') AS speed,
+    get_json_object(j.info,'$.direction') AS direction,
+    get_json_object(j.info,'$.province') AS province,
+    get_json_object(j.info,'$.city') AS city,
+    get_json_object(j.info,'$.district') AS district,
+    get_json_object(j.info,'$.address') AS address,
+    get_json_object(j.info,'$.isIndoor') AS is_indoor,
+    a.msgtype,
+    a.process_time,
+    a.reportdate,
+    a.dt,a.ht
+FROM
+(
+    SELECT  
+        deviceid,
+        voice_info_list,
+        msgtype,
+        process_time,
+        reportdate,
+        dt,ht
+    FROM knowyou_ott_ods.odm_tair_info_tmp
+    WHERE dt='${C_DAY}' AND ht='${CURRENT_HOUR}'
+    AND length(voice_info_list) > 2
+)a
+lateral view explode(split(regexp_replace(regexp_replace(a.voice_info_list,'\\[|\\]',''),'\\}\\,\\{','\\}\\;\\{'),'\\;')) j as info;
+</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>HIVE2_TEST</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>992</xloc>
+      <yloc>816</yloc>
+    </entry>
+    <entry>
+      <name>dws_tair_grid_dm</name>
+      <description />
+      <type>SQL</type>
+      <sql>
+CREATE TABLE IF NOT EXISTS knowyou_ott_ods.dws_tair_grid_dm(
+deviceid 			string,
+group_id 			int,
+operator_id			int, 
+network_class		int,
+nr_type				int,
+grid_id				string,
+grid_length			int,
+grid_lefttop_x	string,
+grid_lefttop_y	string,
+grid_leftdown_x	string,
+grid_leftdown_y	string,
+grid_righttop_x	string,
+grid_righttop_y	string,
+grid_rightdown_x	string,
+grid_rightdown_y	string,
+province			string,
+city				string,
+district			string,
+app_dlrate_tv       string,
+app_dlrate_tc       int,
+app_ulrate_tv       string,
+app_ulrate_tc       int,
+ping_delay_tv       string,
+ping_delay_tc       int,
+vmos_tv             string,
+vmos_tc             int,
+is_interference     int,
+is_overlap          int,
+is_no_major_cell	int,
+is_cross_coverage   int,
+lte_rsrp_tv         string,
+lte_rsrp_tc         int,
+lte_sinr_tv         string,
+lte_sinr_tc         int,
+lte_rsrq_tv         string,
+lte_rsrq_tc         int,
+nr_rsrp_tv          string,
+nr_rsrp_tc          int,
+nr_sinr_tv          string,
+nr_sinr_tc          int,
+nr_rsrq_tv          string,
+nr_rsrq_tc          int,
+wifi_strenth_tv     string,
+wifi_strenth_tc     int,
+htime               string,
+taskid              int
+)
+PARTITIONED BY (dt string,ht string)
+STORED AS orc tblproperties("orc.compress"="SNAPPY")</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>HIVE2_TEST</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1152</xloc>
+      <yloc>80</yloc>
+    </entry>
+    <entry>
+      <name>SQL 4 2</name>
+      <description />
+      <type>SQL</type>
+      <sql>INSERT overwrite TABLE knowyou_ott_ods.dws_tair_grid_dm partition(dt,ht)
+SELECT 	deviceid,group_id,operator_id,network_class,nr_type,grid_id,
+		max(grid_length) as grid_length,
+		round((split(grid_id,'-')[0]*0.0005 +73.5),4) as grid_lefttop_x,
+		round((split(grid_id,'-')[1]*0.0005 +3.5),4) as grid_lefttop_y,
+		round((split(grid_id,'-')[0]*0.0005 +73.5),4) as grid_leftdown_x,
+		round((split(grid_id,'-')[1]*0.0005 +3.4995),4) as grid_leftdown_y,
+		round((split(grid_id,'-')[0]*0.0005 +73.5005),4) as grid_righttop_x,
+		round((split(grid_id,'-')[1]*0.0005 +3.5000),4) as grid_righttop_y,
+		round((split(grid_id,'-')[0]*0.0005 +73.5005),4) as grid_rightdown_x,
+		round((split(grid_id,'-')[1]*0.0005 +3.4995),4) as grid_rightdown_y,
+		province,
+		city,
+		max(district) as district,
+		scientific_trans(sum((case when app_dlrate>500 then 0 else app_dlrate end))) as app_dlrate_tv,
+		sum((case when app_dlrate>500 then 0 else 1 end)) as app_dlrate_tc,
+		scientific_trans(sum((case when app_ulrate>500 then 0 else app_ulrate end))) as app_ulrate_tv,
+		sum((case when app_ulrate>500 then 0 else 1 end) ) as app_ulrate_tc,
+		scientific_trans(sum((case when ping_delay=-10000 then 0 else ping_delay end))) as ping_delay_tv,
+		sum((case when ping_delay=-10000 then 0 else 1 end) ) as ping_delay_tc,
+		scientific_trans(sum((case when vmos=-10000 then 0 else vmos end))) as vmos_tv,
+		sum((case when vmos=-10000 then 0 else 1 end) ) as vmos_tc,
+		sum((case when is_interference=-10000 then 0 else 1 end) ) as is_interference,
+		sum((case when is_overlap=-10000 then 0 else 1 end) ) as is_overlap,
+		sum((case when is_no_major_cell=-10000 then 0 else 1 end) ) as is_no_major_cell,
+		sum((case when is_cross_coverage=-10000 then 0 else 1 end) ) as is_cross_coverage,
+		scientific_trans(sum((case when lte_rsrp=-10000 then 0 else lte_rsrp end))) as lte_rsrp_tv,
+		sum((case when lte_rsrp=-10000 then 0 else 1 end) ) as lte_rsrp_tc,
+		scientific_trans(sum((case when lte_sinr=-10000 then 0 else lte_sinr end))) as lte_sinr_tv,
+		sum((case when lte_sinr=-10000 then 0 else 1 end) ) as lte_sinr_tc,
+		scientific_trans(sum((case when lte_rsrq=-10000 then 0 else lte_rsrq end))) as lte_rsrq_tv,
+		sum((case when lte_rsrq=-10000 then 0 else 1 end) ) as lte_rsrq_tc,
+		scientific_trans(sum((case when nr_rsrp=-10000 then 0 else nr_rsrp end))) as nr_rsrp_tv,
+		sum((case when nr_rsrp=-10000 then 0 else 1 end) ) as nr_rsrp_tc,
+		scientific_trans(sum((case when nr_sinr=-10000 then 0 else nr_sinr end))) as nr_sinr_tv,
+		sum((case when nr_sinr=-10000 then 0 else 1 end) ) as nr_sinr_tc,
+		scientific_trans(sum((case when nr_rsrq=-10000 then 0 else nr_rsrq end))) as nr_rsrq_tv,
+		sum((case when nr_rsrq=-10000 then 0 else 1 end) ) as nr_rsrq_tc,
+		scientific_trans(sum((case when wifi_strenth=-10000 then 0 else wifi_strenth end))) as wifi_strenth_tv,
+		sum((case when wifi_strenth=-10000 then 0 else 1 end) ) as wifi_strenth_tc,
+		htime,
+        case when taskid is null then 0 else taskid end taskid,
+		'${C_DAY}' as dt, 
+		'${CURRENT_HOUR}' as ht
+FROM(
+SELECT *,date_format(handset_time,'yyyy-MM-dd HH:00:00') as htime FROM knowyou_ott_ods.odm_tair_samplepoint_dm
+where dt='${C_DAY}' and ht='${CURRENT_HOUR}' and size(split(grid_id,'-'))=2 and grid_id !='-10000'
+)a
+group by deviceid,group_id,operator_id,network_class,nr_type,grid_id,province,city,htime,taskid
+</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>HIVE2_TEST</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1296</xloc>
+      <yloc>80</yloc>
+    </entry>
+    <entry>
+      <name>Shell</name>
+      <description />
+      <type>SHELL</type>
+      <filename />
+      <work_directory />
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile />
+      <set_append_logfile>N</set_append_logfile>
+      <logext />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>hive -e "select deviceid,group_id,operator_id, network_class, nr_type, grid_id,grid_length,grid_lefttop_x,grid_lefttop_y,  grid_leftdown_x,grid_leftdown_y, grid_righttop_x,grid_righttop_y,grid_rightdown_x,grid_rightdown_y,  province,city,district,app_dlrate_tv,app_dlrate_tc, app_ulrate_tv,app_ulrate_tc,ping_delay_tv,ping_delay_tc,vmos_tv,vmos_tc,is_interference,is_overlap,is_no_major_cell,is_cross_coverage,lte_rsrp_tv,lte_rsrp_tc,lte_sinr_tv,lte_sinr_tc,lte_rsrq_tv,lte_rsrq_tc,nr_rsrp_tv,nr_rsrp_tc,nr_sinr_tv,nr_sinr_tc,nr_rsrq_tv,nr_rsrq_tc,wifi_strenth_tv,wifi_strenth_tc,htime,taskid from knowyou_ott_ods.dws_tair_grid_dm where dt='${C_DAY}' and ht='${CURRENT_HOUR}'  and htime is not null and grid_id !='-10000'  and grid_id is not null ">/data/shell/kettle_job/dws_tair_grid_dm.txt 
+cat /data/shell/kettle_job/dws_tair_grid_dm.txt  | clickhouse-client -h clickhouse01 -u default --password 9ChD7cPH --query "insert into taier_ott_odsnew.dws_tair_grid_dm format TabSeparated"</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1296</xloc>
+      <yloc>192</yloc>
+    </entry>
+    <entry>
+      <name>odm_tair_spoint_dm</name>
+      <description />
+      <type>SQL</type>
+      <sql>CREATE TABLE IF NOT EXISTS knowyou_ott_ods.odm_tair_samplepoint_dm(
+deviceid 			string,
+group_id 			int,
+test_guid 		    string,
+test_type 			int,
+scene_type 			int,
+scene_name 			string,
+scene_mark 			string,
+handset_time		string,
+operator_id			int,
+network_class		int,
+network_type		int,
+sp_type				int,
+app_dlrate			string,
+app_ulrate			string,
+ping_delay			int,
+vmos				float,
+cell_name			string,
+cell_distance		int,
+is_interference		int,
+is_overlap			int,
+is_no_major_cell	int,
+is_cross_coverage	int,
+lte_tac				bigint,
+lte_eci				bigint,
+lte_earfcn			bigint,
+lte_enod_bid		bigint,
+lte_cellid			int,
+lte_pci				int,
+lte_rsrp			int,
+lte_sinr			float,
+lte_rsrq			int,
+nr_type				int,
+nr_tac				bigint,
+nr_eci				bigint,
+nr_earfcn			bigint,
+nr_enod_bid			bigint,
+nr_cellid			int,
+nr_pci				int,
+nr_rsrp				int,
+nr_sinr				float,
+nr_rsrq				int,
+wifi_manufacturer	string,
+wifi_name			string,
+wifi_mac			string,
+wifi_freq			int,
+wifi_strenth		int,
+wifi_operator_id	int,
+latitude			string,
+longitude			string,
+grid_id				string,
+grid_length			int,
+province			string,
+city				string,
+district			string,
+msgtype				string,
+process_time		string,
+reportdate			string,
+
+  `task_name` string COMMENT 'New Fields from here to end.2022.08.05',
+  `task_type` string COMMENT '',
+  `taskid` int COMMENT '',
+  `test_planid` string COMMENT ''
+)
+PARTITIONED BY (dt string,ht string)
+STORED AS orc tblproperties("orc.compress"="SNAPPY")</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>HIVE2_TEST</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>800</xloc>
+      <yloc>16</yloc>
+    </entry>
+    <entry>
+      <name>SQL12</name>
+      <description />
+      <type>SQL</type>
+      <sql>
+INSERT overwrite TABLE knowyou_ott_ods.odm_tair_samplepoint_dm partition(dt,ht)
+SELECT  
+    a.deviceid,
+    get_json_object(j.info,'$.groupId') AS group_id,
+    get_json_object(j.info,'$.test_guid') AS test_guid,
+    get_json_object(j.info,'$.testType') AS test_type,
+    get_json_object(j.info,'$.scene_type') AS scene_type,
+    get_json_object(j.info,'$.scene_name') AS scene_name,
+    get_json_object(j.info,'$.scene_mark') AS scene_mark,
+    get_json_object(j.info,'$.handset_time') AS handset_time,
+    get_json_object(j.info,'$.operatorId') AS operator_id,
+    get_json_object(j.info,'$.network_Class') AS network_class,
+    get_json_object(j.info,'$.network_Type') AS network_type,
+    get_json_object(j.info,'$.sp_type') AS sp_type,
+    get_json_object(j.info,'$.app_dlrate') AS app_dlrate,
+    get_json_object(j.info,'$.app_ulrate') AS app_ulrate,
+    get_json_object(j.info,'$.ping_delay') AS ping_delay,
+    get_json_object(j.info,'$.vmos') AS vmos,
+    get_json_object(j.info,'$.cellName') AS cell_name,
+    get_json_object(j.info,'$.cellDistance') AS cell_distance,
+    get_json_object(j.info,'$.isInterference') AS is_interference,
+    get_json_object(j.info,'$.isOverlap') AS is_overlap,
+    get_json_object(j.info,'$.isNoMajorCell') AS is_no_major_cell,
+    get_json_object(j.info,'$.isCrossCoverage') AS is_cross_coverage,
+    get_json_object(j.info,'$.lte_tac') AS lte_tac,
+    get_json_object(j.info,'$.lte_eci') AS lte_eci,
+    get_json_object(j.info,'$.lte_earfcn') AS lte_earfcn,
+    get_json_object(j.info,'$.lte_enodBID') AS lte_enod_bid,
+    get_json_object(j.info,'$.lte_cellid') AS lte_cellid,
+    get_json_object(j.info,'$.lte_pci') AS lte_pci,
+    get_json_object(j.info,'$.lte_rsrp') AS lte_rsrp,
+    get_json_object(j.info,'$.lte_sinr') AS lte_sinr,
+    get_json_object(j.info,'$.lte_rsrq') AS lte_rsrq,
+    get_json_object(j.info,'$.nr_type') AS nr_type,
+    get_json_object(j.info,'$.nr_tac') AS nr_tac,
+    get_json_object(j.info,'$.nr_eci') AS nr_eci,
+    get_json_object(j.info,'$.nr_earfcn') AS nr_earfcn,
+    get_json_object(j.info,'$.nr_enodBID') AS nr_enod_bid,
+    get_json_object(j.info,'$.nr_cellid') AS nr_cellid,
+    get_json_object(j.info,'$.nr_pci') AS nr_pci,
+    get_json_object(j.info,'$.nr_rsrp') AS nr_rsrp,
+    get_json_object(j.info,'$.nr_sinr') AS nr_sinr,
+    get_json_object(j.info,'$.nr_rsrq') AS nr_rsrq,
+    get_json_object(j.info,'$.wifi_manufacturer') AS wifi_manufacturer,
+    get_json_object(j.info,'$.wifi_name') AS wifi_name,
+    get_json_object(j.info,'$.wifi_mac') AS wifi_mac,
+    get_json_object(j.info,'$.wifi_freq') AS wifi_freq,
+    get_json_object(j.info,'$.wifi_strenth') AS wifi_strenth,
+    get_json_object(j.info,'$.wifi_operatorId') AS wifi_operator_id,
+    get_json_object(j.info,'$.latitude') AS latitude,
+    get_json_object(j.info,'$.longitude') AS longitude,
+    get_json_object(j.info,'$.grid_id') AS grid_id,
+    get_json_object(j.info,'$.grid_length') AS grid_length,
+    get_json_object(j.info,'$.province') AS province,
+    get_json_object(j.info,'$.city') AS city,
+    get_json_object(j.info,'$.district') AS district,
+    a.msgtype,
+    a.process_time,
+    a.reportdate,
+
+    get_json_object(j.info,'$.taskName') AS task_name,
+    get_json_object(j.info,'$.taskType') AS task_type,
+    get_json_object(j.info,'$.taskId') AS taskid,
+    get_json_object(j.info,'$.testPlanId') AS test_planid,
+
+    a.dt,a.ht
+FROM
+(
+    SELECT  
+        deviceid, 
+        sampling_point_list, 
+        msgtype, 
+        process_time, 
+        reportdate, 
+        dt,ht
+    FROM knowyou_ott_ods.odm_tair_info_tmp
+    WHERE dt = '${C_DAY}' AND ht = '${CURRENT_HOUR}' 
+    AND length(sampling_point_list) > 2
+)a
+lateral view explode(split(regexp_replace(regexp_replace(a.sampling_point_list,'\\[|\\]',''),'\\}\\,\\{','\\}\\;\\{'),'\\;')) j as info;
+</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>HIVE2_TEST</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>992</xloc>
+      <yloc>16</yloc>
+    </entry>
+    <entry>
+      <name>SQL 4 2 2</name>
+      <description />
+      <type>SQL</type>
+      <sql>INSERT overwrite TABLE knowyou_ott_ods.dws_tair_grid_dm partition(dt,ht)
+SELECT 	deviceid,group_id,operator_id,network_class,nr_type,grid_id,
+		max(grid_length) as grid_length,
+		max(grid_lefttop_x) as grid_lefttop_x,
+		max(grid_lefttop_y) as grid_lefttop_y,
+		province,
+		city,
+		max(district) as district,
+		sum(app_dlrate) as app_dlrate_tv,
+		count(app_dlrate) as app_dlrate_tc,
+		sum(app_ulrate) as app_ulrate_tv,
+		count(app_ulrate) as app_ulrate_tc,
+		sum(delay) as ping_delay_tv,
+		count(delay) as ping_delay_tc,
+		sum(vmos) as vmos_tv,
+		count(vmos) as vmos_tc,
+		count(is_interference) as is_interference,
+		count(is_overlap) as is_overlap,
+		count(is_no_major_cell) as is_no_major_cell,
+		count(is_cross_coverage) as is_cross_coverage,
+		sum(lte_rsrp) as lte_rsrp_tv,
+		count(lte_rsrp) as lte_rsrp_tc,
+		sum(lte_sinr) as lte_sinr_tv,
+		count(lte_sinr) as lte_sinr_tc,
+		sum(lte_rsrq) as lte_rsrq_tv,
+		count(lte_rsrq) as lte_rsrq_tc,
+		
+		sum(nr_rsrp) as nr_rsrp_tv,
+		count(nr_rsrp) as nr_rsrp_tc,
+		sum(nr_sinr) as nr_sinr_tv,
+		count(nr_sinr) as nr_sinr_tc,
+		sum(nr_rsrq) as nr_rsrq_tv,
+		count(nr_rsrq) as nr_rsrq_tc,
+		sum(wifi_strenth) as wifi_strenth_tv,
+		count(wifi_strenth) as wifi_strenth_tc,
+		dt,ht
+FROM knowyou_ott_ods.odm_tair_paramdt_dm
+where dt='${C_DAY}' and ht='${CURRENT_HOUR}'
+group by deviceid,group_id,operator_id,network_class,nr_type,grid_id,province,city,dt,ht
+</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>HIVE2_TEST</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1296</xloc>
+      <yloc>16</yloc>
+    </entry>
+    <entry>
+      <name>dws_tair_grid_dm 2</name>
+      <description />
+      <type>SQL</type>
+      <sql>
+CREATE TABLE IF NOT EXISTS knowyou_ott_ods.dws_tair_grid_dm(
+deviceid 			string,
+group_id 			int,
+operator_id			int, 
+network_class		int,
+nr_type				int,
+grid_id				string,
+grid_length			int,
+grid_lefttop_x	string,
+grid_lefttop_y	string,
+grid_leftdown_x	string,
+grid_leftdown_y	string,
+grid_righttop_x	string,
+grid_righttop_y	string,
+grid_rightdown_x	string,
+grid_rightdown_y	string,
+province			string,
+city				string,
+district			string,
+app_dlrate_tv       double,
+app_dlrate_tc       int,
+app_ulrate_tv       double,
+app_ulrate_tc       int,
+ping_delay_tv       double,
+ping_delay_tc       int,
+vmos_tv             double,
+vmos_tc             int,
+is_interference     int,
+is_overlap          int,
+is_no_major_cell	int,
+is_cross_coverage   int,
+lte_rsrp_tv         double,
+lte_rsrp_tc         int,
+lte_sinr_tv         double,
+lte_sinr_tc         int,
+lte_rsrq_tv         double,
+lte_rsrq_tc         int,
+nr_rsrp_tv          double,
+nr_rsrp_tc          int,
+nr_sinr_tv          double,
+nr_sinr_tc          int,
+nr_rsrq_tv          double,
+nr_rsrq_tc          int,
+wifi_strenth_tv     double,
+wifi_strenth_tc     int
+)
+PARTITIONED BY (dt string,ht string)
+STORED AS orc tblproperties("orc.compress"="SNAPPY")</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>HIVE2_TEST</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1184</xloc>
+      <yloc>0</yloc>
+    </entry>
+    <entry>
+      <name>生命周期</name>
+      <description />
+      <type>SQL</type>
+      <sql>alter table knowyou_ott_ods.ods_tair_dm drop partition(dt&lt;='${S_DAY}')</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>HIVE2_TEST</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>496</xloc>
+      <yloc>496</yloc>
+    </entry>
+    <entry>
+      <name>清理hdfs文件</name>
+      <description />
+      <type>SHELL</type>
+      <filename />
+      <work_directory />
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile />
+      <set_append_logfile>N</set_append_logfile>
+      <logext />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>hadoop fs -rm -r -skipTrash /apps/hive/warehouse/tair/ods_tair_dm/$S_DAY/</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>496</xloc>
+      <yloc>224</yloc>
+    </entry>
+    <entry>
+      <name>成功</name>
+      <description />
+      <type>SUCCESS</type>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>592</xloc>
+      <yloc>368</yloc>
+    </entry>
+  </entries>
+  <hops>
+    <hop>
+      <from>START</from>
+      <to>转换</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>转换</from>
+      <to>SQL</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>SQL</from>
+      <to>odm_tair_info_tmp</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>odm_tair_paramdt_dm</from>
+      <to>SQL 4</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>odm_tair_app_dm</from>
+      <to>SQL 6</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>odm_tair_speed_dm</from>
+      <to>SQL 8</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>odm_tair_ftp_dm</from>
+      <to>SQL 5</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>odm_tair_http_dm</from>
+      <to>SQL 7</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>odm_tair_ping_dm</from>
+      <to>SQL 9</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>odm_tair_spdouyin_dm</from>
+      <to>SQL 10</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>odm_tair_video_dm</from>
+      <to>SQL 11</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>odm_tair_voice_dm</from>
+      <to>SQL 12</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>dws_tair_grid_dm</from>
+      <to>SQL 4 2</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>SQL 4 2</from>
+      <to>Shell</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>odm_tair_spoint_dm</from>
+      <to>SQL12</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>SQL12</from>
+      <to>dws_tair_grid_dm</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>odm_tair_info_tmp</from>
+      <to>生命周期</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>odm_tair_info_tmp</from>
+      <to>清理hdfs文件</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>odm_tair_info_tmp</from>
+      <to>成功</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>成功</from>
+      <to>odm_tair_spoint_dm</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>成功</from>
+      <to>odm_tair_paramdt_dm</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>成功</from>
+      <to>odm_tair_app_dm</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>成功</from>
+      <to>odm_tair_speed_dm</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>成功</from>
+      <to>odm_tair_ftp_dm</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>成功</from>
+      <to>odm_tair_http_dm</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>成功</from>
+      <to>odm_tair_ping_dm</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>成功</from>
+      <to>odm_tair_spdouyin_dm</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>成功</from>
+      <to>odm_tair_video_dm</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>成功</from>
+      <to>odm_tair_voice_dm</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+  </hops>
+  <notepads>
+  </notepads>
+  <attributes>
+    <group>
+      <name>METASTORE.pentaho</name>
+      <attribute>
+        <key>Default Run Configuration</key>
+        <value>{"namespace":"pentaho","id":"Default Run Configuration","name":"Default Run Configuration","description":"Defines a default run configuration","metaStoreName":null}</value>
+      </attribute>
+    </group>
+    <group>
+      <name>{"_":"Embedded MetaStore Elements","namespace":"pentaho","type":"Default Run Configuration"}</name>
+      <attribute>
+        <key>Pentaho local</key>
+        <value>{"children":[{"children":[],"id":"server","value":null},{"children":[],"id":"clustered","value":"N"},{"children":[],"id":"name","value":"Pentaho local"},{"children":[],"id":"description","value":null},{"children":[],"id":"readOnly","value":"Y"},{"children":[],"id":"sendResources","value":"N"},{"children":[],"id":"logRemoteExecutionLocally","value":"N"},{"children":[],"id":"remote","value":"N"},{"children":[],"id":"local","value":"Y"},{"children":[],"id":"showTransformations","value":"N"}],"id":"Pentaho local","value":null,"name":"Pentaho local","owner":null,"ownerPermissionsList":[]}</value>
+      </attribute>
+    </group>
+  </attributes>
+</job>

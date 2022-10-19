@@ -1,0 +1,15 @@
+ 10.231.32.23    401a26rs07hdp023.sxmcc 
+ 10.231.32.42    401b18rs07hdp042.sxmcc 
+ 10.231.32.51    401b19rs07hdp051.sxmcc 
+ 10.231.32.50    401b10rs07hdp050.sxmcc 
+ 10.231.32.59    401c14rs03hdp059.sxmcc 
+
+ 10.212.8.13    za2301d04rs10hdp1502.sxmcc 
+ 10.212.9.46    za2301e03rs08hdp1646.sxmcc 
+
+ 10.213.92.59    za2301g12rs01.sxmcc 
+ 10.213.92.113    za2301h02rs01.sxmcc 
+ 10.213.92.141    za2301h06rs01.sxmcc 
+
+ 10.213.92.37    za2301g06rs07.sxmcc 
+ 10.213.92.47    za2301g07rs08.sxmcc 
