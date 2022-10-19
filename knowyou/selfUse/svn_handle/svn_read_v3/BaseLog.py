@@ -231,7 +231,7 @@ def get_employee_dict():
     return employee_dict
 
 
-def get_author_list(log_list):
+def get_author_set(log_list):
     author_set = set()
     for log in log_list:
         author_set.add(log.get_author)
@@ -255,7 +255,10 @@ if __name__ == '__main__':
     for i in logs:
         print(str(i))
 
-    print(get_author_list(logs))
+    print(get_author_set(logs))
+
+    get_employee_dict()
+    get_author_set(logs)
     import time
 
     time.sleep(5)
