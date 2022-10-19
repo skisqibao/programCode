@@ -1,0 +1,182 @@
+--地市偏好
+citys = select deviceid,city  from  knowyou_ott.dmt_ott_devicestate where date_time='%s' and active_state='1' group by deviceid,city
+
+--观看电影类时长
+filmtime = select deviceid,sum(playTime) as playduration from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day='%s' and contentType='电影' and playstatus='1' and videotype='点播' group by deviceid 
+
+
+--观看综艺类时长
+entertainment = select deviceid,sum(playTime) as playduration from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day='%s' and contentType='综艺' and playstatus='1' and videotype='点播' group by deviceid 
+
+--观看少儿类时长
+childtime = select deviceid,sum(playTime) as playduration from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day='%s' and contentType='少儿' and playstatus='1' and videotype='点播' group by deviceid 
+
+--观看电视剧时长
+tvtime =select deviceid,sum(playTime) as playduration from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day='%s' and contentType='少儿' and playstatus='1' and videotype='点播' group by deviceid 
+
+--观看动漫时长
+comictime = select deviceid,sum(playTime) as playduration from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day='%s' and contentType='少儿' and playstatus='1' and videotype='点播' group by deviceid 
+
+--近一周观看电影类类时长
+filmtime_week = select deviceid,sum(playTime) as playduration from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day>='%s' and statis_day<='%s' and contentType='电影' and playstatus='1' and videotype='点播' group by deviceid 
+
+--近一周观看综艺类时长
+entertainment_week = select deviceid,sum(playTime) as playduration from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day>='%s' and statis_day<='%s' and contentType='综艺' and playstatus='1' and videotype='点播' group by deviceid 
+
+--近一周观看少儿类时长
+child_week = select deviceid,sum(playTime) as playduration from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day>='%s' and statis_day<='%s' and contentType='少儿' and playstatus='1' and videotype='点播' group by deviceid 
+
+--近一周观看电视剧时长
+tvtime_week = select deviceid,sum(playTime) as playduration from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day>='%s' and statis_day<='%s' and contentType='电视剧' and playstatus='1' and videotype='点播' group by deviceid 
+
+--近一周观看动漫时长
+comictime_week = select deviceid,sum(playTime) as playduration from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day>='%s' and statis_day<='%s' and contentType='动漫' and playstatus='1' and videotype='点播' group by deviceid 
+
+--90年代影片爱好
+90times_love = select a.deviceid,a.watchcounts from (select deviceid,videoname,count(videoname) as watchcounts from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day='%s' and playstatus='1' and videoname!='' group by deviceid,videoname)a  left join (select videoname,substr(datepublished,1,4) as datepublished from knowyou_ott.ods_uba_cn_year_videoinformation where videotype='点播' group by videoname,substr(datepublished,1,4))b on b.videoname=a.videoname where a.watchcounts>=1 and b.datepublished like '%%199%%' 
+
+--00年代影片爱好
+00times_love = select a.deviceid,a.watchcounts from (select deviceid,videoname,count(videoname) as watchcounts from knowyou_ott.ods_uba_cn_videoplayinfo  where statis_day='%s' and playstatus='1' and videoname!='' group by deviceid,videoname)a  left join (select videoname,substr(datepublished,1,4) as datepublished from knowyou_ott.ods_uba_cn_year_videoinformation where videotype='点播' group by videoname,substr(datepublished,1,4))b on b.videoname=a.videoname where a.watchcounts>=1 and b.datepublished like '%%200%%' 
+
+--最常订购产品包
+prc_product = select user_identity,prod_prc_name from (select  user_identity,prod_prc_name,count(prod_prc_name) as watchcounts from  knowyou_ott.tb_mid_pdt_nettv_user_day where deal_date_p='%s' group by user_identity,prod_prc_name)a order by watchcounts   
+
+--动作片爱好(月观看次数大于30)
+actlove = select a.deviceid,a.watchcounts from (select deviceid,count(videoname) as watchcounts from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day>='%s' and  statis_day<='%s' and programClass='动作' and playstatus='1' and videotype='点播' group by deviceid)a where a.watchcounts>=30 
+
+--爱情片爱好
+lovelove = select a.deviceid,a.watchcounts from (select deviceid,count(videoname) as watchcounts from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day>='%s' and  statis_day<='%s' and programClass='爱情' and playstatus='1' and videotype='点播' group by deviceid)a where a.watchcounts>=30 
+
+--喜剧片爱好
+comedylove = select a.deviceid,a.watchcounts from (select deviceid,count(videoname) as watchcounts from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day>='%s' and  statis_day<='%s' and programClass='喜剧' and playstatus='1' and videotype='点播' group by deviceid)a where a.watchcounts>=30 
+
+--最常观看视频类型
+movietype = select b.deviceid,b.contentType from (select a.deviceid,a.contentType,row_number() over(partition by a.deviceid order by a.watchcounts)rank from (select deviceid,contentType, count(contentType) as watchcounts from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day='%s' and playstatus='1' and contentType!=''  group by deviceid,contentType)a)b where b.rank=1 
+
+
+--恐怖片爱好
+terrorlove = select a.deviceid,a.watchcounts from (select deviceid,count(videoname) as watchcounts from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day>='%s' and  statis_day<='%s' and programClass='恐怖' and playstatus='1' and videotype='点播' group by deviceid)a where a.watchcounts>=30 
+
+--军事片爱好
+warlove = select a.deviceid,a.watchcounts from (select deviceid,count(videoname) as watchcounts from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day>='%s' and  statis_day<='%s' and programClass='军事' and playstatus='1' and videotype='点播' group by deviceid)a where a.watchcounts>=30 
+
+--点播类别爱好
+dianbotype_love = select b.deviceid,b.contentType from (select a.deviceid,a.contentType,row_number() over(partition by a.deviceid order by a.watchcounts)rank from (select deviceid,contentType, count(contentType) as watchcounts  from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day='%s' and videotype='点播' and playstatus='1' and contentType!=''  group by deviceid,contentType)a)b where b.rank=1 
+
+--直播类别爱好
+zhibotype_love = select b.deviceid,b.contentType from (select a.deviceid,a.contentType,row_number() over(partition by a.deviceid order by a.watchcounts)rank from (select deviceid,contentType, count(contentType) as watchcounts  from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day='%s' and videotype='直播' and playstatus='1' and contentType!=''  group by deviceid,contentType)a)b where b.rank=1 
+
+--回看类别爱好
+huikantype_love = select b.deviceid,b.contentType from (select a.deviceid,a.contentType,row_number() over(partition by a.deviceid order by a.watchcounts)rank from (select deviceid,contentType, count(contentType) as watchcounts  from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day='%s' and videotype='回看' and playstatus='1' and contentType!=''  group by deviceid,contentType)a)b where b.rank=1  
+
+--观看电视剧类次数近三月均值
+tvtime_threemonth = select deviceid,sum(playTime)/90 as playduration from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day>='%s' and statis_day<='%s' and contentType='电视剧' and playstatus='1' and videotype='点播' group by deviceid 
+
+--观看综艺类次数近三月均值
+entertainment_threemonth = select deviceid,sum(playTime)/90 as playduration from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day>='%s' and statis_day<='%s' and contentType='综艺' and playstatus='1' and videotype='点播' group by deviceid 
+
+--观看动漫类次数近三月均值
+comic_timethreemonth = select deviceid,sum(playTime)/90 as playduration from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day>='%s' and statis_day<='%s' and contentType='动漫' and playstatus='1' and videotype='点播' group by deviceid 
+
+--观看电影类类次数近三月均值
+filmtime_threemonth = select deviceid,sum(playTime)/90 as playduration from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day>='%s' and statis_day<='%s' and contentType='电影' and playstatus='1' and videotype='点播' group by deviceid 
+
+--观看少儿类次数近三月均值
+childtime_threemonth = select deviceid,sum(playTime)/90 as playduration from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day>='%s' and statis_day<='%s' and contentType='少儿' and playstatus='1' and videotype='点播' group by deviceid 
+
+--韩剧爱好
+hanju_love = select a.deviceid,a.watchcounts from (select deviceid,videoname,count(videoname) as watchcounts from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day>='%s' and  statis_day<='%s' and playstatus='1' and videotype='点播' group by deviceid,videoname)a left join (select videoname from knowyou_ott.ods_uba_cn_year_videoinformation where videotype='点播' and region like '%%韩国%%' group by videoname )b on a.videoname=b.videoname where a.watchcounts>=30 and b.videoname!='' 
+
+--日剧爱好
+riju_love = select a.deviceid,a.watchcounts from (select deviceid,videoname,count(videoname) as watchcounts from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day>='%s' and  statis_day<='%s' and playstatus='1' and videotype='点播' group by deviceid,videoname)a left join (select videoname from knowyou_ott.ods_uba_cn_year_videoinformation where videotype='点播' and region like '%%日本%%' group by videoname )b on a.videoname=b.videoname where a.watchcounts>=30 and b.videoname!='' 
+
+--美剧爱好
+meiju_love = select a.deviceid,a.watchcounts from (select deviceid,videoname,count(videoname) as watchcounts from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day>='%s' and  statis_day<='%s' and playstatus='1' and videotype='点播' group by deviceid,videoname)a left join (select videoname from knowyou_ott.ods_uba_cn_year_videoinformation where videotype='点播' and region like '%%美国%%' group by videoname )b on a.videoname=b.videoname where a.watchcounts>=30 and b.videoname!='' 
+
+--港片爱好
+gangju_love = select a.deviceid,a.watchcounts from (select deviceid,videoname,count(videoname) as watchcounts from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day>='%s' and  statis_day<='%s' and playstatus='1' and videotype='点播' group by deviceid,videoname)a left join (select videoname from knowyou_ott.ods_uba_cn_year_videoinformation where videotype='点播' and region like '%%香港%%' group by videoname )b on a.videoname=b.videoname where a.watchcounts>=30 and b.videoname!='' 
+
+--牌照方
+license_type = select a.deviceid,a.cp_name from (select deviceid,cp_name,count(cp_name) as watchcounts from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day='%s' and playstatus='1' group by deviceid,cp_name)a order by a.watchcounts   
+
+--近一周在线观看总时长
+time_week = select deviceid,sum(playTime) as playduration from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day>='%s' and statis_day<='%s'  and playstatus='1'  group by deviceid 
+
+--近三月在线观看总时长
+time_threemonth = select deviceid,sum(playTime) as playduration from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day>='%s' and statis_day<='%s'  and playstatus='1'  group by deviceid 
+
+--夜间点播类别爱好
+dianbotype_night = select b.deviceid,b.contentType from (select a.deviceid,a.contentType,row_number() over(partition by a.deviceid order by a.watchcounts)rank from (select deviceid,contentType, count(contentType) as watchcounts  from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day='%s' and videotype='点播' and playstatus='1' and contentType!='' and substr(play_endTime,9,2)>='16' and substr(play_endTime,9,2)<'24' group by deviceid,contentType)a)b where b.rank=1 
+
+--夜间情节类别爱好
+plottype_night = select b.deviceid,b.programClass from (select a.deviceid,a.programClass,row_number() over(partition by a.deviceid order by a.watchcounts)rank from (select deviceid,programClass, count(programClass) as watchcounts  from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day='%s' and videotype='点播' and playstatus='1' and programClass!='' and substr(play_endTime,9,2)>='16' and substr(play_endTime,9,2)<'24' group by deviceid,programClass)a)b where b.rank=1 
+
+
+--夜间观看时长
+time_night = select deviceid,sum(playTime) as playduration from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day='%s' and substr(play_endTime,9,2)>='16' and substr(play_endTime,9,2)<'24'  and playstatus='1'  group by deviceid 
+
+--近一周夜间观看时长
+time_nightweek = select deviceid,sum(playTime) as playduration from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day>='%s' and statis_day<='%s'  and substr(play_endTime,9,2)>='16' and substr(play_endTime,9,2)<'24'  and playstatus='1'  group by deviceid 
+
+--近三月夜间观看次数均值
+time_night_threemonth = select deviceid,sum(playTime) as playduration from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day>='%s' and statis_day<='%s'  and substr(play_endTime,9,2)>='16' and substr(play_endTime,9,2)<'24'  and playstatus='1'  group by deviceid 
+
+--夜间回看类别爱好
+huikantype_night = select b.deviceid,b.contentType from (select a.deviceid,a.contentType,row_number() over(partition by a.deviceid order by a.watchcounts)rank from (select deviceid,contentType, count(contentType) as watchcounts  from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day='%s' and videotype='回看' and playstatus='1' and contentType!='' and substr(play_endTime,9,2)>='16' and substr(play_endTime,9,2)<'24' group by deviceid,contentType)a)b where b.rank=1 
+
+--早间观看视频类型
+type_morning = select b.deviceid,b.contentType from (select a.deviceid,a.contentType,row_number() over(partition by a.deviceid order by a.watchcounts)rank from (select deviceid,contentType, count(contentType) as watchcounts  from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day='%s'  and playstatus='1' and contentType!='' and substr(play_endTime,9,2)>='06' and substr(play_endTime,9,2)<'11' group by deviceid,contentType)a)b where b.rank=1 
+
+
+--早间观看时长
+time_morning = select deviceid,sum(playTime) as playduration from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day='%s' and playstatus='1' and  substr(play_endTime,9,2)>='06' and substr(play_endTime,9,2)<'11'group by deviceid 
+
+--午间观看视频类型
+type_noon = select b.deviceid,b.contentType from (select a.deviceid,a.contentType,row_number() over(partition by a.deviceid order by a.watchcounts)rank from (select deviceid,contentType, count(contentType) as watchcounts  from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day='%s'  and playstatus='1' and contentType!='' and  substr(play_endTime,9,2)>='11' and substr(play_endTime,9,2)<'16' group by deviceid,contentType)a)b where b.rank=1 
+
+
+--午间观看时长
+time_noon = select deviceid,sum(playTime) as playduration from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day='%s' and playstatus='1' and  substr(play_endTime,9,2)>='11' and substr(play_endTime,9,2)<'16'group by deviceid 
+
+--凌晨观看视频类型
+type_am = select b.deviceid,b.contentType from (select a.deviceid,a.contentType,row_number() over(partition by a.deviceid order by a.watchcounts)rank from (select deviceid,contentType, count(contentType) as watchcounts  from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day='%s'  and playstatus='1' and contentType!='' and  substr(play_endTime,9,2)>='00' and substr(play_endTime,9,2)<'06'  group by deviceid,contentType)a)b where b.rank=1 
+
+--凌晨观看时长
+time_am = select deviceid,sum(playTime) as playduration from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day='%s' and playstatus='1' and  substr(play_endTime,9,2)>='00' and substr(play_endTime,9,2)<'06'group by deviceid 
+
+--观看各类时长
+all_time = select e.deviceid,a.playduration,b\
+  .playduration,c.playduration,d.playduration,e\
+  .playduration from ( select deviceid,sum(playTime) as \
+  playduration from knowyou_ott.ods_uba_cn_videoplayinfo \
+  where statis_day='%s' and contentType='电影' and \
+  playstatus='1' and videotype='点播' group by deviceid)e \
+  left join (select deviceid,sum(playTime) as \
+  playduration from knowyou_ott.ods_uba_cn_videoplayinfo \
+  where statis_day='%s' and contentType='综艺' and \
+  playstatus='1' and videotype='点播' group by deviceid)a \
+  on e.deviceid=a.deviceid left join (select deviceid,sum\
+  (playTime) as playduration from knowyou_ott\
+  .ods_uba_cn_videoplayinfo where statis_day='%s' \
+  and contentType='少儿' and playstatus='1' and \
+  videotype='点播' group by deviceid)b on e.deviceid=b\
+  .deviceid left join (select deviceid,sum(playTime) as playduration from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day='%s' and contentType='少儿' and playstatus='1' and videotype='点播' group by deviceid)c  on e.deviceid=c.deviceid left join (select deviceid,sum(playTime) as playduration from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day='%s' and contentType='少儿' and playstatus='1' and videotype='点播' group by deviceid)d  on e.deviceid=c.deviceid 
+
+--观看一周各类时长
+allweek_time = select a.deviceid,a.playduration,b\
+  .playduration,c\
+  .playduration,d.playduration,e.playduration from ( \
+  select deviceid,sum(playTime) as playduration from \
+  knowyou_ott.ods_uba_cn_videoplayinfo where \
+  statis_day>='%s' and statis_day<='%s' and \
+  contentType='电影' and playstatus='1' and videotype='点播' \
+  group by deviceid)a left join (select deviceid,sum\
+  (playTime) as playduration from knowyou_ott\
+  .ods_uba_cn_videoplayinfo where statis_day>='%s' \
+  and statis_day<='%s' and contentType='综艺' and \
+  playstatus='1' and videotype='点播' group by deviceid)b \
+  on a.deviceid=b.deviceid left join (select deviceid,sum\
+  (playTime) as playduration from knowyou_ott\
+  .ods_uba_cn_videoplayinfo where statis_day>='%s' \
+  and statis_day<='%s' and contentType='少儿' and \
+  playstatus='1' and videotype='点播' group by deviceid)c  on a.deviceid=c.deviceid left join (select deviceid,sum(playTime) as playduration from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day>='%s' and statis_day<='%s' and contentType='电视剧' and playstatus='1' and videotype='点播' group by deviceid)d  on a.deviceid=d.deviceid left join (select deviceid,sum(playTime) as playduration from knowyou_ott.ods_uba_cn_videoplayinfo where statis_day>='%s' and statis_day<='%s' and contentType='动漫' and playstatus='1' and videotype='点播' group by deviceid)e on a.deviceid=e.deviceid  

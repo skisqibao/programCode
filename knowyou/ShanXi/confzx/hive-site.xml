@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?><!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<configuration>
+    <!-- WARNING!!! This file is auto generated for documentation purposes ONLY! -->
+    <!-- WARNING!!! Any changes you make to this file will be ignored by Hive.   -->
+    <!-- WARNING!!! You must make your changes in hive-site.xml instead.         -->
+    <!-- Hive Execution Parameters -->
+    <!--
+    <property>
+        <name>hive.metastore.warehouse.dir</name>
+        <value>hdfs://beh001/user/hive/warehouse</value>
+    </property>
+   -->
+    <property>
+        <name>javax.jdo.option.ConnectionDriverName</name>
+        <value>com.mysql.jdbc.Driver</value>
+    </property>
+
+
+    <property>
+        <name>hive.server2.thrift.port</name>
+        <value>10000</value>
+    </property>
+
+    <property>
+        <name>hive.zookeeper.client.port</name>
+        <value>2181</value>
+    </property>
+
+    <!--
+    <property>
+        <name>spark.eventLog.dir</name>
+        <value>hdfs://beh001/var/log/hadoop-spark</value>
+    </property>
+ -->
+
+    <property>
+        <name>spark.serializer</name>
+        <value>org.apache.spark.serializer.KryoSerializer</value>
+    </property>
+
+    <property>
+        <name>spark.executor.extraJavaOptions</name>
+        <value> -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:+PrintFlagsFinal -XX:+PrintReferenceGC -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintAdaptiveSizePolicy -XX:+UnlockDiagnosticVMOptions -XX:+G1SummarizeConcMark -XX:InitiatingHeapOccupancyPercent=35</value>
+    </property>
+
+    <property>
+        <name>spark.executor.extraLibraryPath</name>
+        <value>/opt/beh/core/hadoop/lib/native</value>
+    </property>
+
+    <property>
+        <name>spark.executor.extraLibraryPath</name>
+        <value>/opt/beh/core/hadoop/lib/native</value>
+    </property>
+
+
+    <property>
+        <name>hive.metastore.uris</name>
+        <value>thrift://za2301g12rs01.sxmcc:9083,thrift://za2301h02rs01.sxmcc:9083</value>
+    </property>
+
+    <property>
+        <name>hive.server2.thrift.bind.host</name>
+        <value>za2301g12rs01.sxmcc</value>
+    </property>
+
+    <property>
+        <name>hive.zookeeper.quorum</name>
+        <value>za2301g12rs01.sxmcc,za2301h02rs01.sxmcc,za2301h06rs01.sxmcc</value>
+    </property>
+
+
+
+    <property>
+        <name>hive.server2.authentication</name>
+        <value>KERBEROS</value>
+    </property>
+
+    <property>
+        <name>hive.server2.authentication.kerberos.principal</name>
+        <value>hs2/_HOST@SXMCC.COM</value>
+    </property>
+
+
+    <property>
+        <name>hive.metastore.sasl.enabled</name>
+        <value>true</value>
+    </property>
+
+
+    <property>
+        <name>hive.metastore.kerberos.principal</name>
+        <value>ms/_HOST@SXMCC.COM</value>
+    </property>
+
+    <!-- from 172.16.13.11:$HIVE_HOME/conf/hive-site.xml -->
+    <property>
+        <name>hive.cluster.delegation.token.store.class</name>
+        <value>org.apache.hadoop.hive.thrift.DBTokenStore</value>
+    </property>
+
+    <property>
+        <name>hive.cluster.delegation.token.store.zookeeper.connectString</name>
+        <value>za2301g12rs01.sxmcc,za2301h02rs01.sxmcc,za2301h06rs01.sxmcc</value>
+    </property>
+
+    <property>
+        <name>hive.cluster.delegation.token.store.zookeeper.znode</name>
+        <value>/hive/cluster/delegation</value>
+    </property>
+
+    <property>
+        <name>hive.cluster.delegation.token.store.zookeeper.acl</name>
+        <value>sasl:hs2:cdrwa,sasl:ms:cdrwa</value>
+    </property>
+
+    <property>
+        <name>hive.server2.webui.use.ssl</name>
+        <value>true</value>
+    </property>
+
+    <property>
+        <name>hive.server2.webui.keystore.path</name>
+        <value>/opt/beh/metadata/key/hadoop.keystore</value>
+    </property>
+
+    <property>
+        <name>hive.server2.webui.keystore.password</name>
+        <value>hadoop</value>
+    </property>
+    <!--
+    <property>
+        <name>hive.metastore.schema.verification</name>
+        <value>false</value>
+    </property>
+    -->
+
+    <property>
+        <name>datanucleus.schema.autoCreateAll</name>
+        <value>true</value>
+    </property>
+
+    <property>
+        <name>hive.server2.builtin.udf.blacklist</name>
+        <value>empty</value>
+    </property>
+
+    <property>
+        <name>hive.security.authorization.manager</name>
+        <value>org.apache.ranger.authorization.hive.authorizer.RangerHiveAuthorizerFactory</value>
+    </property>
+
+    <!--metrics-->
+    <property>
+        <name>hive.metastore.metrics.enabled</name>
+        <value>true</value>
+    </property>
+
+    <property>
+        <name>hive.server2.metrics.enabled</name>
+        <value>true</value>
+    </property>
+
+    <property>
+        <name>hive.service.metrics.reporter</name>
+        <value>JMX</value>
+    </property>
+
+    <!-- User config-->
+    <property>
+        <name>hive.vectorized.execution.reduce.enabled</name>
+        <value>false</value>
+    </property>
+    <property>
+        <name>spark.network.timeout</name>
+        <value>300</value>
+    </property>
+    <property>
+        <name>hive.merge.sparkfiles</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>hive.server2.logging.operation.log.location</name>
+        <value>/opt/beh/tmp/hadoop/operation_logs</value>
+    </property>
+    <property>
+        <name>javax.jdo.option.ConnectionURL</name>
+        <value>jdbc:mysql://10.231.32.27/hive_zx?createDatabaseIfNotExist=true&amp;characterEncoding=UTF-8</value>
+    </property>
+    <property>
+        <name>hive.merge.size.per.task</name>
+        <value>268435456</value>
+    </property>
+    <property>
+        <name>mapreduce.input.fileinputformat.split.minsize.per.rack</name>
+        <value>256000000</value>
+    </property>
+    <property>
+        <name>hive.async.log.enabled</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>hive.merge.smallfiles.avgsize</name>
+        <value>16777216</value>
+    </property>
+    <property>
+        <name>hive.compute.query.using.stats</name>
+        <value>false</value>
+    </property>
+    <property>
+        <name>hive.merge.mapredfiles</name>
+        <value>false</value>
+    </property>
+    <property>
+        <name>hive.vectorized.adaptor.usage.mode</name>
+        <value>chosen</value>
+    </property>
+    <property>
+        <name>spark.eventLog.dir</name>
+        <value>hdfs://beh001/var/log/hadoop-spark</value>
+    </property>
+    <property>
+        <name>hive.hadoop.supports.splittable.combineinputformat</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>hive.vectorized.use.vector.serde.deserialize</name>
+        <value>false</value>
+    </property>
+    <property>
+        <name>spark.dynamicAllocation.initialExecutors</name>
+        <value>1</value>
+    </property>
+    <property>
+        <name>hive.security.authorization.sqlstd.confwhitelist</name>
+        <value>mapred.*|hive.*|mapreduce.*|spark.*|oozie.*|tez.*</value>
+    </property>
+    <property>
+        <name>hive.server2.async.exec.wait.queue.size</name>
+        <value>500</value>
+    </property>
+    <property>
+        <name>hive.security.authorization.sqlstd.confwhitelist.append</name>
+        <value>mapred.*|hive.*|mapreduce.*|spark.*|oozie.*|tez.*</value>
+    </property>
+    <property>
+        <name>hive.metastore.warehouse.dir</name>
+        <value>hdfs://beh001/user/hive/warehouse</value>
+    </property>
+    <property>
+        <name>hive.server2.async.exec.threads</name>
+        <value>500</value>
+    </property>
+    <property>
+        <name>hive.auto.convert.join.noconditionaltask.size</name>
+        <value>20971520</value>
+    </property>
+    <property>
+        <name>hive.execution.engine</name>
+        <value>mr</value>
+    </property>
+    <property>
+        <name>spark.executor.memory</name>
+        <value>20g</value>
+    </property>
+    <property>
+        <name>hbase.zookeeper.quorum</name>
+        <value>za2301g12rs01.sxmcc:2181,za2301h02rs01.sxmcc:2181,za2301h06rs01.sxmcc:2181</value>
+    </property>
+    <property>
+        <name>spark.master</name>
+        <value>yarn-cluster</value>
+    </property>
+    <property>
+        <name>spark.driver.memory</name>
+        <value>4g</value>
+    </property>
+    <property>
+        <name>hive.exec.max.dynamic.partitions</name>
+        <value>5000</value>
+    </property>
+    <property>
+        <name>spark.yarn.driver.memoryOverhead</name>
+        <value>26</value>
+    </property>
+    <property>
+        <name>hive.support.concurrency</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>mapreduce.input.fileinputformat.split.minsize.per.node</name>
+        <value>256000000</value>
+    </property>
+    <property>
+        <name>hive.server2.support.dynamic.service.discovery</name>
+        <value>false</value>
+    </property>
+    <property>
+        <name>hive.cli.print.current.db</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>spark.executor.cores</name>
+        <value>4</value>
+    </property>
+    <property>
+        <name>hive.cli.print.header</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>hive.merge.mapfiles</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>hive.querylog.location</name>
+        <value>/user/hive/log</value>
+    </property>
+    <property>
+        <name>hive.server2.zookeeper.namespace</name>
+        <value>hiveserver2</value>
+    </property>
+    <property>
+        <name>hive.server2.enable.doAs</name>
+        <value>false</value>
+    </property>
+    <property>
+        <name>hive.vectorized.use.checked.expressions</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>spark.eventLog.enabled</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>hive.exec.scratchdir</name>
+        <value>/user/hive/tmp</value>
+    </property>
+    <property>
+        <name>spark.shuffle.service.enabled</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>hive.metastore.server.max.threads</name>
+        <value>100000</value>
+    </property>
+    <property>
+        <name>spark.dynamicAllocation.enabled</name>
+        <value>true</value>
+    </property>
+
+</configuration>
