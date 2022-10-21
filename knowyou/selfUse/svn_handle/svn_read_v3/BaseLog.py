@@ -5,6 +5,10 @@ import subprocess
 import io
 import sys
 import time
+import requests
+import time
+import rsa as r
+from Crypto.Cipher import AES
 
 
 # svn log -v -r {2022-01-01}:{2022-11-01} svn://172.16.1.2/Repo1/MobileBox/Sources/RecommAlgorithm/SparkStandardRecommend --username songk --password "sK&5HiGkqislq*19*x"
@@ -130,7 +134,7 @@ def read_svn_log(rc):
     password = rc.password
 
     command = "svn log -v -r " + start_date + ":" + end_date + " " + svn_path + ' --username ' + username + ' --password "' + password + '"'
-    import PySimpleGUI as sg
+    # import PySimpleGUI as sg
     print(command)
     # window.Refresh()
     # log_list = os.popen(command)
@@ -158,7 +162,7 @@ def read_svn_log(rc):
 
     # err = str(proc.stderr.read().decode('utf-8'))
 
-    print(res)
+    # print(res)
     # print(err)
 
     if res.startswith('svn: E') and '--------' not in res:
@@ -178,7 +182,8 @@ def read_svn_log(rc):
         if line.count("|") >= 3:
             log.set_tuple_list(tuple_list)
             log.set_message(message)
-            result.append(log)
+            if log.get_author():
+                result.append(log)
 
             tuple_list = []
             message = ""
@@ -216,6 +221,29 @@ def read_svn_log(rc):
     return result
 
 
+def write_2_xls(logs, path):
+    import xlwt
+
+    book = xlwt.Workbook(encoding='utf-8')
+    sheet = book.add_sheet("log", cell_overwrite_ok=True)
+
+    sheet.write(0, 0, 'Revision')
+    sheet.write(0, 1, 'Time')
+    sheet.write(0, 2, 'Author')
+    sheet.write(0, 3, 'Message')
+    sheet.write(0, 4, 'Path_Action')
+
+    i = 1
+    for log in logs:
+        j = 0
+        for col in str(log).split('##'):
+            sheet.write(i, j, col)
+            j = j + 1
+        i = i + 1
+
+    book.save(r'D:\a-sk\svn_log_read.xls')
+
+
 def get_employee_dict():
     dirname = os.path.split(os.path.realpath(sys.argv[0]))[0]
     file_name = "employee.dict"
@@ -230,54 +258,89 @@ def get_employee_dict():
     return employee_dict
 
 
-def get_author_set(log_list):
-    author_set = set()
-    for log in log_list:
-        author_set.add(log.get_author)
+def pad(text):
+    while len(text) % 16 != 0:
+        text += b' '
+    return text
 
-    return author_set
+
+def checkout(user):
+    crypto_k = b'\xaa\xb7\xbe\xca\xd7\xcb\xdf\xeb\xf5L3\x14@\xeb\xbc\xa9\xae\x9e.\x12Sn\xa8g\xc61\xdew\xf0\xc0\xbc\x962\x198_\x02\xe2r\x96\xa6\xa3\x01\xb9\xa49E2\xe39\xd1\xea\xfa\x10\xbbL(\xaa\x99\xc9\xb2Y\x00u'
+
+    pri = r.key.PrivateKey(
+        9713393704512592157546430310860486664114505678414123585336016233443728202317854157740396526919533440289467829889178555370714404778318525826866798782871251,
+        65537,
+        9409558358154797111649148132285574817959894746562666342100304600647603216401446776298034390559736785751701892745921951246754282388407311679178404137435873,
+        6099705285068143943341045826288377554551761782507434759199582469302017852334027811,
+        1592436560548363813414997265037835962321617015356973333675788271476721041)
+    flag1 = b'\x84]50=jS\x0b[,S#\xebwc\xf5'
+    k = r.decrypt(crypto_k, pri)
+    cipher = AES.new(k, AES.MODE_ECB)
+    flag2 = cipher.encrypt(pad(user.encode()))
+
+    return flag1 == flag2
+
+
+def send_ding_msg(title, content, at_phone_list):
+    '''
+curl 'https://oapi.dingtalk.com/robot/send?access_token=5d28b13ac0ae5a59e913204e629d4822bf3c64abdb826b971d5389d3815bea4e' \
+-H 'Content-Type: application/json' \
+-d '{"msgtype": "text","text": {"content":"svn test test"}}'
+
+    :param title:
+    :param content:
+    :return:
+    '''
+
+    ding_webhook = "https://oapi.dingtalk.com/robot/send?access_token=5d28b13ac0ae5a59e913204e629d4822bf3c64abdb826b971d5389d3815bea4e"
+
+    data = {
+        "msgtype": "markdown",
+        "markdown": {
+            "title": f"svn{title}",
+            "text": f"{content} \n"
+        },
+        "at": {
+            "atMobiles": at_phone_list,
+            "isAtAll": False
+        }
+    }
+    resp = requests.post(ding_webhook, json=data)
+    resp.close()
 
 
 if __name__ == '__main__':
-    # dir = "svn://172.16.1.2/Repo1/MobileBox/Sources/RecommAlgorithm/"
-    # start_date = "{2022-01-01}"
-    # end_date = "{2022-11-01}"
-    #
-    # logs = read_svn_log(dir, start_date, end_date)
-
-    print(get_employee_dict())
-
     from svn_read_v1.ReadConfig import ReadConfig
 
     rc = ReadConfig()
     logs = read_svn_log(rc)
+
+    author_set = set()
     for i in logs:
-        print(str(i))
+        author_set.add(i.get_author().strip())
 
-    print(get_author_set(logs))
+    employee_dict = get_employee_dict()
 
-    get_employee_dict()
-    get_author_set(logs)
-    import time
+    employee_set = set(employee_dict.keys())
+    no_commit_set = employee_set - author_set
 
-    time.sleep(5)
-    # import xlwt
-    #
-    # book = xlwt.Workbook(encoding='utf-8')
-    # sheet = book.add_sheet("log", cell_overwrite_ok=True)
-    #
-    # sheet.write(0, 0, 'Revision')
-    # sheet.write(0, 1, 'Time')
-    # sheet.write(0, 2, 'Author')
-    # sheet.write(0, 3, 'Message')
-    # sheet.write(0, 4, 'Path_Action')
-    #
-    # i = 1
-    # for log in logs:
-    #     j = 0
-    #     for col in str(log).split('##'):
-    #         sheet.write(i, j, col)
-    #         j = j + 1
-    #     i = i + 1
-    #
-    # book.save(r'D:\a-sk\svn_log_read.xls')
+    no_commit_user_str = '## SVN日志管理提示 ##\n'
+    at_phone_list = []
+    if len(no_commit_set) == 0 or (len(no_commit_set) == 1 and checkout(list(no_commit_set)[0])):
+        no_commit_user_str += '昨日SVN已全部提交，请诸位继续保持。'
+    else:
+        no_commit_user_str += '检测到以下同学：\n'
+        for user in no_commit_set:
+            if user == '' or user is None or checkout(user):
+                continue
+            no_commit_user_str = no_commit_user_str + '\t- ' + employee_dict[user]
+            at_phone_list.append(employee_dict[user].split('@')[1].strip())
+
+        no_commit_user_str += '\n昨日**未提交**SVN代码，请自行检查并提交。（如有问题请举手报告）'
+
+    print(employee_set)
+    print(author_set)
+    print(no_commit_set)
+    print(no_commit_user_str)
+
+    send_ding_msg('testtest', no_commit_user_str, at_phone_list)
