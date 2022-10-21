@@ -1872,7 +1872,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt = '${C_DAY}' AND updatetype IN (1,0) AND feename like '%百灵K歌%' 
         GROUP BY usercode, feename
@@ -1882,7 +1882,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt = '${C_DAY}' AND updatetype IN (1,0) AND feename like '%超级影视会员%'
         GROUP BY usercode, feename
@@ -1892,7 +1892,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt = '${C_DAY}' AND updatetype IN (1,0) AND feename like '%百映优生活%' 
         GROUP BY usercode, feename
@@ -1902,7 +1902,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt = '${C_DAY}' AND updatetype IN (1,0) AND feename like '%超级游戏会员%' 
         GROUP BY usercode, feename
@@ -1912,7 +1912,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt = '${C_DAY}' AND updatetype IN (1,0) AND feename like '%超级电竞会员%' 
         GROUP BY usercode, feename
@@ -1922,7 +1922,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt = '${C_DAY}' AND updatetype IN (1,0) AND feename like '%教育会员-幼教%' 
         GROUP BY usercode, feename
@@ -1932,7 +1932,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt = '${C_DAY}' AND updatetype IN (1,0) AND feename like '%教育会员-小学%' 
         GROUP BY usercode, feename
@@ -1942,7 +1942,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt = '${C_DAY}' AND updatetype IN (1,0) AND feename like '%教育会员-初中%' 
         GROUP BY usercode, feename
@@ -1952,7 +1952,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt = '${C_DAY}' AND updatetype IN (1,0) AND feename like '%教育会员-高中%' 
         GROUP BY usercode, feename
@@ -1962,7 +1962,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt = '${C_DAY}' AND updatetype IN (1,0) AND feename like '%音乐会员%' 
         GROUP BY usercode, feename
@@ -1972,7 +1972,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt = '${C_DAY}' AND updatetype IN (1,0) AND feename like '%酷喵会员%' 
         GROUP BY usercode, feename
@@ -1982,7 +1982,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt = '${C_DAY}' AND updatetype IN (1,0) AND feename like '%云视听%' 
         GROUP BY usercode, feename
@@ -1992,7 +1992,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt = '${C_DAY}' AND updatetype IN (1,0) AND feename like '%银河少儿%' 
         GROUP BY usercode, feename
@@ -2002,7 +2002,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt = '${C_DAY}' AND updatetype IN (1,0) AND feename like '%圣剑游戏%' 
         GROUP BY usercode, feename
@@ -2012,7 +2012,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt = '${C_DAY}' AND updatetype IN (1,0) AND feename like '%咪咕快游%' 
         GROUP BY usercode, feename
@@ -2022,7 +2022,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt = '${C_DAY}' AND updatetype IN (1,0) AND feename like '%梦想游戏厅%' 
         GROUP BY usercode, feename
@@ -2032,7 +2032,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt = '${C_DAY}' AND updatetype IN (1,0) AND feename like '%炫佳乐园%' 
         GROUP BY usercode, feename
@@ -2042,7 +2042,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt = '${C_DAY}' AND updatetype IN (1,0) AND feename like '%乐游世界%' 
         GROUP BY usercode, feename
@@ -2052,7 +2052,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt = '${C_DAY}' AND updatetype IN (1,0) AND feename like '%电竞风暴%' 
         GROUP BY usercode, feename
@@ -2062,7 +2062,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt = '${C_DAY}' AND updatetype IN (1,0) AND feename like '%头号电竞%' 
         GROUP BY usercode, feename
@@ -2072,7 +2072,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt = '${C_DAY}' AND updatetype IN (1,0) AND feename like '%幸福健身团%' 
         GROUP BY usercode, feename
@@ -2082,7 +2082,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt = '${C_DAY}' AND updatetype IN (1,0) AND feename like '%九州乐学%' 
         GROUP BY usercode, feename
@@ -2092,7 +2092,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt = '${C_DAY}' AND updatetype IN (1,0) AND feename like '%学而思%' 
         GROUP BY usercode, feename
@@ -2102,7 +2102,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt = '${C_DAY}' AND updatetype IN (1,0) AND feename like '%第二课堂%' 
         GROUP BY usercode, feename
@@ -2112,7 +2112,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt = '${C_DAY}' AND updatetype IN (1,0) AND feename like '%智能语音会员%' 
         GROUP BY usercode, feename
@@ -2203,7 +2203,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt <='${C_DAY}' AND dt >= '${C_MONTH}01' AND updatetype IN (1,0) AND feename like '%百灵K歌%' 
         GROUP BY usercode, feename
@@ -2213,7 +2213,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt <='${C_DAY}' AND dt >= '${C_MONTH}01' AND updatetype IN (1,0) AND feename like '%超级影视会员%'
         GROUP BY usercode, feename
@@ -2223,7 +2223,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt <='${C_DAY}' AND dt >= '${C_MONTH}01' AND updatetype IN (1,0) AND feename like '%百映优生活%' 
         GROUP BY usercode, feename
@@ -2233,7 +2233,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt <='${C_DAY}' AND dt >= '${C_MONTH}01' AND updatetype IN (1,0) AND feename like '%超级游戏会员%' 
         GROUP BY usercode, feename
@@ -2243,7 +2243,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt <='${C_DAY}' AND dt >= '${C_MONTH}01' AND updatetype IN (1,0) AND feename like '%超级电竞会员%' 
         GROUP BY usercode, feename
@@ -2253,7 +2253,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt <='${C_DAY}' AND dt >= '${C_MONTH}01' AND updatetype IN (1,0) AND feename like '%教育会员-幼教%' 
         GROUP BY usercode, feename
@@ -2263,7 +2263,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt <='${C_DAY}' AND dt >= '${C_MONTH}01' AND updatetype IN (1,0) AND feename like '%教育会员-小学%' 
         GROUP BY usercode, feename
@@ -2273,7 +2273,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt <='${C_DAY}' AND dt >= '${C_MONTH}01' AND updatetype IN (1,0) AND feename like '%教育会员-初中%' 
         GROUP BY usercode, feename
@@ -2283,7 +2283,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt <='${C_DAY}' AND dt >= '${C_MONTH}01' AND updatetype IN (1,0) AND feename like '%教育会员-高中%' 
         GROUP BY usercode, feename
@@ -2293,7 +2293,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt <='${C_DAY}' AND dt >= '${C_MONTH}01' AND updatetype IN (1,0) AND feename like '%音乐会员%' 
         GROUP BY usercode, feename
@@ -2303,7 +2303,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt <='${C_DAY}' AND dt >= '${C_MONTH}01' AND updatetype IN (1,0) AND feename like '%酷喵会员%' 
         GROUP BY usercode, feename
@@ -2313,7 +2313,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt <='${C_DAY}' AND dt >= '${C_MONTH}01' AND updatetype IN (1,0) AND feename like '%云视听%' 
         GROUP BY usercode, feename
@@ -2323,7 +2323,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt <='${C_DAY}' AND dt >= '${C_MONTH}01' AND updatetype IN (1,0) AND feename like '%银河少儿%' 
         GROUP BY usercode, feename
@@ -2333,7 +2333,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt <='${C_DAY}' AND dt >= '${C_MONTH}01' AND updatetype IN (1,0) AND feename like '%圣剑游戏%' 
         GROUP BY usercode, feename
@@ -2343,7 +2343,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt <='${C_DAY}' AND dt >= '${C_MONTH}01' AND updatetype IN (1,0) AND feename like '%咪咕快游%' 
         GROUP BY usercode, feename
@@ -2353,7 +2353,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt <='${C_DAY}' AND dt >= '${C_MONTH}01' AND updatetype IN (1,0) AND feename like '%梦想游戏厅%' 
         GROUP BY usercode, feename
@@ -2363,7 +2363,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt <='${C_DAY}' AND dt >= '${C_MONTH}01' AND updatetype IN (1,0) AND feename like '%炫佳乐园%' 
         GROUP BY usercode, feename
@@ -2373,7 +2373,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt <='${C_DAY}' AND dt >= '${C_MONTH}01' AND updatetype IN (1,0) AND feename like '%乐游世界%' 
         GROUP BY usercode, feename
@@ -2383,7 +2383,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt <='${C_DAY}' AND dt >= '${C_MONTH}01' AND updatetype IN (1,0) AND feename like '%电竞风暴%' 
         GROUP BY usercode, feename
@@ -2393,7 +2393,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt <='${C_DAY}' AND dt >= '${C_MONTH}01' AND updatetype IN (1,0) AND feename like '%头号电竞%' 
         GROUP BY usercode, feename
@@ -2403,7 +2403,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt <='${C_DAY}' AND dt >= '${C_MONTH}01' AND updatetype IN (1,0) AND feename like '%幸福健身团%' 
         GROUP BY usercode, feename
@@ -2413,7 +2413,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt <='${C_DAY}' AND dt >= '${C_MONTH}01' AND updatetype IN (1,0) AND feename like '%九州乐学%' 
         GROUP BY usercode, feename
@@ -2423,7 +2423,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt <='${C_DAY}' AND dt >= '${C_MONTH}01' AND updatetype IN (1,0) AND feename like '%学而思%' 
         GROUP BY usercode, feename
@@ -2433,7 +2433,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt <='${C_DAY}' AND dt >= '${C_MONTH}01' AND updatetype IN (1,0) AND feename like '%第二课堂%' 
         GROUP BY usercode, feename
@@ -2443,7 +2443,7 @@ FROM
         SELECT 
             usercode, 
             MAX(CASE WHEN updatetype = 1 THEN 1 ELSE 0 END) subscribe,
-            MAX(CASE WHEN updatetype = 0 THEN 1 ELSE 0 END) unsubscribe
+            MAX(CASE WHEN updatetype = 2 THEN 1 ELSE 0 END) unsubscribe
         FROM knowyou_ott_ods.odm_mz_subs_di
         WHERE dt <='${C_DAY}' AND dt >= '${C_MONTH}01' AND updatetype IN (1,0) AND feename like '%智能语音会员%' 
         GROUP BY usercode, feename
@@ -2487,4 +2487,36 @@ FROM
     FROM knowyou_ott_ods.odm_mz_subs_di
     WHERE updatetype = 1 AND dt = '${C_DAY}'
 )a 
+;
+
+
+-- 2.1 信息标签-用户信息-资费和到期时间
+INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_tariff_and_expire_date PARTITION(dt ='${C_DAY}')
+SELECT
+    b.deviceid device_id,
+    b.user_sub_id,
+    a.*
+FROM
+(
+    SELECT
+        usercode,
+        feecode,
+        CASE WHEN substr(endtime, 0, 4) = '2099' THEN 'forever'
+        ELSE datediff
+        (
+            from_unixtime(unix_timestamp(substr(endtime, 0, 8), 'yyyyMMdd'),'yyyy-MM-dd'),
+            from_unixtime(unix_timestamp('${C_DAY}', 'yyyyMMdd'),'yyyy-MM-dd')
+        ) END
+    FROM knowyou_ott_ods.odm_mz_subs_di
+    WHERE dt ='${C_DAY}' AND updatetype IN (1, 2)
+) a
+LEFT JOIN
+(
+    SELECT
+        deviceid,
+        user_id,
+        user_sub_id
+    FROM knowyou_ott_ods.dim_cus_user_itv_df
+    WHERE dt ='${C_DAY}' AND length(deviceid) > 0 AND length(user_id) > 0
+) b ON b.user_id = a.usercode
 ;

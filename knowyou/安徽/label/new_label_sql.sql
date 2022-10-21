@@ -21,7 +21,8 @@
 
 -- 1.11 行为标签-用户订购信息-付费内容订购退订标签（当日/当月）
 -- 1.12 行为标签-用户订购信息-ARPU值
-
+-- 2.1 信息标签-用户信息-资费和到期时间
+-- 2.2 信息标签-用户信息-牌照方
 
 -- 1.1 行为标签-用户活跃信息-基础信息标签表（当日/当月）
 CREATE TABLE IF NOT EXISTS knowyou_ott_dmt.`htv_serv_basic_part1`( 
@@ -707,4 +708,16 @@ ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
 STORED AS INPUTFORMAT 'org.apache.hadoop.mapred.TextInputFormat' 
 OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat';
 
-
+-- 2.1 信息标签-用户信息-资费和到期时间
+CREATE TABLE IF NOT EXISTS knowyou_ott_dmt.`htv_tariff_and_expire_date`(
+    device_id      STRING  COMMENT '设备id',
+    user_sub_id    STRING  COMMENT '子账号id',
+    usercode       STRING  COMMENT '宽带绑定号码',
+    feecode        STRING  COMMENT '资费',
+    expire         STRING  COMMENT '到期天数'
+)
+COMMENT '资费和到期时间'
+PARTITIONED BY (`dt` STRING COMMENT '日期')
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
+STORED AS INPUTFORMAT 'org.apache.hadoop.mapred.TextInputFormat'
+OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat';
