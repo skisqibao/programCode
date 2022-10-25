@@ -1,4 +1,4 @@
-from numpy import ndarray, argmax
+from numpy import ndarray, argmax, isnan
 from sklearn.externals import joblib
 
 # 载入已经训练好的模型
@@ -6,7 +6,12 @@ clf = joblib.load('aidiag_script/aidiag_model.pkl')
 
 # 将时序特征输入已经训练好的模型，得到预测的故障原因
 def predict(feature: ndarray) -> dict:
+    print('predict begin')
+    
     assert feature.shape[0] == 1
+    
+    # 将缺失值替换为0
+    feature[isnan(feature)] = 0
     
     # 获取模型预测结果，每个分类的概率分布
     pred = clf.predict_proba(feature)[0]
@@ -19,5 +24,7 @@ def predict(feature: ndarray) -> dict:
         'predict_reason': reason_name[argmax(pred)],
         'predict_reason_prob': {reason_name[1]: pred[1], reason_name[0]: pred[0]}
     }
+    
+    print('predict success')
     
     return pred_dict

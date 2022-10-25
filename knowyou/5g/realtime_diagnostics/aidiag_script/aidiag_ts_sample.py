@@ -9,6 +9,8 @@ df_threshold = df_threshold[df_threshold['use'] == 1].copy()
 
 # 将带有时间戳的实时解码参数数据整理成按秒采样的参数数据，范围为异常时间点前后4分钟
 def ts_sample(df_raw: DataFrame, time_point: datetime) -> DataFrame:
+    print('ts_sample begin')
+    
     # 时间戳转换为DateTime
     df_raw['DateTime'] = pd.to_datetime(df_raw['DateTime'], format='%Y-%m-%d %H:%M:%S')
     
@@ -59,5 +61,7 @@ def ts_sample(df_raw: DataFrame, time_point: datetime) -> DataFrame:
     df_param = pd.merge(DataFrame({'sec': full_sec}), df_raw, how='left')
     df_param = df_param.groupby('sec').mean().sort_index()
     df_param.reset_index(drop=True, inplace=True)
+    
+    print('ts_sample success')
     
     return df_param

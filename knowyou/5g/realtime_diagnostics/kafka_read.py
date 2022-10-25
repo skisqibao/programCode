@@ -85,9 +85,10 @@ if __name__ == '__main__':
     spark.sparkContext.setLogLevel("WARN")
 
     decode_schema, exception_schema = getInputSchema()
-    kafkaBrokers = "172.16.1.222:6667"
-    decodeTopic = "test"
-    exceptionTopic = "test2"
+    # kafkaBrokers = "172.16.1.222:6667"
+    kafkaBrokers = "192.168.1.102:26667"
+    decodeTopic = "fvgiis-wireless-Message"
+    exceptionTopic = "fvgiis-ai-alarm"
     write_path = 'file://' + os.path.join(dirname, 'kafka_train_df')
     checkpoint_path = 'file://' + os.path.join(dirname, 'ck1')
 
@@ -97,6 +98,7 @@ if __name__ == '__main__':
         .format("kafka") \
         .option("kafka.bootstrap.servers", kafkaBrokers) \
         .option("subscribe", decodeTopic) \
+        .option("failOnDataLoss", "false") \
         .load() \
         .selectExpr("CAST(value AS STRING)") \
         .select(F.from_json("value", decode_schema).alias("data")) \
@@ -111,6 +113,7 @@ if __name__ == '__main__':
                     "data.dt", "data.dt_hour", "data.dt_min",
                     "CAST(from_unixtime(unix_timestamp(data.dt_sec, 'yyyyMMddHHmmss'),'yyyy-MM-dd HH:mm:ss') AS TIMESTAMP) dt_sec",
                     "data.net_type", "data.p_scene_id") \
+        .filter("device_sn not in ('ecf039c0-dd2c-41e8-ae9a-a7289326e61b')") \
         .withWatermark("dt_sec", "1 hour")
 
     exceptionDF = spark \
@@ -118,11 +121,13 @@ if __name__ == '__main__':
         .format("kafka") \
         .option("kafka.bootstrap.servers", kafkaBrokers) \
         .option("subscribe", exceptionTopic) \
+        .option("failOnDataLoss", "false") \
         .load() \
         .selectExpr("CAST(value AS STRING)") \
         .select(F.from_json("value", exception_schema).alias("data")) \
         .selectExpr("data.uuid", "data.deviceSn",
                     "CAST(from_unixtime(unix_timestamp(data.dtSec, 'yyyyMMddHHmmss'),'yyyy-MM-dd HH:mm:ss') AS TIMESTAMP) dtSec") \
+        .filter("deviceSn not in ('ecf039c0-dd2c-41e8-ae9a-a7289326e61b')") \
         .withWatermark("dtSec", "1 hour")
 
     joinDF = decodeDF.join(

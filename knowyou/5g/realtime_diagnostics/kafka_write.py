@@ -66,13 +66,16 @@ if __name__ == '__main__':
        );
     ''')
 
-    kafka_brokers = "172.16.1.222:6667"
-    write_topic = "test"
+    # kafka_brokers = "172.16.1.222:6667"
+    kafka_brokers = "192.168.1.102:26667"
+    # write_topic = "test"
+    write_topic = "ai-diagnostics-result"
     data_path = os.path.join(dirname, 'kafka_train_df')
     params = ['DateTime', 'SS_RSRP', 'SS_RSRQ', 'SS_SINR', 'PUCCH_TxPower', 'PUSCH_TxPower', 'MCSAvg_DL', 'MCSBest_DL',
               'MCSMost_DL', 'MCSAvg_UL', 'MCSBest_UL', 'MCSMost_UL', 'CQI_Avg', 'CQI_Best', 'CQI_Most', 'PDSCH_BLER',
               'PUSCH_BLER']
     source_df = getSourceDataFrame(data_path)
+    print(source_df)
     write_list = []
 
     uuid_list = source_df['uuid'].unique()
@@ -92,6 +95,7 @@ if __name__ == '__main__':
             if len(cursor.fetchall()) == 0:
 
                 sample_df = ts_sample(train_df, datetime.strptime(abnormal_sec, '%Y-%m-%d %H:%M:%S'))
+                print(sample_df)
                 result = predict_phase(sample_df)
                 print(result)
 
