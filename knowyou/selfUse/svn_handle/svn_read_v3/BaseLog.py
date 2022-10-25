@@ -6,13 +6,13 @@ import io
 import sys
 import time
 import requests
-import time
 import rsa as r
 from Crypto.Cipher import AES
+import datetime as dt
+from ReadConfig import ReadConfig
 
+dirname = os.path.split(os.path.realpath(sys.argv[0]))[0]
 
-# svn log -v -r {2022-01-01}:{2022-11-01} svn://172.16.1.2/Repo1/MobileBox/Sources/RecommAlgorithm/SparkStandardRecommend --username songk --password "sK&5HiGkqislq*19*x"
-# svn log -v -r {2022-01-01}:{2022-11-01} svn://218.80.1.114:6689/Repo1/CMCDP/Sources/ --username qianym --password "Ou2*35&1.5H1Bbwq1zhY"
 
 class BaseLog:
     def __init__(self):
@@ -221,38 +221,42 @@ def read_svn_log(rc):
     return result
 
 
-def write_2_xls(logs, path):
-    import xlwt
+def write_2_xls(user_list):
+    import xlwt, xlrd
+    from xlutils.copy import copy as xl_copy
 
-    book = xlwt.Workbook(encoding='utf-8')
-    sheet = book.add_sheet("log", cell_overwrite_ok=True)
+    file_directory = "no-commit-user-result"
+    dict_path = os.path.join(dirname, file_directory)
+    yesterday = (dt.datetime.now() - dt.timedelta(days=1))
+    file_month = yesterday.strftime('%Y-%m.xls')
+    file_day = yesterday.strftime('%Y-%m-%d')
+    file_name = os.path.join(dict_path, file_month)
+    flag = os.path.exists(file_name)
 
-    sheet.write(0, 0, 'Revision')
-    sheet.write(0, 1, 'Time')
-    sheet.write(0, 2, 'Author')
-    sheet.write(0, 3, 'Message')
-    sheet.write(0, 4, 'Path_Action')
+    if flag:
+        rb = xlrd.open_workbook(file_name, formatting_info=True)
+        book = xl_copy(rb)
+        sheet = book.add_sheet(file_day, cell_overwrite_ok=True)
+    else:
+        book = xlwt.Workbook(encoding='utf-8')
+        sheet = book.add_sheet(file_day, cell_overwrite_ok=True)
 
     i = 1
-    for log in logs:
-        j = 0
-        for col in str(log).split('##'):
-            sheet.write(i, j, col)
-            j = j + 1
+    for col in user_list:
+        sheet.write(i, 0, col)
         i = i + 1
 
-    book.save(r'D:\a-sk\svn_log_read.xls')
+    book.save(file_name)
 
 
 def get_employee_dict():
-    dirname = os.path.split(os.path.realpath(sys.argv[0]))[0]
     file_name = "employee.dict"
     dict_path = os.path.join(dirname, file_name)
 
     employee_dict = {}
     with open(dict_path, encoding='utf-8') as f:
         for line in f:
-            (account, employee) = line.split(' ')
+            (account, employee) = line.split('&')
             employee_dict[account] = employee
 
     return employee_dict
@@ -292,12 +296,13 @@ curl 'https://oapi.dingtalk.com/robot/send?access_token=5d28b13ac0ae5a59e913204e
     :return:
     '''
 
-    ding_webhook = "https://oapi.dingtalk.com/robot/send?access_token=5d28b13ac0ae5a59e913204e629d4822bf3c64abdb826b971d5389d3815bea4e"
+    yanfazhongxin_webhook = "https://oapi.dingtalk.com/robot/send?access_token=e2990b48a2a45b1967cbe94849d851c322675fc3fcac3c2b2683c6859fe8f33e"
+    ai_diagnostics_webhook = "https://oapi.dingtalk.com/robot/send?access_token=5d28b13ac0ae5a59e913204e629d4822bf3c64abdb826b971d5389d3815bea4e"
 
     data = {
         "msgtype": "markdown",
         "markdown": {
-            "title": f"svn{title}",
+            "title": f"{title}",
             "text": f"{content} \n"
         },
         "at": {
@@ -305,14 +310,19 @@ curl 'https://oapi.dingtalk.com/robot/send?access_token=5d28b13ac0ae5a59e913204e
             "isAtAll": False
         }
     }
-    resp = requests.post(ding_webhook, json=data)
+    resp = requests.post(ai_diagnostics_webhook, json=data)
     resp.close()
 
 
 if __name__ == '__main__':
-    from svn_read_v1.ReadConfig import ReadConfig
-
+    yesterday = (dt.datetime.now() - dt.timedelta(days=1))
+    start = yesterday.strftime('%Y-%m-%dT00:00:00')
+    end = yesterday.strftime('%Y-%m-%dT23:59:59')
     rc = ReadConfig()
+    rc.start_date = '{' + start + '}'
+    rc.end_date = '{' + end + '}'
+    rc.set_start_date('{' + start + '}')
+    rc.set_end_date('{' + end + '}')
     logs = read_svn_log(rc)
 
     author_set = set()
@@ -326,21 +336,29 @@ if __name__ == '__main__':
 
     no_commit_user_str = '## SVN日志管理提示 ##\n'
     at_phone_list = []
+    no_commit_list = []
+
     if len(no_commit_set) == 0 or (len(no_commit_set) == 1 and checkout(list(no_commit_set)[0])):
         no_commit_user_str += '昨日SVN已全部提交，请诸位继续保持。'
     else:
         no_commit_user_str += '检测到以下同学：\n'
         for user in no_commit_set:
-            if user == '' or user is None or checkout(user):
+            # if user == '' or user is None or checkout(user):
+            if user == '' or user is None:
                 continue
             no_commit_user_str = no_commit_user_str + '\t- ' + employee_dict[user]
-            at_phone_list.append(employee_dict[user].split('@')[1].strip())
 
+            no_commit_list.append(employee_dict[user].split('@')[0].strip())
+            at_phone_list.append(employee_dict[user].split('@')[1].strip())
         no_commit_user_str += '\n昨日**未提交**SVN代码，请自行检查并提交。（如有问题请举手报告）'
 
     print(employee_set)
     print(author_set)
     print(no_commit_set)
     print(no_commit_user_str)
+    print(at_phone_list)
+    # send_ding_msg('SVN每日提醒', no_commit_user_str, at_phone_list)
+    write_2_xls(no_commit_list)
 
-    send_ding_msg('testtest', no_commit_user_str, at_phone_list)
+    # if 6 != dt.datetime.now().weekday() and 0 != dt.datetime.now().weekday():
+    #    send_ding_msg('SVN每日提醒', no_commit_user_str, at_phone_list)
