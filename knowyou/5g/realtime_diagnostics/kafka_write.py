@@ -3,6 +3,7 @@ from pyspark.sql import SparkSession
 from aidiag_script.aidiag_predict_phase import predict_phase
 from aidiag_script.aidiag_ts_sample import ts_sample
 
+import sys
 import pandas as pd
 import os
 import json
@@ -46,15 +47,18 @@ def getSourceDataFrame(data_path):
 
 
 if __name__ == '__main__':
+    os.environ['PYSPARK_PYTHON'] = sys.executable
+    os.environ['PYSPARK_DRIVER_PYTHON'] = sys.executable
     # 初始化spark配置
     spark = SparkSession \
         .builder \
-        .master("yarn-client") \
+        .master("local[*]") \
         .appName("real-time diagnostics") \
         .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.11:2.3.0") \
         .getOrCreate()
 
     spark.sparkContext.setLogLevel("WARN")
+    spark.conf.set("spark.sql.execution.arrow.pyspark.enabled", "true")
 
     conn = sqlite3.connect(os.path.join(dirname, 'diagnostics.db'))
     c = conn.cursor()
@@ -77,6 +81,7 @@ if __name__ == '__main__':
     source_df = getSourceDataFrame(data_path)
     print(source_df)
     write_list = []
+    tuple_list = []
 
     uuid_list = source_df['uuid'].unique()
     for uuid in uuid_list:
@@ -89,11 +94,9 @@ if __name__ == '__main__':
             unique_uuid_sec_df = unique_uuid_df[unique_uuid_df['abnormal_sec'].isin([abnormal_sec])]
             train_df = pd.DataFrame(unique_uuid_sec_df, columns=params)
 
-
             # 查询数据, 查询为空执行预测
             cursor = c.execute("SELECT * FROM diagnostics WHERE uuid = ? AND abnormal_sec = ?", (uuid, abnormal_sec))
             if len(cursor.fetchall()) == 0:
-
                 sample_df = ts_sample(train_df, datetime.strptime(abnormal_sec, '%Y-%m-%d %H:%M:%S'))
                 print(sample_df)
                 result = predict_phase(sample_df)
@@ -108,14 +111,13 @@ if __name__ == '__main__':
                 output = json.dumps(dictionary, ensure_ascii=False)
 
                 write_list.append(output)
-                # 插入数据
-                c.execute("INSERT INTO diagnostics (uuid, device_sn, abnormal_sec) VALUES (?, ?, ?)",
-                          (uuid, device_sn, abnormal_sec))
+                tuple_list.append((uuid, device_sn, abnormal_sec))
 
-                conn.commit()
-
-    print(write_list)
+    print('1111', write_list)
     if len(write_list) != 0:
+        print('22222')
+        spark.createDataFrame(pd.DataFrame({'value': write_list})).select("value").show()
+        print('33333')
         spark.createDataFrame(pd.DataFrame({'value': write_list})) \
             .write \
             .format("kafka") \
@@ -124,4 +126,11 @@ if __name__ == '__main__':
             .save()
 
     spark.stop()
+
+    for (uuid, device_sn, abnormal_sec) in tuple_list:
+        # 插入数据
+        c.execute("INSERT INTO diagnostics (uuid, device_sn, abnormal_sec) VALUES (?, ?, ?)",
+                  (uuid, device_sn, abnormal_sec))
+
+        conn.commit()
     conn.close()

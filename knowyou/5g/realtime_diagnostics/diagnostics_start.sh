@@ -2,6 +2,7 @@
 
 SHELL_FOLDER=$(cd "$(dirname "$0")";pwd)
 START_DATA=`date +%Y%m%d`
+source /etc/profile.d/sk_profile.sh
 
 # 运行spark实时流
 # spark-submit --jars ${SHELL_FOLDER}/spark-sql-kafka-0-10_2.11-2.3.0.jar ${SHELL_FOLDER}/kafka_read.py >> ${SHELL_FOLDER}/log/read_${START_DATA}.log 2>&1 &
