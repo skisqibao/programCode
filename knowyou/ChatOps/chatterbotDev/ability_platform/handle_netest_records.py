@@ -22,14 +22,23 @@ def parser_data(response):
     result_desc = response_data["resultDesc"]
     # stat_count = response_data["statCount"]
     stat_list = response_data["statList"]
-
+    # 自动拨测结果：taskNamexx任务,拨测totalCntx次，成功succCntx次，失败(totalCnt-succCnt)x次，成功率succRatiox%
     if result == 1:
         code = 0
     else:
         code = 1
 
     if result_desc == "":
-        msg = "成功"
+        msg = "成功，自动拨测结果：["
+        for stat in stat_list:
+            task_name = stat['taskName']
+            total_cnt = stat['totalCnt']
+            success_cnt = stat['succCnt']
+            fail_cnt = total_cnt - success_cnt
+            success_ratio = stat['succRatio']
+
+            msg += f'{task_name}任务，拨测{total_cnt}次，成功{success_cnt}次，失败{fail_cnt}次，成功率{success_ratio}%；'
+        msg += "]"
     else:
         msg = result_desc
 
