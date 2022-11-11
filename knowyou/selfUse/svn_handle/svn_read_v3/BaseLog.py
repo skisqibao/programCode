@@ -9,7 +9,7 @@ import requests
 import rsa as r
 from Crypto.Cipher import AES
 import datetime as dt
-from ReadConfig import ReadConfig
+from svn_read_v3.ReadConfig import ReadConfig
 
 dirname = os.path.split(os.path.realpath(sys.argv[0]))[0]
 
@@ -59,72 +59,6 @@ class BaseLog:
         str = ("%s##%s##%s##%s##%s") % (
             self.revision, self.time, self.author, self.message, self.tuple_list)
         return str
-
-
-def read_svn_log(dir, start_date, end_date):
-    if start_date is None:
-        command = "svn log -v " + dir
-    else:
-        command = "svn log -v -r " + start_date + ":" + end_date + " " + dir
-
-    print(command)
-
-    log_list = os.popen(command)
-
-    res = log_list.read()
-
-    log_list.close()
-
-    log = BaseLog()
-    message = ""
-    tuple_list = []
-    result = []
-
-    for line in res.splitlines():
-        if line is None or len(line) < 1:
-            continue
-        if '--------' in line:
-            continue
-
-        if line.count("|") >= 3:
-            log.set_tuple_list(tuple_list)
-            log.set_message(message)
-            tuple_list = []
-            message = ""
-
-            if len(log.get_message()) > 0:
-                result.append(log)
-
-            log = BaseLog()
-            tmp_list = line.split("|")
-            log.set_revision(tmp_list[0])
-            log.set_author(tmp_list[1])
-            log.set_time(tmp_list[2])
-        else:
-            if 'Changed paths' in line:
-                continue
-
-            flag1 = line.lstrip().startswith('A')
-            flag2 = line.lstrip().startswith('D')
-            flag3 = line.lstrip().startswith('M')
-
-            if flag1 or flag2 or flag3:
-                action = line.lstrip()[0]
-                path = line.lstrip()[2:]
-
-                tuple_list.append((path, action))
-            else:
-                if message == "":
-                    message = message + line
-                else:
-                    message = message + '\n' + line
-
-    log.set_tuple_list(tuple_list)
-    log.set_message(message)
-    result.append(log)
-
-    return result
-
 
 def read_svn_log(rc):
     svn_path = rc.svn_path
@@ -234,12 +168,18 @@ def write_2_xls(user_list):
     flag = os.path.exists(file_name)
 
     if flag:
-        rb = xlrd.open_workbook(file_name, formatting_info=True)
+        rb = xlrd.open_workbook(file_name)
         book = xl_copy(rb)
-        sheet = book.add_sheet(file_day, cell_overwrite_ok=True)
+        table = rb.sheet_by_name(file_day)
+        if table:
+            sheet = book.get_sheet(file_day)
+        else:
+            sheet = book.add_sheet(file_day, cell_overwrite_ok=True)
     else:
         book = xlwt.Workbook(encoding='utf-8')
         sheet = book.add_sheet(file_day, cell_overwrite_ok=True)
+
+
 
     i = 1
     for col in user_list:
@@ -310,7 +250,7 @@ curl 'https://oapi.dingtalk.com/robot/send?access_token=5d28b13ac0ae5a59e913204e
             "isAtAll": False
         }
     }
-    resp = requests.post(ai_diagnostics_webhook, json=data)
+    resp = requests.post(yanfazhongxin_webhook, json=data)
     resp.close()
 
 
@@ -339,26 +279,28 @@ if __name__ == '__main__':
     no_commit_list = []
 
     if len(no_commit_set) == 0 or (len(no_commit_set) == 1 and checkout(list(no_commit_set)[0])):
-        no_commit_user_str += '昨日SVN已全部提交，请诸位继续保持。'
+        no_commit_user_str += '昨日SVN已全部提交。'
     else:
         no_commit_user_str += '检测到以下同学：\n'
         for user in no_commit_set:
-            # if user == '' or user is None or checkout(user):
-            if user == '' or user is None:
+            if user == '' or user is None or checkout(user):
                 continue
-            no_commit_user_str = no_commit_user_str + '\t- ' + employee_dict[user]
+            no_commit_user_str = no_commit_user_str + '\t- @' + employee_dict[user].split('@')[1]
 
             no_commit_list.append(employee_dict[user].split('@')[0].strip())
             at_phone_list.append(employee_dict[user].split('@')[1].strip())
-        no_commit_user_str += '\n昨日**未提交**SVN代码，请自行检查并提交。（如有问题请举手报告）'
+        no_commit_user_str += '\n\r 昨日**未提交**SVN代码，请自行检查并提交。（如有问题请举手报告）'
 
-    print(employee_set)
-    print(author_set)
-    print(no_commit_set)
-    print(no_commit_user_str)
-    print(at_phone_list)
-    # send_ding_msg('SVN每日提醒', no_commit_user_str, at_phone_list)
-    write_2_xls(no_commit_list)
+    # print(employee_set)
+    # print(author_set)
+    # print(no_commit_set)
+    # print(no_commit_user_str)
+    # print(at_phone_list)
+    # time.sleep(5)
 
-    # if 6 != dt.datetime.now().weekday() and 0 != dt.datetime.now().weekday():
-    #    send_ding_msg('SVN每日提醒', no_commit_user_str, at_phone_list)
+    if 6 != dt.datetime.now().weekday() and 0 != dt.datetime.now().weekday():
+        send_ding_msg('SVN每日提醒', no_commit_user_str, at_phone_list)
+        write_2_xls(no_commit_list)
+
+
+# schtasks /create /tn "DailyBaseLog" /tr d:\a-sk\git\programCode\knowyou\selfUse\svn_handle\svn_read_v3\BaseLog.exe /sc daily /mo 1 /st 16:50:00
