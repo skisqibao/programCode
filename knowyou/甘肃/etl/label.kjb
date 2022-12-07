@@ -762,7 +762,7 @@ group by a.deviceid,a.channelname,a.date_time;</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>800</xloc>
+      <xloc>816</xloc>
       <yloc>288</yloc>
     </entry>
     <entry>
@@ -973,7 +973,7 @@ where date_time='${C_DAY}' and channelname='CCTV17'
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>960</xloc>
+      <xloc>1024</xloc>
       <yloc>288</yloc>
     </entry>
     <entry>
@@ -1118,7 +1118,7 @@ where date_time='${C_DAY}' and channelname='宁夏卫视'
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1104</xloc>
+      <xloc>1248</xloc>
       <yloc>288</yloc>
     </entry>
     <entry>
@@ -1214,7 +1214,7 @@ videotype='点播'
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>800</xloc>
+      <xloc>816</xloc>
       <yloc>400</yloc>
     </entry>
     <entry>
@@ -1324,7 +1324,7 @@ group by deviceid)ff</sql>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>480</xloc>
-      <yloc>672</yloc>
+      <yloc>704</yloc>
     </entry>
     <entry>
       <name>10.行为标签 月/活跃/新增留存分类</name>
@@ -1379,7 +1379,7 @@ on aa.deviceid =bb.deviceid
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>480</xloc>
-      <yloc>784</yloc>
+      <yloc>832</yloc>
     </entry>
     <entry>
       <name>15.7日回流用户</name>
@@ -1454,7 +1454,7 @@ on a.deviceid=c.deviceid
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>352</xloc>
-      <yloc>672</yloc>
+      <yloc>736</yloc>
     </entry>
     <entry>
       <name>15.30日回流用户</name>
@@ -1492,7 +1492,7 @@ on a.deviceid=c.deviceid
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>352</xloc>
-      <yloc>784</yloc>
+      <yloc>848</yloc>
     </entry>
     <entry>
       <name>沉默用户</name>
@@ -1536,7 +1536,7 @@ where date_time>='${L_MONTH}' and date_time&lt;='${C_MONTH}'
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>608</xloc>
+      <xloc>656</xloc>
       <yloc>576</yloc>
     </entry>
     <entry>
@@ -1761,8 +1761,8 @@ limit 10)ff)aa</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>608</xloc>
-      <yloc>672</yloc>
+      <xloc>656</xloc>
+      <yloc>704</yloc>
     </entry>
     <entry>
       <name>当月活跃信息基础标签表</name>
@@ -1972,7 +1972,7 @@ and substr(play_endtime,9,2)>='22' and substr(play_endtime,9,2)&lt;'24'
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1264</xloc>
+      <xloc>1344</xloc>
       <yloc>400</yloc>
     </entry>
     <entry>
@@ -2039,7 +2039,7 @@ and substr(play_endtime,9,2)>='22' and substr(play_endtime,9,2)&lt;'24'
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1248</xloc>
+      <xloc>1456</xloc>
       <yloc>288</yloc>
     </entry>
     <entry>
@@ -2167,7 +2167,7 @@ videotype='点播'
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>960</xloc>
+      <xloc>992</xloc>
       <yloc>400</yloc>
     </entry>
     <entry>
@@ -3071,8 +3071,8 @@ group by a.deviceid,a.channelname,a.date_time;</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>800</xloc>
-      <yloc>160</yloc>
+      <xloc>816</xloc>
+      <yloc>176</yloc>
     </entry>
     <entry>
       <name>当月点播栏目偏好标签表</name>
@@ -3156,7 +3156,7 @@ videotype='点播'
 )l on a.key=l.deviceid 
 left join(
 select distinct deviceid from knowyou_jituan_edw.edw_uba_cn_videoplayinfo
-where date_time&lt;='${C_DAY}' and date_time>='${C_MONTH}' and contentType!='少儿' and contentType!='生活' and contentType='综艺' and  contentType!='游戏' and contentType!='电竞' and contentType!='教育' and contentType!='纪实' and contentType!='体育' and contentType!='动漫' and contentType!='电影' and  contentType!='电视剧' and playstatus='1' and
+where date_time&lt;='${C_DAY}' and date_time>='${C_MONTH}' and contentType!='少儿' and contentType!='生活' and contentType!='综艺' and  contentType!='游戏' and contentType!='电竞' and contentType!='教育' and contentType!='纪实' and contentType!='体育' and contentType!='动漫' and contentType!='电影' and  contentType!='电视剧' and playstatus='1' and
 videotype='点播'
 )m on a.key=m.deviceid</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
@@ -3167,7 +3167,7 @@ videotype='点播'
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1104</xloc>
+      <xloc>1168</xloc>
       <yloc>400</yloc>
     </entry>
     <entry>
@@ -3340,7 +3340,7 @@ on a.videoname=b.videoname)ff group by deviceid)gg</sql>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>224</xloc>
-      <yloc>672</yloc>
+      <yloc>704</yloc>
     </entry>
     <entry>
       <name>媒资标签 发行年限分类 标签</name>
@@ -3408,7 +3408,7 @@ on a.videoname=b.videoname)ff group by deviceid)gg</sql>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>224</xloc>
-      <yloc>784</yloc>
+      <yloc>816</yloc>
     </entry>
     <entry>
       <name>媒资标签 语言分类 标签</name>
@@ -3469,8 +3469,8 @@ on a.videoname=b.videoname)ff group by deviceid)gg;
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>80</xloc>
-      <yloc>784</yloc>
+      <xloc>224</xloc>
+      <yloc>944</yloc>
     </entry>
     <entry>
       <name>媒资标签 演员分类 标签</name>
@@ -3531,8 +3531,8 @@ group by gg.deviceid,gg.actorname</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>80</xloc>
-      <yloc>672</yloc>
+      <xloc>32</xloc>
+      <yloc>944</yloc>
     </entry>
     <entry>
       <name>媒资标签 导演分类 标签</name>
@@ -3594,8 +3594,8 @@ group by gg.deviceid,gg.directorname
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>80</xloc>
-      <yloc>576</yloc>
+      <xloc>32</xloc>
+      <yloc>832</yloc>
     </entry>
     <entry>
       <name>每日新增订购按栏目分类</name>
@@ -3701,8 +3701,8 @@ where hh.device_id is NULL or hh.product_name is NULL and gg.device_id!='')ii  o
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>608</xloc>
-      <yloc>864</yloc>
+      <xloc>656</xloc>
+      <yloc>960</yloc>
     </entry>
     <entry>
       <name>arpu值</name>
@@ -3727,8 +3727,8 @@ select sum(product_price)/count(*) as arpu from knowyou_jituan_edw.jk_list where
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>608</xloc>
-      <yloc>768</yloc>
+      <xloc>656</xloc>
+      <yloc>832</yloc>
     </entry>
     <entry>
       <name>电影电视剧少儿收视用户且未订购</name>
@@ -3793,7 +3793,7 @@ where t1.device_id is null
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>768</xloc>
+      <xloc>848</xloc>
       <yloc>576</yloc>
     </entry>
     <entry>
@@ -3858,8 +3858,8 @@ product_name in ('增值业务','尊享专区','魔百和钻石尊享包','全�
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>768</xloc>
-      <yloc>672</yloc>
+      <xloc>848</xloc>
+      <yloc>704</yloc>
     </entry>
     <entry>
       <name>电视剧点播类别偏好未订购表</name>
@@ -3922,8 +3922,8 @@ product_name in ('增值业务','尊享专区','魔百和钻石尊享包','全�
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>768</xloc>
-      <yloc>768</yloc>
+      <xloc>848</xloc>
+      <yloc>832</yloc>
     </entry>
     <entry>
       <name>少儿点播类别偏好未订购表</name>
@@ -3986,8 +3986,8 @@ product_name in ('嘟嘟学堂','果果乐园','拉贝少儿','朵丫视界','�
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>768</xloc>
-      <yloc>864</yloc>
+      <xloc>848</xloc>
+      <yloc>960</yloc>
     </entry>
     <entry>
       <name>设备信息基础标签表</name>
@@ -4008,8 +4008,8 @@ where a.province='58' and a.cp_name!='' group by a.deviceid,a.model,b.manufactur
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>960</xloc>
-      <yloc>192</yloc>
+      <xloc>1024</xloc>
+      <yloc>176</yloc>
     </entry>
   </entries>
   <hops>
@@ -4198,7 +4198,7 @@ where a.province='58' and a.cp_name!='' group by a.deviceid,a.model,b.manufactur
       <to>当月直播时段偏好标签表</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>

@@ -313,7 +313,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id />
-      <filename>${Internal.Entry.Current.Directory}/clean_getsysdate.ktr</filename>
+      <filename>${Internal.Entry.Current.Directory}/sys_date.ktr</filename>
       <transname />
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -690,7 +690,7 @@ group by a.deviceid,a.channelname,a.date_time;</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>800</xloc>
+      <xloc>832</xloc>
       <yloc>288</yloc>
     </entry>
     <entry>
@@ -901,7 +901,7 @@ where date_time='20210901' and channelname='CCTV17'
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>960</xloc>
+      <xloc>1040</xloc>
       <yloc>288</yloc>
     </entry>
     <entry>
@@ -1045,7 +1045,7 @@ where date_time='20210901' and channelname='宁夏卫视'
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1104</xloc>
+      <xloc>1264</xloc>
       <yloc>288</yloc>
     </entry>
     <entry>
@@ -1141,7 +1141,7 @@ videotype='点播'
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>768</xloc>
+      <xloc>816</xloc>
       <yloc>400</yloc>
     </entry>
     <entry>
@@ -1341,7 +1341,7 @@ on a.deviceid=c.deviceid
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>352</xloc>
+      <xloc>288</xloc>
       <yloc>576</yloc>
     </entry>
     <entry>
@@ -1379,8 +1379,8 @@ on a.deviceid=c.deviceid
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>352</xloc>
-      <yloc>672</yloc>
+      <xloc>288</xloc>
+      <yloc>688</yloc>
     </entry>
     <entry>
       <name>15.30日回流用户</name>
@@ -1417,7 +1417,7 @@ on a.deviceid=c.deviceid
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>352</xloc>
+      <xloc>288</xloc>
       <yloc>784</yloc>
     </entry>
     <entry>
@@ -1462,7 +1462,7 @@ where date_time>='20210701' and date_time&lt;='20210801'
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>608</xloc>
+      <xloc>656</xloc>
       <yloc>576</yloc>
     </entry>
     <entry>
@@ -1684,7 +1684,7 @@ limit 10)ff)aa</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>608</xloc>
+      <xloc>656</xloc>
       <yloc>672</yloc>
     </entry>
     <entry>
@@ -1759,7 +1759,7 @@ group by deviceid
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>912</xloc>
+      <xloc>1072</xloc>
       <yloc>496</yloc>
     </entry>
     <entry>
@@ -1826,7 +1826,7 @@ and substr(actiontime,9,2)>='22' and substr(actiontime,9,2)&lt;'24'
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>768</xloc>
+      <xloc>864</xloc>
       <yloc>496</yloc>
     </entry>
     <entry>
@@ -1893,7 +1893,7 @@ and substr(actiontime,9,2)>='22' and substr(actiontime,9,2)&lt;'24'
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>896</xloc>
+      <xloc>1024</xloc>
       <yloc>400</yloc>
     </entry>
     <entry>
@@ -1960,7 +1960,7 @@ and substr(actiontime,9,2)>='22' and substr(actiontime,9,2)&lt;'24'
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1248</xloc>
+      <xloc>1472</xloc>
       <yloc>288</yloc>
     </entry>
     <entry>
@@ -2080,7 +2080,7 @@ videotype='点播'
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1008</xloc>
+      <xloc>1216</xloc>
       <yloc>400</yloc>
     </entry>
     <entry>
@@ -3068,7 +3068,7 @@ where t2.ranks=1
       <to>当月直播时段偏好标签表</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>

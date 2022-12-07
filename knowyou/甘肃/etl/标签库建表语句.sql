@@ -51,7 +51,7 @@ OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat';
   `live_prefer_lv5` string COMMENT '当日直播时段14-18点偏好', 
   `live_prefer_lv6` string COMMENT '当日直播时段18-22点偏好', 
   `live_prefer_lv7` string COMMENT '当日直播时段22-24点偏好')
-COMMENT '用户直播时段偏好标签表'
+COMMENT '当日用户直播时段偏好标签表'
 PARTITIONED BY ( 
   `date_time` string COMMENT '日期')
 ROW FORMAT SERDE 
@@ -63,14 +63,14 @@ OUTPUTFORMAT
  
  CREATE TABLE knowyou_ott_dmt.htv_live_prefer_month(
   `deviceid` string COMMENT '设备id', 
-  `live_prefer_lv1` string COMMENT '当日直播时段0-6点偏好', 
-  `live_prefer_lv2` string COMMENT '当日直播时段6-9点偏好', 
-  `live_prefer_lv3` string COMMENT '当日直播时段9-12点偏好', 
-  `live_prefer_lv4` string COMMENT '当日直播时段12-14点偏好', 
-  `live_prefer_lv5` string COMMENT '当日直播时段14-18点偏好', 
-  `live_prefer_lv6` string COMMENT '当日直播时段18-22点偏好', 
-  `live_prefer_lv7` string COMMENT '当日直播时段22-24点偏好')
-COMMENT '用户直播时段偏好标签表'
+  `live_prefer_lv1` string COMMENT '当月直播时段0-6点偏好', 
+  `live_prefer_lv2` string COMMENT '当月直播时段6-9点偏好', 
+  `live_prefer_lv3` string COMMENT '当月直播时段9-12点偏好', 
+  `live_prefer_lv4` string COMMENT '当月直播时段12-14点偏好', 
+  `live_prefer_lv5` string COMMENT '当月直播时段14-18点偏好', 
+  `live_prefer_lv6` string COMMENT '当月直播时段18-22点偏好', 
+  `live_prefer_lv7` string COMMENT '当月直播时段22-24点偏好')
+COMMENT '当月用户直播时段偏好标签表'
 PARTITIONED BY ( 
   `date_time` string COMMENT '日期')
 ROW FORMAT SERDE 
@@ -90,7 +90,7 @@ OUTPUTFORMAT
   `demand_prefer_lv5` string COMMENT '当日点播时段14-18点偏好', 
   `demand_prefer_lv6` string COMMENT '当日点播时段18-22点偏好', 
   `demand_prefer_lv7` string COMMENT '当日点播时段22-24点偏好')
-COMMENT '用户点播时段偏好标签表'
+COMMENT '当日用户点播时段偏好标签表'
 PARTITIONED BY ( 
   `date_time` string COMMENT '日期')
 ROW FORMAT SERDE 
@@ -102,14 +102,14 @@ OUTPUTFORMAT
   
   CREATE TABLE knowyou_ott_dmt.`htv_demand_prefer_month`(
   `deviceid` string COMMENT '设备id', 
-  `demand_prefer_lv1` string COMMENT '当日点播时段0-6点偏好', 
-  `demand_prefer_lv2` string COMMENT '当日点播时段6-9点偏好', 
-  `demand_prefer_lv3` string COMMENT '当日点播时段9-12点偏好', 
-  `demand_prefer_lv4` string COMMENT '当日点播时段12-14点偏好', 
-  `demand_prefer_lv5` string COMMENT '当日点播时段14-18点偏好', 
-  `demand_prefer_lv6` string COMMENT '当日点播时段18-22点偏好', 
-  `demand_prefer_lv7` string COMMENT '当日点播时段22-24点偏好')
-COMMENT '用户点播时段偏好标签表'
+  `demand_prefer_lv1` string COMMENT '当月点播时段0-6点偏好', 
+  `demand_prefer_lv2` string COMMENT '当月点播时段6-9点偏好', 
+  `demand_prefer_lv3` string COMMENT '当月点播时段9-12点偏好', 
+  `demand_prefer_lv4` string COMMENT '当月点播时段12-14点偏好', 
+  `demand_prefer_lv5` string COMMENT '当月点播时段14-18点偏好', 
+  `demand_prefer_lv6` string COMMENT '当月点播时段18-22点偏好', 
+  `demand_prefer_lv7` string COMMENT '当月点播时段22-24点偏好')
+COMMENT '当月用户点播时段偏好标签表'
 PARTITIONED BY ( 
   `date_time` string COMMENT '日期')
 ROW FORMAT SERDE 
@@ -129,7 +129,7 @@ OUTPUTFORMAT
   `replay_prefer_lv5` string COMMENT '当日回看时段14-18点偏好', 
   `replay_prefer_lv6` string COMMENT '当日回看时段18-22点偏好', 
   `replay_prefer_lv7` string COMMENT '当日回看时段22-24点偏好')
-COMMENT '用户回看时段偏好标签表'
+COMMENT '当日用户回看时段偏好标签表'
 PARTITIONED BY ( 
   `date_time` string COMMENT '日期')
 ROW FORMAT SERDE 
@@ -141,14 +141,14 @@ OUTPUTFORMAT
   
  CREATE TABLE knowyou_ott_dmt.`htv_replay_prefer_month`( 
   `deviceid` string COMMENT '设备id', 
-  `replay_prefer_lv1` string COMMENT '当日回看时段0-6点偏好', 
-  `replay_prefer_lv2` string COMMENT '当日回看时段6-9点偏好', 
-  `replay_prefer_lv3` string COMMENT '当日回看时段9-12点偏好', 
-  `replay_prefer_lv4` string COMMENT '当日回看时段12-14点偏好', 
-  `replay_prefer_lv5` string COMMENT '当日回看时段14-18点偏好', 
-  `replay_prefer_lv6` string COMMENT '当日回看时段18-22点偏好', 
-  `replay_prefer_lv7` string COMMENT '当日回看时段22-24点偏好')
-COMMENT '用户回看时段偏好标签表'
+  `replay_prefer_lv1` string COMMENT '当月回看时段0-6点偏好', 
+  `replay_prefer_lv2` string COMMENT '当月回看时段6-9点偏好', 
+  `replay_prefer_lv3` string COMMENT '当月回看时段9-12点偏好', 
+  `replay_prefer_lv4` string COMMENT '当月回看时段12-14点偏好', 
+  `replay_prefer_lv5` string COMMENT '当月回看时段14-18点偏好', 
+  `replay_prefer_lv6` string COMMENT '当月回看时段18-22点偏好', 
+  `replay_prefer_lv7` string COMMENT '当月回看时段22-24点偏好')
+COMMENT '当月用户回看时段偏好标签表'
 PARTITIONED BY ( 
   `date_time` string COMMENT '日期')
 ROW FORMAT SERDE 
@@ -176,7 +176,7 @@ CREATE TABLE knowyou_ott_dmt.`htv_channel_dm_month`(
   `deviceid` string COMMENT '设备id', 
   `channelname` string COMMENT '直播频道名称', 
   `play_duration` string COMMENT '时长（秒）')
-COMMENT '当日直播频道中间表'
+COMMENT '当月直播频道中间表'
 PARTITIONED BY ( 
   `date_time` string)
 ROW FORMAT SERDE 
@@ -327,7 +327,7 @@ CREATE TABLE knowyou_ott_dmt.`htv_demand_type_prefer_dm`(
   `demand_type_prefer_lv15` string COMMENT '娱乐栏目偏好',
   `demand_type_prefer_lv16` string COMMENT '戏曲栏目偏好',
   `demand_type_prefer_lv17` string COMMENT '生活栏目偏好')
-COMMENT '当日点播栏目偏好标签表'
+COMMENT '当日点类别目偏好标签表'
 PARTITIONED BY ( 
   `date_time` string COMMENT '日期')
 ROW FORMAT SERDE 
@@ -363,7 +363,7 @@ OUTPUTFORMAT
   'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat';
   
   
-CREATE TABLE knowyou_ott_dmt.`htv_demand_type_prefer_dm_month`(
+CREATE TABLE knowyou_ott_dmt.`htv_demand_column_prefer_dm_month`(
   `deviceid` string COMMENT '设备id', 
   `demand_type_prefer_lv1` string COMMENT '电视剧栏目偏好', 
   `demand_type_prefer_lv2` string COMMENT '电影栏目偏好', 
@@ -891,6 +891,27 @@ STORED AS INPUTFORMAT 'org.apache.hadoop.mapred.TextInputFormat'
 OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat';
 
 
+CREATE TABLE IF NOT EXISTS knowyou_ott_dmt.htv_secondlevel_increase
+(
+    deviceid    string  COMMENT 'id',
+    film        string  COMMENT '',
+    child       string  COMMENT '',
+    comic       string  COMMENT '',
+    dianjing    string  COMMENT '',
+    game        string  COMMENT '',
+    edu         string  COMMENT '',
+    health      string  COMMENT '',
+    life        string  COMMENT '',
+    phy         string  COMMENT '',
+    pingpai     string  COMMENT '',
+    music       string  COMMENT '',
+    other       string  COMMENT ''
+)
+COMMENT '每日新增订购按栏目分类'
+PARTITIONED BY (`date_time` string COMMENT '日期')
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe' 
+STORED AS INPUTFORMAT 'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat';
 
   
 CREATE TABLE knowyou_ott_dmt.`htv_epg_prefer_dm`( 
