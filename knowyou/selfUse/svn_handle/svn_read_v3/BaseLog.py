@@ -9,6 +9,8 @@ import requests
 import rsa as r
 from Crypto.Cipher import AES
 import datetime as dt
+
+
 from svn_read_v3.ReadConfig import ReadConfig
 
 dirname = os.path.split(os.path.realpath(sys.argv[0]))[0]
@@ -156,7 +158,9 @@ def read_svn_log(rc):
 
 
 def write_2_xls(user_list):
-    import xlwt, xlrd
+    import xlwt
+    import xlrd
+    from xlrd import XLRDError
     from xlutils.copy import copy as xl_copy
 
     file_directory = "no-commit-user-result"
@@ -170,11 +174,12 @@ def write_2_xls(user_list):
     if flag:
         rb = xlrd.open_workbook(file_name)
         book = xl_copy(rb)
-        table = rb.sheet_by_name(file_day)
-        if table:
-            sheet = book.get_sheet(file_day)
-        else:
+        try:
+            table = rb.sheet_by_name(file_day)
+        except XLRDError:
             sheet = book.add_sheet(file_day, cell_overwrite_ok=True)
+        else:
+            sheet = book.get_sheet(file_day)
     else:
         book = xlwt.Workbook(encoding='utf-8')
         sheet = book.add_sheet(file_day, cell_overwrite_ok=True)
