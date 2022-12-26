@@ -7,21 +7,21 @@ SELECT
     a.deviceid AS deviceid,
     (CASE WHEN b.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS is_boot, -- 当日是否开机
     (CASE WHEN c.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS is_play, -- 当日是否播放
-    (CASE WHEN c.play_duration IS NOT NULL THEN c.play_duration ELSE 0 END) AS play_duration, -- 当日播放时长
+    (CASE WHEN c.play_duratiON IS NOT NULL THEN c.play_duratiON ELSE 0 END) AS play_duration, -- 当日播放时长
     (CASE WHEN c.play_num IS NOT NULL THEN c.play_num ELSE 0 END) AS play_num , -- 当日播放次数
     (CASE WHEN d.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS is_live, -- 当日收看直播
     (CASE WHEN d.play_num IS NOT NULL THEN d.play_num ELSE 0 END) AS live_play_num, -- 当日收看直播次数
-    (CASE WHEN d.play_duration IS NOT NULL THEN d.play_duration ELSE 0 END) AS live_play_duration, -- 当日收看直播时长
+    (CASE WHEN d.play_duratiON IS NOT NULL THEN d.play_duratiON ELSE 0 END) AS live_play_duration, -- 当日收看直播时长
     (CASE WHEN e.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS is_demand, -- 当日收看点播
     (CASE WHEN e.play_num IS NOT NULL THEN e.play_num ELSE 0 END) AS demand_play_num, --当日收看点播次数
-    (CASE WHEN e.play_duration IS NOT NULL THEN e.play_duration ELSE 0 END) AS demand_play_duration, -- 当日收看点播时长
+    (CASE WHEN e.play_duratiON IS NOT NULL THEN e.play_duratiON ELSE 0 END) AS demand_play_duration, -- 当日收看点播时长
     (CASE WHEN f.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS is_replay, -- 当日收看回看
     (CASE WHEN f.play_num IS NOT NULL THEN f.play_num ELSE 0 END) AS replay_play_num, --当日收看回看次数
-    (CASE WHEN f.play_duration IS NOT NULL THEN f.play_duration ELSE 0 END) AS replay_play_duration, -- 当日收看回看时长 
+    (CASE WHEN f.play_duratiON IS NOT NULL THEN f.play_duratiON ELSE 0 END) AS replay_play_duration, -- 当日收看回看时长 
     '${C_DAY}' AS date_time
 FROM
 (
-    SELECT deviceid FROM knowyou_jituan_edw.edw_ba_cn_deviceinfo WHERE date_time='${C_DAY}'
+    SELECT deviceid FROM knowyou_jituan_edw.edw_ba_cn_deviceinfo 
     GROUP BY deviceid
 ) a
 -- 是否开机 
@@ -66,7 +66,7 @@ LEFT JOIN
 
 
 
---当月活跃信息基础标签表
+--2.当月活跃信息基础标签表
 
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
@@ -74,22 +74,22 @@ INSERT OVERWRITE TABLE knowyou_ott_dmt.HTV_SERV_BASIC_MONTH PARTITION(date_time)
 SELECT a.deviceid AS deviceid,
     (CASE WHEN b.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS is_boot, -- 当月是否开机
     (CASE WHEN c.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS is_play, -- 当月是否播放
-    (CASE WHEN c.play_duration IS NOT NULL THEN c.play_duration ELSE 0 END) AS play_duration, -- 当月播放时长
+    (CASE WHEN c.play_duratiON IS NOT NULL THEN c.play_duratiON ELSE 0 END) AS play_duration, -- 当月播放时长
     (CASE WHEN c.play_num IS NOT NULL THEN c.play_num ELSE 0 END) AS play_num , -- 当月播放次数
     (CASE WHEN d.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS is_live, -- 当月收看直播
     (CASE WHEN d.play_num IS NOT NULL THEN d.play_num ELSE 0 END) AS live_play_num, -- 当月收看直播次数
-    (CASE WHEN d.play_duration IS NOT NULL THEN d.play_duration ELSE 0 END) AS live_play_duration, -- 当月收看直播时长
+    (CASE WHEN d.play_duratiON IS NOT NULL THEN d.play_duratiON ELSE 0 END) AS live_play_duration, -- 当月收看直播时长
     (CASE WHEN e.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS is_demand, -- 当月收看点播
     (CASE WHEN e.play_num IS NOT NULL THEN e.play_num ELSE 0 END) AS demand_play_num, --当月收看点播次数
-    (CASE WHEN e.play_duration IS NOT NULL THEN e.play_duration ELSE 0 END) AS demand_play_duration, -- 当月收看点播时长
+    (CASE WHEN e.play_duratiON IS NOT NULL THEN e.play_duratiON ELSE 0 END) AS demand_play_duration, -- 当月收看点播时长
     (CASE WHEN f.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS is_replay, -- 当月收看回看
     (CASE WHEN f.play_num IS NOT NULL THEN f.play_num ELSE 0 END) AS replay_play_num, --当月收看回看次数
-    (CASE WHEN f.play_duration IS NOT NULL THEN f.play_duration ELSE 0 END) AS replay_play_duration, -- 当月收看回看时长 
+    (CASE WHEN f.play_duratiON IS NOT NULL THEN f.play_duratiON ELSE 0 END) AS replay_play_duration, -- 当月收看回看时长 
     '${C_DAY}' AS date_time
 FROM
 (
     SELECT deviceid FROM knowyou_jituan_edw.edw_ba_cn_deviceinfo
-    WHERE date_time<='${C_DAY}' AND date_time>='${C_MONTH}01'
+    GROUP BY deviceid
 ) a
 -- 是否开机
 LEFT JOIN 
@@ -133,7 +133,7 @@ LEFT JOIN
 
 
 
--- 2.当日直播时段偏好标签表
+-- 3.当日直播时段偏好标签表
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_live_prefer PARTITION(date_time)
@@ -150,7 +150,7 @@ SELECT
 FROM
 (
     SELECT deviceid FROM knowyou_jituan_edw.edw_ba_cn_deviceinfo 
-    WHERE date_time='${C_DAY}'
+    GROUP BY deviceid
 ) a
 -- 当日直播时段0-6点偏好
 LEFT JOIN
@@ -205,7 +205,7 @@ LEFT JOIN
 
 
 
--- 当月直播时段偏好标签表
+-- 4.当月直播时段偏好标签表
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_live_prefer_month PARTITION(date_time)
@@ -222,7 +222,6 @@ SELECT
 FROM
 (
     SELECT deviceid FROM knowyou_jituan_edw.edw_ba_cn_deviceinfo
-    WHERE date_time<='${C_DAY}' AND date_time>='${C_MONTH}01'
     GROUP BY deviceid
 ) a
 -- 当月直播时段0-6点偏好
@@ -277,7 +276,7 @@ LEFT JOIN
 )h ON a.deviceid=h.deviceid;
 
 
--- 3.点播时段偏好标签表
+-- 5.点播时段偏好标签表
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_demand_prefer PARTITION(date_time)
@@ -294,7 +293,6 @@ SELECT
 FROM
 (
     SELECT deviceid FROM knowyou_jituan_edw.edw_ba_cn_deviceinfo
-    WHERE date_time='${C_DAY}'
     GROUP BY deviceid
 )a
 LEFT JOIN
@@ -350,7 +348,7 @@ LEFT JOIN
 
 
 
--- 当月点播时段偏好标签表
+-- 6.当月点播时段偏好标签表
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_demand_prefer_month PARTITION(date_time)
@@ -366,7 +364,6 @@ SELECT
     '${C_DAY}' AS date_time
 FROM(
     SELECT deviceid FROM knowyou_jituan_edw.edw_ba_cn_deviceinfo
-    WHERE date_time<='${C_DAY}' AND date_time>='${C_MONTH}01'
     GROUP BY deviceid
 )a
 LEFT JOIN
@@ -421,7 +418,7 @@ LEFT JOIN
 )h ON a.deviceid=h.deviceid;
 
 
--- 4.回看时段偏好标签表
+-- 7.回看时段偏好标签表
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_replay_prefer PARTITION(date_time)
@@ -437,7 +434,7 @@ SELECT
     '${C_DAY}' AS date_time
 FROM(
     SELECT deviceid FROM knowyou_jituan_edw.edw_ba_cn_deviceinfo
-    WHERE date_time='${C_DAY}'
+    GROUP BY deviceid
 )a
     -- 当日回看时段0-6点偏好
 LEFT JOIN
@@ -492,7 +489,7 @@ LEFT JOIN
 
 
 
--- 当月回看时段偏好标签表
+-- 8.当月回看时段偏好标签表
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_replay_prefer_month PARTITION(date_time)
@@ -509,7 +506,6 @@ SELECT
 FROM
 (
     SELECT deviceid FROM knowyou_jituan_edw.edw_ba_cn_deviceinfo
-    WHERE date_time<='${C_DAY}' AND date_time>='${C_MONTH}01'
     GROUP BY deviceid
 )a
     -- 当月回看时段0-6点偏好
@@ -565,7 +561,7 @@ LEFT JOIN
 
 
 
--- 5.当日直播频道偏好标签中间表
+-- 9.当日直播频道偏好标签中间表
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_channel_dm PARTITION(date_time)
@@ -628,7 +624,7 @@ GROUP BY a.deviceid, a.channelname, a.date_time;
 
 
 
--- 当月直播频道偏好标签中间表
+-- 10.当月直播频道偏好标签中间表
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_channel_dm_month PARTITION(date_time)
@@ -691,7 +687,7 @@ GROUP BY a.deviceid, a.channelname, a.date_time;
 
 
 
--- 6.当日直播CCTV频道偏好标签表
+-- 11.当日直播CCTV频道偏好标签表
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_channel_prefer_cctv_dm PARTITION(date_time='${C_DAY}')
@@ -767,81 +763,80 @@ SELECT
     (CASE WHEN r.deviceid IS NOT NULL AND r.play_duration>10800 THEN 1 ELSE 0 END) AS channel_high_prefer_cctv17 
 FROM(
     SELECT deviceid AS key FROM knowyou_jituan_edw.edw_ba_cn_deviceinfo
-    WHERE date_time='${C_DAY}'
     GROUP BY deviceid
 )a
 LEFT JOIN(
-    SELECT deviceid,play_duration FROM knowyou_ott_dmt.htv_channel_dm
+    SELECT deviceid,play_duratiON FROM knowyou_ott_dmt.htv_channel_dm
     WHERE date_time='${C_DAY}' AND channelname='CCTV1'
 )b ON a.key=b.deviceid
 LEFT JOIN(
-    SELECT deviceid,play_duration FROM knowyou_ott_dmt.htv_channel_dm
+    SELECT deviceid,play_duratiON FROM knowyou_ott_dmt.htv_channel_dm
     WHERE date_time='${C_DAY}' AND channelname='CCTV2'
 )c ON a.key=c.deviceid
 LEFT JOIN(
-    SELECT deviceid,play_duration FROM knowyou_ott_dmt.htv_channel_dm
+    SELECT deviceid,play_duratiON FROM knowyou_ott_dmt.htv_channel_dm
     WHERE date_time='${C_DAY}' AND channelname='CCTV3'
 )d ON a.key=d.deviceid
 LEFT JOIN(
-    SELECT deviceid,play_duration FROM knowyou_ott_dmt.htv_channel_dm
+    SELECT deviceid,play_duratiON FROM knowyou_ott_dmt.htv_channel_dm
     WHERE date_time='${C_DAY}' AND channelname='CCTV4'
 )e ON a.key=e.deviceid
 LEFT JOIN(
-    SELECT deviceid,play_duration FROM knowyou_ott_dmt.htv_channel_dm
+    SELECT deviceid,play_duratiON FROM knowyou_ott_dmt.htv_channel_dm
     WHERE date_time='${C_DAY}' AND channelname='CCTV5'
 )f ON a.key=f.deviceid
 LEFT JOIN(
-    SELECT deviceid,play_duration FROM knowyou_ott_dmt.htv_channel_dm
+    SELECT deviceid,play_duratiON FROM knowyou_ott_dmt.htv_channel_dm
     WHERE date_time='${C_DAY}' AND channelname='CCTV6'
 )g ON a.key=g.deviceid
 LEFT JOIN(
-    SELECT deviceid,play_duration FROM knowyou_ott_dmt.htv_channel_dm
+    SELECT deviceid,play_duratiON FROM knowyou_ott_dmt.htv_channel_dm
     WHERE date_time='${C_DAY}' AND channelname='CCTV7'
 )h ON a.key=h.deviceid
 LEFT JOIN(
-    SELECT deviceid,play_duration FROM knowyou_ott_dmt.htv_channel_dm
+    SELECT deviceid,play_duratiON FROM knowyou_ott_dmt.htv_channel_dm
     WHERE date_time='${C_DAY}' AND channelname='CCTV8'
 )i ON a.key=i.deviceid
 LEFT JOIN(
-    SELECT deviceid,play_duration FROM knowyou_ott_dmt.htv_channel_dm
+    SELECT deviceid,play_duratiON FROM knowyou_ott_dmt.htv_channel_dm
     WHERE date_time='${C_DAY}' AND channelname='CCTV9'
 )j ON a.key=j.deviceid
 LEFT JOIN(
-    SELECT deviceid,play_duration FROM knowyou_ott_dmt.htv_channel_dm
+    SELECT deviceid,play_duratiON FROM knowyou_ott_dmt.htv_channel_dm
     WHERE date_time='${C_DAY}' AND channelname='CCTV10'
 )k ON a.key=k.deviceid
 LEFT JOIN(
-    SELECT deviceid,play_duration FROM knowyou_ott_dmt.htv_channel_dm
+    SELECT deviceid,play_duratiON FROM knowyou_ott_dmt.htv_channel_dm
     WHERE date_time='${C_DAY}' AND channelname='CCTV11'
 )l ON a.key=l.deviceid
 LEFT JOIN(
-    SELECT deviceid,play_duration FROM knowyou_ott_dmt.htv_channel_dm
+    SELECT deviceid,play_duratiON FROM knowyou_ott_dmt.htv_channel_dm
     WHERE date_time='${C_DAY}' AND channelname='CCTV12'
 )m ON a.key=m.deviceid
 LEFT JOIN(
-    SELECT deviceid,play_duration FROM knowyou_ott_dmt.htv_channel_dm
+    SELECT deviceid,play_duratiON FROM knowyou_ott_dmt.htv_channel_dm
     WHERE date_time='${C_DAY}' AND channelname='CCTV13'
 )n ON a.key=n.deviceid
 LEFT JOIN(
-    SELECT deviceid,play_duration FROM knowyou_ott_dmt.htv_channel_dm
+    SELECT deviceid,play_duratiON FROM knowyou_ott_dmt.htv_channel_dm
     WHERE date_time='${C_DAY}' AND channelname='CCTV14'
 )o ON a.key=o.deviceid
 LEFT JOIN(
-    SELECT deviceid,play_duration FROM knowyou_ott_dmt.htv_channel_dm
+    SELECT deviceid,play_duratiON FROM knowyou_ott_dmt.htv_channel_dm
     WHERE date_time='${C_DAY}' AND channelname='CCTV15'
 )p ON a.key=p.deviceid 
 LEFT JOIN(
-    SELECT deviceid,play_duration FROM knowyou_ott_dmt.htv_channel_dm
+    SELECT deviceid,play_duratiON FROM knowyou_ott_dmt.htv_channel_dm
     WHERE date_time='${C_DAY}' AND channelname='CCTV16'
 )q ON a.key=q.deviceid 
 LEFT JOIN(
-    SELECT deviceid,play_duration FROM knowyou_ott_dmt.htv_channel_dm
+    SELECT deviceid,play_duratiON FROM knowyou_ott_dmt.htv_channel_dm
     WHERE date_time='${C_DAY}' AND channelname='CCTV17'
 )r ON a.key=r.deviceid;
 
 
 
--- 7.当日直播卫视频道偏好标签表
+-- 12.当日直播卫视频道偏好标签表
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_channel_prefer_dm PARTITION(date_time)
@@ -874,7 +869,6 @@ SELECT
     '${C_DAY}' AS date_time
 FROM(
     SELECT deviceid AS key FROM knowyou_jituan_edw.edw_ba_cn_deviceinfo
-    WHERE date_time='${C_DAY}'
     GROUP BY deviceid
 )a
 LEFT JOIN(
@@ -975,7 +969,7 @@ LEFT JOIN(
 )y ON a.key=y.deviceid;
 
 
--- 8.当日点播栏目偏好标签表
+-- 13.当日点播栏目偏好标签表
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_demand_column_prefer_dm PARTITION(date_time)
@@ -996,7 +990,6 @@ SELECT
     '${C_DAY}' AS date_time
 FROM(
     SELECT deviceid AS key FROM knowyou_jituan_edw.edw_ba_cn_deviceinfo
-    WHERE date_time='${C_DAY}'
     GROUP BY deviceid
 )a
 LEFT JOIN( 
@@ -1064,7 +1057,7 @@ LEFT JOIN(
 )m ON a.key=m.deviceid;
 
 
--- 9.当日点播类别偏好标签表
+-- 14.当日点播类别偏好标签表
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_demand_type_prefer_dm PARTITION(date_time)
@@ -1090,7 +1083,6 @@ SELECT
     '${C_DAY}' AS date_time
 FROM(
     SELECT deviceid AS key FROM knowyou_jituan_edw.edw_ba_cn_deviceinfo
-    WHERE date_time='${C_DAY}'
     GROUP BY deviceid
 )a
 LEFT JOIN( 
@@ -1180,7 +1172,7 @@ LEFT JOIN(
 
 
 
--- 当月点播栏目偏好标签表
+-- 15.当月点播栏目偏好标签表
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_demand_column_prefer_dm_month PARTITION(date_time)
@@ -1201,7 +1193,6 @@ SELECT
     '${C_DAY}' AS date_time
 FROM(
     SELECT deviceid AS key FROM knowyou_jituan_edw.edw_ba_cn_deviceinfo
-    WHERE date_time<='${C_DAY}' AND date_time>='${C_MONTH}01'
     GROUP BY deviceid
 )a
 LEFT JOIN( 
@@ -1272,7 +1263,7 @@ LEFT JOIN(
 
 
 
--------8 行为标签 1.新增留存分类 
+-- 16.新增留存分类 
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_adduserretentionlabe_dm PARTITION(date_time='${C_DAY}')
@@ -1286,10 +1277,10 @@ FROM
 (
     SELECT 
     deviceid,
-    cast(MAX(CASE WHEN d.date_time=date_format(date_add(from_unixtime(unix_timestamp(d.dt,'yyyyMMdd'),'yyyy-MM-dd'),1),'yyyyMMdd') THEN retention_usernum END) AS int) AS day_1,
-    cast(MAX(CASE WHEN d.date_time=date_format(date_add(from_unixtime(unix_timestamp(d.dt,'yyyyMMdd'),'yyyy-MM-dd'),7),'yyyyMMdd') THEN retention_usernum END) AS int) AS day_7,
-    cast(MAX(CASE WHEN d.date_time=date_format(date_add(from_unixtime(unix_timestamp(d.dt,'yyyyMMdd'),'yyyy-MM-dd'),14),'yyyyMMdd') THEN retention_usernum END) AS int) AS day_14,
-    cast(MAX(CASE WHEN d.date_time=date_format(date_add(from_unixtime(unix_timestamp(d.dt,'yyyyMMdd'),'yyyy-MM-dd'),30),'yyyyMMdd') THEN retention_usernum END) AS int) AS day_30,
+    cast(MAX(CASE WHEN d.date_time=date_format(date_add(FROM_unixtime(unix_timestamp(d.dt,'yyyyMMdd'),'yyyy-MM-dd'),1),'yyyyMMdd') THEN retention_usernum END) AS int) AS day_1,
+    cast(MAX(CASE WHEN d.date_time=date_format(date_add(FROM_unixtime(unix_timestamp(d.dt,'yyyyMMdd'),'yyyy-MM-dd'),7),'yyyyMMdd') THEN retention_usernum END) AS int) AS day_7,
+    cast(MAX(CASE WHEN d.date_time=date_format(date_add(FROM_unixtime(unix_timestamp(d.dt,'yyyyMMdd'),'yyyy-MM-dd'),14),'yyyyMMdd') THEN retention_usernum END) AS int) AS day_14,
+    cast(MAX(CASE WHEN d.date_time=date_format(date_add(FROM_unixtime(unix_timestamp(d.dt,'yyyyMMdd'),'yyyy-MM-dd'),30),'yyyyMMdd') THEN retention_usernum END) AS int) AS day_30,
     d.dt AS date_time
     FROM
     (
@@ -1318,7 +1309,7 @@ GROUP BY deviceid, date_time;
 
 
 
---------- 9 行为标签 2.活跃留存分类 
+-- 17.活跃留存分类 
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_activeretentionlabe_dm PARTITION(date_time='${C_DAY}')
@@ -1347,7 +1338,7 @@ SELECT
 
 
 
----------------10 行为标签 3.月/活跃/新增留存分类
+-- 18.月活跃与新增留存分类
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_activeadd_retention_mm PARTITION(date_time='${C_DAY}')
@@ -1396,7 +1387,7 @@ ON aa.deviceid =bb.deviceid;
 
 
 
--- 15.7日回流用户
+-- 19.7日回流用户
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_back_flow_lv7 PARTITION(date_time)
@@ -1408,7 +1399,6 @@ SELECT tt.* FROM
     FROM
     (
         SELECT deviceid FROM knowyou_jituan_edw.edw_ba_cn_deviceinfo
-        WHERE date_time='${C_DAY}'
         GROUP BY deviceid
     )a -- 前两天全量用户
     LEFT JOIN
@@ -1430,7 +1420,7 @@ WHERE tt.deviceid IS NOT NULL;
 
 
 
--- 15.14日回流用户
+-- 20.14日回流用户
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_back_flow_lv14 PARTITION(date_time)
@@ -1441,7 +1431,6 @@ SELECT tt.* FROM
         '${C_DAY}' AS date_time -- 14日回流用户
     FROM(
         SELECT deviceid FROM knowyou_jituan_edw.edw_ba_cn_deviceinfo
-        WHERE date_time='${C_DAY}'
         GROUP BY deviceid
     )a -- 前两天全量用户
     LEFT JOIN(
@@ -1462,7 +1451,7 @@ WHERE tt.deviceid IS NOT NULL;
 
 
 
--- 15.30日回流用户
+-- 21.30日回流用户
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_back_flow_lv30 PARTITION(date_time)
@@ -1472,7 +1461,6 @@ SELECT tt.* FROM (
         '${C_DAY}' AS date_time -- 30日回流用户
     FROM(
         SELECT deviceid FROM knowyou_jituan_edw.edw_ba_cn_deviceinfo
-        WHERE date_time='${C_DAY}'
         GROUP BY deviceid
     )a -- 前两天全量用户
     LEFT JOIN(
@@ -1492,7 +1480,7 @@ WHERE tt.deviceid IS NOT NULL;
 
 
 
--- 沉默用户
+-- 22.沉默用户
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_slience_dm PARTITION(date_time)
@@ -1505,7 +1493,6 @@ SELECT
     '${C_DAY}' AS date_time
 FROM(
     SELECT deviceid FROM knowyou_jituan_edw.edw_ba_cn_deviceinfo
-    WHERE date_time='${C_DAY}'
     GROUP BY deviceid
 )a
 LEFT JOIN(
@@ -1515,12 +1502,12 @@ LEFT JOIN(
 )b ON a.deviceid = b.deviceid 
 LEFT JOIN(
     SELECT deviceid FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
-    WHERE date_time>='${FOURTEEN_DAY}' AND date_time<='${C_DAY}'
+    WHERE date_time>='${FOURTEEN_DAY}' AND date_time<='${Y_DAY}'
     GROUP BY deviceid
 )c ON a.deviceid = c.deviceid
 LEFT JOIN(
     SELECT deviceid FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
-    WHERE date_time>='${THIRTY_DAY}' AND date_time<='${C_DAY}'
+    WHERE date_time>='${THIRTY_DAY}' AND date_time<='${Y_DAY}'
     GROUP BY deviceid
 )d ON a.deviceid = d.deviceid
 LEFT JOIN(
@@ -1532,7 +1519,7 @@ LEFT JOIN(
 
 
 
--- 1.直播内容轻偏好
+-- 23.直播内容轻偏好
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_live_content_light PARTITION(date_time)
@@ -1545,11 +1532,11 @@ FROM
     SELECT a.deviceid, a.videoname
     FROM
     (
-        SELECT deviceid, videoname, sum(playTime) AS play_duration 
+        SELECT deviceid, videoname, sum(playTime) AS play_duratiON 
         FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
         WHERE date_time='${C_DAY}' AND videoname !='' AND playstatus='1' AND videotype='直播' 
         GROUP BY deviceid, videoname
-    )a WHERE a.play_duration<1800
+    )a WHERE a.play_duration<2700
 )t0
 LEFT JOIN
 (
@@ -1567,7 +1554,7 @@ WHERE t1.videoname IS NOT NULL;
 
 
 
--- 2.直播内容100个中偏好
+-- 24.直播内容100个中偏好
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_live_content_middle PARTITION(date_time)
@@ -1580,12 +1567,12 @@ FROM
     SELECT a.deviceid, a.videoname
     FROM
     (
-        SELECT deviceid, videoname, sum(playTime) AS play_duration 
+        SELECT deviceid, videoname, sum(playTime) AS play_duratiON 
         FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
         WHERE date_time='${C_DAY}' AND videoname !='' AND playstatus='1' AND videotype='直播' 
         GROUP BY deviceid, videoname
     )a 
-    WHERE a.play_duration>=1800 AND a.play_duration<=3600
+    WHERE a.play_duration>=2700 AND a.play_duration<=5400
 )t0
 LEFT JOIN
 (
@@ -1603,7 +1590,7 @@ WHERE t1.videoname IS NOT NULL;
 
 
 
--- 3.直播内容100个重偏好
+-- 25.直播内容100个重偏好
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_live_content_high PARTITION(date_time)
@@ -1615,12 +1602,12 @@ FROM
 (
     SELECT a.deviceid, a.videoname FROM
     (
-        SELECT deviceid, videoname, sum(playTime) AS play_duration 
+        SELECT deviceid, videoname, sum(playTime) AS play_duratiON 
         FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
         WHERE date_time='${C_DAY}' AND videoname !='' AND playstatus='1' AND videotype='直播' 
         GROUP BY deviceid, videoname
     )a 
-    WHERE a.play_duration>3600
+    WHERE a.play_duration>5400
 )t0
 LEFT JOIN
 (
@@ -1637,7 +1624,7 @@ WHERE t1.videoname IS NOT NULL;
 
 
 
--- 4.点播内容100个轻偏好
+-- 26.点播内容100个轻偏好
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_demand_content_light PARTITION(date_time)
@@ -1649,7 +1636,7 @@ FROM
 (
     SELECT a.deviceid, a.videoname FROM
     (
-        SELECT deviceid, videoname, sum(playTime) AS play_duration 
+        SELECT deviceid, videoname, sum(playTime) AS play_duratiON 
         FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
         WHERE date_time='${C_DAY}' AND videoname !='' AND playstatus='1' AND videotype='点播' 
         GROUP BY deviceid, videoname
@@ -1670,7 +1657,7 @@ WHERE t1.videoname IS NOT NULL;
 
 
 
--- 5.点播内容100个中偏好
+-- 27.点播内容100个中偏好
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_demand_content_middle PARTITION(date_time)
@@ -1682,7 +1669,7 @@ FROM
 (
     SELECT a.deviceid, a.videoname FROM
     (
-        SELECT deviceid, videoname, sum(playTime) AS play_duration 
+        SELECT deviceid, videoname, sum(playTime) AS play_duratiON 
         FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
         WHERE date_time='${C_DAY}' AND videoname !='' AND playstatus='1' AND videotype='点播' 
         GROUP BY deviceid,videoname
@@ -1703,7 +1690,7 @@ WHERE t1.videoname IS NOT NULL;
 
 
 
--- 6.点播内容100个重偏好
+-- 28.点播内容100个重偏好
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_demand_content_high PARTITION(date_time)
@@ -1715,7 +1702,7 @@ FROM
 (
     SELECT a.deviceid, a.videoname FROM
     (
-        SELECT deviceid, videoname, sum(playTime) AS play_duration 
+        SELECT deviceid, videoname, sum(playTime) AS play_duratiON 
         FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
         WHERE date_time='${C_DAY}' AND videoname !='' AND playstatus='1' AND videotype='点播' 
         GROUP BY deviceid, videoname
@@ -1736,7 +1723,7 @@ WHERE t1.videoname IS NOT NULL;
 
 
 
---------- 行为标签 1.搜索收藏分类
+--29.搜索收藏分类
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_searchcollectlabe_dm PARTITION(date_time='${C_DAY}')
@@ -1789,224 +1776,223 @@ FROM
 
 
 
--- 2.当日收看各类APP信息情况表
-set hive.exec.dynamic.partition=true;
-set hive.exec.dynamic.partition.mode=nonstrict;
-INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_app_basic PARTITION(date_time)
-SELECT 
-    a.deviceid,
-    (CASE WHEN b.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS jiguang_pre,    --当日收看极光TVAPP
-    (CASE WHEN c.deviceid IS NOT NULL THEN c.play_num ELSE 0 END) AS jiguang_count,  --当日收看极光TVAPP的次数
-    (CASE WHEN c.deviceid IS NOT NULL THEN c.play_duration ELSE 0 END) AS jiguang_time, --当日收看极光TVAPP的时长
-    (CASE WHEN d.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS qiyi_pre,
-    (CASE WHEN e.deviceid IS NOT NULL THEN e.play_num ELSE 0 END) AS qiyi_count,
-    (CASE WHEN e.deviceid IS NOT NULL THEN e.play_duration ELSE 0 END) AS qiyi_time,
-    (CASE WHEN f.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS bailin_pre,
-    (CASE WHEN g.deviceid IS NOT NULL THEN g.play_num ELSE 0 END) AS bailin_count,
-    (CASE WHEN g.deviceid IS NOT NULL THEN g.play_duration ELSE 0 END) AS bailin_time,
-    (CASE WHEN f.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS other_pre,
-    (CASE WHEN g.deviceid IS NOT NULL THEN g.play_num ELSE 0 END) AS other_count,
-    (CASE WHEN g.deviceid IS NOT NULL THEN g.play_duration ELSE 0 END) AS other_time,
-    '${C_DAY}' AS date_time 
-FROM 
-(
-    SELECT deviceid FROM knowyou_jituan_edw.edw_ba_cn_deviceinfo
-    WHERE date_time='${C_DAY}'
-    GROUP BY deviceid
-)a
-LEFT JOIN 
-(
-    SELECT deviceid, appname FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo 
-    WHERE date_time='${C_DAY}' AND appname='tv.huan.tencentTV'
-)b ON a.deviceid=b.deviceid  
-LEFT JOIN 
-(
-    SELECT deviceid, count(*) AS play_num, round(sum(playTime)/3600,1) AS play_duration
-    FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
-    WHERE date_time='${C_DAY}' AND appname='tv.huan.tencentTV'
-    GROUP BY deviceid 
-)c ON a.deviceid=c.deviceid 
-LEFT JOIN 
-(
-    SELECT deviceid, appname FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo 
-    WHERE date_time='${C_DAY}' AND appname='com.gitvvideo.sichuanyidong' 
-)d ON a.deviceid=d.deviceid  
-LEFT JOIN 
-(
-    SELECT deviceid, count(*) AS play_num, round(sum(playTime)/3600,1) AS play_duration
-    FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
-    WHERE date_time='${C_DAY}' AND appname='com.gitvvideo.sichuanyidong' 
-    GROUP BY deviceid 
-)e ON a.deviceid=e.deviceid 
-LEFT JOIN 
-(
-    SELECT deviceid, appname FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo 
-    WHERE date_time='${C_DAY}' AND appname='tv.icntv.ott' 
-)f ON a.deviceid=f.deviceid  
-LEFT JOIN 
-(
-    SELECT deviceid, count(*) AS play_num, round(sum(playTime)/3600,1) AS play_duration
-    FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
-    WHERE date_time='${C_DAY}' AND appname='tv.icntv.ott' 
-    GROUP BY deviceid 
-)g ON a.deviceid=g.deviceid 
-LEFT JOIN 
-(
-    SELECT deviceid, appname FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo 
-    WHERE date_time='${C_DAY}' AND appname!='tv.icntv.ott' AND appname!='com.gitvvideo.sichuanyidong' AND appname!='tv.huan.tencentTV' 
-)h ON a.deviceid=h.deviceid  
-LEFT JOIN 
-(
-    SELECT deviceid, count(*) AS play_num, round(sum(playTime)/3600,1) AS play_duration
-    FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
-    WHERE date_time='${C_DAY}' AND appname!='tv.icntv.ott' AND appname!='com.gitvvideo.sichuanyidong' AND appname!='tv.huan.tencentTV'  
-    GROUP BY deviceid 
-)i ON a.deviceid=i.deviceid ;
+        -- 2.当日收看各类APP信息情况表
+        set hive.exec.dynamic.partition=true;
+        set hive.exec.dynamic.partition.mode=nonstrict;
+        INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_app_basic PARTITION(date_time)
+        SELECT 
+            a.deviceid,
+            (CASE WHEN b.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS jiguang_pre,    --当日收看极光TVAPP
+            (CASE WHEN c.deviceid IS NOT NULL THEN c.play_num ELSE 0 END) AS jiguang_count,  --当日收看极光TVAPP的次数
+            (CASE WHEN c.deviceid IS NOT NULL THEN c.play_duratiON ELSE 0 END) AS jiguang_time, --当日收看极光TVAPP的时长
+            (CASE WHEN d.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS qiyi_pre,
+            (CASE WHEN e.deviceid IS NOT NULL THEN e.play_num ELSE 0 END) AS qiyi_count,
+            (CASE WHEN e.deviceid IS NOT NULL THEN e.play_duratiON ELSE 0 END) AS qiyi_time,
+            (CASE WHEN f.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS bailin_pre,
+            (CASE WHEN g.deviceid IS NOT NULL THEN g.play_num ELSE 0 END) AS bailin_count,
+            (CASE WHEN g.deviceid IS NOT NULL THEN g.play_duratiON ELSE 0 END) AS bailin_time,
+            (CASE WHEN f.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS other_pre,
+            (CASE WHEN g.deviceid IS NOT NULL THEN g.play_num ELSE 0 END) AS other_count,
+            (CASE WHEN g.deviceid IS NOT NULL THEN g.play_duratiON ELSE 0 END) AS other_time,
+            '${C_DAY}' AS date_time 
+        FROM 
+        (
+            SELECT deviceid FROM knowyou_jituan_edw.edw_ba_cn_deviceinfo
+            GROUP BY deviceid
+        )a
+        LEFT JOIN 
+        (
+            SELECT deviceid, appname FROM knowyou_ott_ods.odm_jt_app_di 
+            WHERE dt='${C_DAY}' AND appname='tv.huan.tencentTV'
+        )b ON a.deviceid=b.deviceid  
+        LEFT JOIN 
+        (
+            SELECT deviceid, count(*) AS play_num, round(sum(playTime)/3600,1) AS play_duration
+            FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
+            WHERE date_time='${C_DAY}' AND appname='tv.huan.tencentTV'
+            GROUP BY deviceid 
+        )c ON a.deviceid=c.deviceid 
+        LEFT JOIN 
+        (
+            SELECT deviceid, appname FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo 
+            WHERE date_time='${C_DAY}' AND appname='com.gitvvideo.sichuanyidong' 
+        )d ON a.deviceid=d.deviceid  
+        LEFT JOIN 
+        (
+            SELECT deviceid, count(*) AS play_num, round(sum(playTime)/3600,1) AS play_duration
+            FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
+            WHERE date_time='${C_DAY}' AND appname='com.gitvvideo.sichuanyidong' 
+            GROUP BY deviceid 
+        )e ON a.deviceid=e.deviceid 
+        LEFT JOIN 
+        (
+            SELECT deviceid, appname FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo 
+            WHERE date_time='${C_DAY}' AND appname='tv.icntv.ott' 
+        )f ON a.deviceid=f.deviceid  
+        LEFT JOIN 
+        (
+            SELECT deviceid, count(*) AS play_num, round(sum(playTime)/3600,1) AS play_duration
+            FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
+            WHERE date_time='${C_DAY}' AND appname='tv.icntv.ott' 
+            GROUP BY deviceid 
+        )g ON a.deviceid=g.deviceid 
+        LEFT JOIN 
+        (
+            SELECT deviceid, appname FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo 
+            WHERE date_time='${C_DAY}' AND appname!='tv.icntv.ott' AND appname!='com.gitvvideo.sichuanyidong' AND appname!='tv.huan.tencentTV' 
+        )h ON a.deviceid=h.deviceid  
+        LEFT JOIN 
+        (
+            SELECT deviceid, count(*) AS play_num, round(sum(playTime)/3600,1) AS play_duration
+            FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
+            WHERE date_time='${C_DAY}' AND appname!='tv.icntv.ott' AND appname!='com.gitvvideo.sichuanyidong' AND appname!='tv.huan.tencentTV'  
+            GROUP BY deviceid 
+        )i ON a.deviceid=i.deviceid ;
 
 
 
--- 3.当月收看各类APP信息情况表
-set hive.exec.dynamic.partition=true;
-set hive.exec.dynamic.partition.mode=nonstrict;
-INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_app_basic_month PARTITION(date_time)
-SELECT 
-    a.deviceid,
-    (CASE WHEN b.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS jiguang_pre,    --当月收看极光TVAPP
-    (CASE WHEN c.deviceid IS NOT NULL THEN c.play_num ELSE 0 END) AS jiguang_count,  --当月收看极光TVAPP的次数
-    (CASE WHEN c.deviceid IS NOT NULL THEN c.play_duration ELSE 0 END) AS jiguang_time, --当月收看极光TVAPP的时长
-    (CASE WHEN d.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS qiyi_pre,
-    (CASE WHEN e.deviceid IS NOT NULL THEN e.play_num ELSE 0 END) AS qiyi_count,
-    (CASE WHEN e.deviceid IS NOT NULL THEN e.play_duration ELSE 0 END) AS qiyi_time,
-    (CASE WHEN f.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS bailin_pre,
-    (CASE WHEN g.deviceid IS NOT NULL THEN g.play_num ELSE 0 END) AS bailin_count,
-    (CASE WHEN g.deviceid IS NOT NULL THEN g.play_duration ELSE 0 END) AS bailin_time,
-    (CASE WHEN f.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS other_pre,
-    (CASE WHEN g.deviceid IS NOT NULL THEN g.play_num ELSE 0 END) AS other_count,
-    (CASE WHEN g.deviceid IS NOT NULL THEN g.play_duration ELSE 0 END) AS other_time,
-    '${C_DAY}' AS date_time 
-FROM  
-(
-    SELECT deviceid FROM knowyou_jituan_edw.edw_ba_cn_deviceinfo
-    WHERE date_time='${C_DAY}' AND date_time>='${C_MONTH}01'
-)a
-LEFT JOIN 
-(
-    SELECT deviceid, appname FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo 
-    WHERE date_time<='${C_DAY}' AND date_time>='${C_MONTH}01' AND appname='tv.huan.tencentTV'
-)b ON a.deviceid=b.deviceid  
-LEFT JOIN 
-(  
-    SELECT deviceid, count(*) AS play_num, round(sum(playTime)/3600,1) AS play_duration
-    FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
-    WHERE date_time='${C_DAY}' AND date_time>='${C_MONTH}01' AND appname='tv.huan.tencentTV'
-    GROUP BY deviceid 
-)c ON a.deviceid=c.deviceid 
-LEFT JOIN 
-(
-    SELECT deviceid, appname FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo 
-    WHERE date_time='${C_DAY}' AND date_time>='${C_MONTH}01' AND appname='com.gitvvideo.sichuanyidong' 
-)d ON a.deviceid=d.deviceid  
-LEFT JOIN 
-(
-    SELECT deviceid, count(*) AS play_num, round(sum(playTime)/3600,1) AS play_duration
-    FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
-    WHERE date_time='${C_DAY}' AND date_time>='${C_MONTH}01' AND appname='com.gitvvideo.sichuanyidong' 
-    GROUP BY deviceid 
-)e ON a.deviceid=e.deviceid 
-LEFT JOIN 
-(
-    SELECT deviceid, appname FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo 
-    WHERE date_time='${C_DAY}' AND date_time>='${C_MONTH}01' AND appname='tv.icntv.ott' 
-)f ON a.deviceid=f.deviceid  
-LEFT JOIN 
-(
-    SELECT deviceid, count(*) AS play_num, round(sum(playTime)/3600,1) AS play_duration
-    FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
-    WHERE date_time='${C_DAY}' AND date_time>='${C_MONTH}01' AND appname='tv.icntv.ott' 
-    GROUP BY deviceid 
-)g ON a.deviceid=g.deviceid 
-LEFT JOIN 
-(
-    SELECT deviceid, appname FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo 
-    WHERE date_time='${C_DAY}' AND date_time>='${C_MONTH}01' AND appname!='tv.icntv.ott' AND appname!='com.gitvvideo.sichuanyidong' AND appname!='tv.huan.tencentTV' 
-)h ON a.deviceid=h.deviceid  
-LEFT JOIN 
-(
-    SELECT deviceid, count(*) AS play_num, round(sum(playTime)/3600,1) AS play_duration
-    FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
-    WHERE date_time='${C_DAY}' AND date_time>='${C_MONTH}01' AND appname!='tv.icntv.ott' AND appname!='com.gitvvideo.sichuanyidong' AND appname!='tv.huan.tencentTV'  
-    GROUP BY deviceid 
-)i ON a.deviceid=i.deviceid ;
-
-
-
-
--- 4.app收视轻偏好
-set hive.exec.dynamic.partition=true;
-set hive.exec.dynamic.partition.mode=nonstrict;
-INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_app_light PARTITION(date_time)
-SELECT  
-    t0.deviceid,
-    t0.appname, 
-    '${C_DAY}' AS date_time
-FROM(
-    SELECT a.deviceid, a.appname FROM
-    (
-       SELECT deviceid, appname, sum(appruntime) AS play_duration 
-       FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
-       WHERE date_time='${C_DAY}' AND appname !=''  
-       GROUP BY deviceid,appname
-    )a 
-    WHERE a.play_duration<3600 
-)t0;
+        -- 3.当月收看各类APP信息情况表
+        set hive.exec.dynamic.partition=true;
+        set hive.exec.dynamic.partition.mode=nonstrict;
+        INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_app_basic_month PARTITION(date_time)
+        SELECT 
+            a.deviceid,
+            (CASE WHEN b.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS jiguang_pre,    --当月收看极光TVAPP
+            (CASE WHEN c.deviceid IS NOT NULL THEN c.play_num ELSE 0 END) AS jiguang_count,  --当月收看极光TVAPP的次数
+            (CASE WHEN c.deviceid IS NOT NULL THEN c.play_duratiON ELSE 0 END) AS jiguang_time, --当月收看极光TVAPP的时长
+            (CASE WHEN d.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS qiyi_pre,
+            (CASE WHEN e.deviceid IS NOT NULL THEN e.play_num ELSE 0 END) AS qiyi_count,
+            (CASE WHEN e.deviceid IS NOT NULL THEN e.play_duratiON ELSE 0 END) AS qiyi_time,
+            (CASE WHEN f.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS bailin_pre,
+            (CASE WHEN g.deviceid IS NOT NULL THEN g.play_num ELSE 0 END) AS bailin_count,
+            (CASE WHEN g.deviceid IS NOT NULL THEN g.play_duratiON ELSE 0 END) AS bailin_time,
+            (CASE WHEN f.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS other_pre,
+            (CASE WHEN g.deviceid IS NOT NULL THEN g.play_num ELSE 0 END) AS other_count,
+            (CASE WHEN g.deviceid IS NOT NULL THEN g.play_duratiON ELSE 0 END) AS other_time,
+            '${C_DAY}' AS date_time 
+        FROM  
+        (
+            SELECT deviceid FROM knowyou_jituan_edw.edw_ba_cn_deviceinfo
+            GROUP BY deviceid
+        )a
+        LEFT JOIN 
+        (
+            SELECT deviceid, appname FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo 
+            WHERE date_time<='${C_DAY}' AND date_time>='${C_MONTH}01' AND appname='tv.huan.tencentTV'
+        )b ON a.deviceid=b.deviceid  
+        LEFT JOIN 
+        (  
+            SELECT deviceid, count(*) AS play_num, round(sum(playTime)/3600,1) AS play_duration
+            FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
+            WHERE date_time='${C_DAY}' AND date_time>='${C_MONTH}01' AND appname='tv.huan.tencentTV'
+            GROUP BY deviceid 
+        )c ON a.deviceid=c.deviceid 
+        LEFT JOIN 
+        (
+            SELECT deviceid, appname FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo 
+            WHERE date_time='${C_DAY}' AND date_time>='${C_MONTH}01' AND appname='com.gitvvideo.sichuanyidong' 
+        )d ON a.deviceid=d.deviceid  
+        LEFT JOIN 
+        (
+            SELECT deviceid, count(*) AS play_num, round(sum(playTime)/3600,1) AS play_duration
+            FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
+            WHERE date_time='${C_DAY}' AND date_time>='${C_MONTH}01' AND appname='com.gitvvideo.sichuanyidong' 
+            GROUP BY deviceid 
+        )e ON a.deviceid=e.deviceid 
+        LEFT JOIN 
+        (
+            SELECT deviceid, appname FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo 
+            WHERE date_time='${C_DAY}' AND date_time>='${C_MONTH}01' AND appname='tv.icntv.ott' 
+        )f ON a.deviceid=f.deviceid  
+        LEFT JOIN 
+        (
+            SELECT deviceid, count(*) AS play_num, round(sum(playTime)/3600,1) AS play_duration
+            FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
+            WHERE date_time='${C_DAY}' AND date_time>='${C_MONTH}01' AND appname='tv.icntv.ott' 
+            GROUP BY deviceid 
+        )g ON a.deviceid=g.deviceid 
+        LEFT JOIN 
+        (
+            SELECT deviceid, appname FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo 
+            WHERE date_time='${C_DAY}' AND date_time>='${C_MONTH}01' AND appname!='tv.icntv.ott' AND appname!='com.gitvvideo.sichuanyidong' AND appname!='tv.huan.tencentTV' 
+        )h ON a.deviceid=h.deviceid  
+        LEFT JOIN 
+        (
+            SELECT deviceid, count(*) AS play_num, round(sum(playTime)/3600,1) AS play_duration
+            FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
+            WHERE date_time='${C_DAY}' AND date_time>='${C_MONTH}01' AND appname!='tv.icntv.ott' AND appname!='com.gitvvideo.sichuanyidong' AND appname!='tv.huan.tencentTV'  
+            GROUP BY deviceid 
+        )i ON a.deviceid=i.deviceid ;
 
 
 
 
--- 5.app收视中偏好
-set hive.exec.dynamic.partition=true;
-set hive.exec.dynamic.partition.mode=nonstrict;
-INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_app_middle PARTITION(date_time)
-SELECT  
-    t0.deviceid,
-    t0.appname, 
-    '${C_DAY}' AS date_time
-FROM(
-    SELECT a.deviceid, a.appname FROM
-    (
-        SELECT deviceid, appname, sum(appruntime) AS play_duration 
-        FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
-        WHERE date_time='${C_DAY}' AND appname !=''  
-        GROUP BY deviceid, appname
-    )a 
-    WHERE a.play_duration>=3600 AND a.play_duration<=10800 
-)t0;
- 
- 
- 
- -- 6.app收视重偏好
-set hive.exec.dynamic.partition=true;
-set hive.exec.dynamic.partition.mode=nonstrict;
-INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_app_high PARTITION(date_time)
-SELECT  
-    t0.deviceid,
-    t0.appname, 
-    '${C_DAY}' AS date_time
-FROM(
-    SELECT a.deviceid, a.appname FROM
-    (
-        SELECT deviceid, appname, sum(appruntime) AS play_duration 
-        FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
-        WHERE date_time='${C_DAY}' AND appname !=''  
-        GROUP BY deviceid, appname
-    )a 
-    WHERE a.play_duration>10800 
-)t0;
+        -- 4.app收视轻偏好
+        set hive.exec.dynamic.partition=true;
+        set hive.exec.dynamic.partition.mode=nonstrict;
+        INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_app_light PARTITION(date_time)
+        SELECT  
+            t0.deviceid,
+            t0.appname, 
+            '${C_DAY}' AS date_time
+        FROM(
+            SELECT a.deviceid, a.appname FROM
+            (
+               SELECT deviceid, appname, sum(appruntime) AS play_duratiON 
+               FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
+               WHERE date_time='${C_DAY}' AND appname !=''  
+               GROUP BY deviceid,appname
+            )a 
+            WHERE a.play_duration<3600 
+        )t0;
 
 
 
 
--------- 媒资标签 1.情节分类 标签个数：34
+        -- 5.app收视中偏好
+        set hive.exec.dynamic.partition=true;
+        set hive.exec.dynamic.partition.mode=nonstrict;
+        INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_app_middle PARTITION(date_time)
+        SELECT  
+            t0.deviceid,
+            t0.appname, 
+            '${C_DAY}' AS date_time
+        FROM(
+            SELECT a.deviceid, a.appname FROM
+            (
+                SELECT deviceid, appname, sum(appruntime) AS play_duratiON 
+                FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
+                WHERE date_time='${C_DAY}' AND appname !=''  
+                GROUP BY deviceid, appname
+            )a 
+            WHERE a.play_duration>=3600 AND a.play_duration<=10800 
+        )t0;
+         
+         
+         
+         -- 6.app收视重偏好
+        set hive.exec.dynamic.partition=true;
+        set hive.exec.dynamic.partition.mode=nonstrict;
+        INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_app_high PARTITION(date_time)
+        SELECT  
+            t0.deviceid,
+            t0.appname, 
+            '${C_DAY}' AS date_time
+        FROM(
+            SELECT a.deviceid, a.appname FROM
+            (
+                SELECT deviceid, appname, sum(appruntime) AS play_duratiON 
+                FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
+                WHERE date_time='${C_DAY}' AND appname !=''  
+                GROUP BY deviceid, appname
+            )a 
+            WHERE a.play_duration>10800 
+        )t0;
+
+
+
+
+--30.情节分类 标签个数：34
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_plotlabel_dm PARTITION(date_time='${C_DAY}')
@@ -2098,26 +2084,26 @@ FROM
 
 
 
------媒资标签 2.地区分类 标签个数：15
+--31.地区分类 标签个数：15
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_regionlabel_dm PARTITION(date_time='${C_DAY}')
 SELECT 
     gg.deviceid,
-    (CASE WHEN gg.region like '%内地%' THEN 1 ELSE 0 END) AS v_b1,
-    (CASE WHEN gg.region like '%香港%' THEN 1 ELSE 0 END) AS v_b2,
-    (CASE WHEN gg.region like '%中国台湾%' THEN 1 ELSE 0 END) AS v_b3,
-    (CASE WHEN gg.region like '%日本%' THEN 1 ELSE 0 END) AS v_b4,
-    (CASE WHEN gg.region like '%韩国%' THEN 1 ELSE 0 END) AS v_b5,
-    (CASE WHEN gg.region like '%泰国%' THEN 1 ELSE 0 END) AS v_b6,
-    (CASE WHEN gg.region like '%美国%' THEN 1 ELSE 0 END) AS v_b7,
-    (CASE WHEN gg.region like '%英国%' THEN 1 ELSE 0 END) AS v_b8,
-    (CASE WHEN gg.region like '%意大利%' THEN 1 ELSE 0 END) AS v_b9,
-    (CASE WHEN gg.region like '%法国%' THEN 1 ELSE 0 END) AS v_b10,
-    (CASE WHEN gg.region like '%俄罗斯%' THEN 1 ELSE 0 END) AS v_b11,
-    (CASE WHEN gg.region like '%德国%' THEN 1 ELSE 0 END) AS v_b12,
-    (CASE WHEN gg.region like '%印度%' THEN 1 ELSE 0 END) AS v_b13,
-    (CASE WHEN gg.region like '%欧洲%' THEN 1 ELSE 0 END) AS v_b14,
+    (CASE WHEN gg.regiON like '%内地%' THEN 1 ELSE 0 END) AS v_b1,
+    (CASE WHEN gg.regiON like '%香港%' THEN 1 ELSE 0 END) AS v_b2,
+    (CASE WHEN gg.regiON like '%中国台湾%' THEN 1 ELSE 0 END) AS v_b3,
+    (CASE WHEN gg.regiON like '%日本%' THEN 1 ELSE 0 END) AS v_b4,
+    (CASE WHEN gg.regiON like '%韩国%' THEN 1 ELSE 0 END) AS v_b5,
+    (CASE WHEN gg.regiON like '%泰国%' THEN 1 ELSE 0 END) AS v_b6,
+    (CASE WHEN gg.regiON like '%美国%' THEN 1 ELSE 0 END) AS v_b7,
+    (CASE WHEN gg.regiON like '%英国%' THEN 1 ELSE 0 END) AS v_b8,
+    (CASE WHEN gg.regiON like '%意大利%' THEN 1 ELSE 0 END) AS v_b9,
+    (CASE WHEN gg.regiON like '%法国%' THEN 1 ELSE 0 END) AS v_b10,
+    (CASE WHEN gg.regiON like '%俄罗斯%' THEN 1 ELSE 0 END) AS v_b11,
+    (CASE WHEN gg.regiON like '%德国%' THEN 1 ELSE 0 END) AS v_b12,
+    (CASE WHEN gg.regiON like '%印度%' THEN 1 ELSE 0 END) AS v_b13,
+    (CASE WHEN gg.regiON like '%欧洲%' THEN 1 ELSE 0 END) AS v_b14,
     '' AS v_b15,
     '' AS v_b16,
     '' AS v_b17,
@@ -2148,15 +2134,15 @@ FROM
             SELECT
                 videoname,
                 region
-            FROM knowyou_jituan_edw.edw_ba_cn_videoinformation 
-            WHERE videotype='点播' GROUP BY videoname, region 
+            FROM knowyou_jituan_edw.edw_ba_cn_videoinformatiON 
+            WHERE videotype='点播' GROUP BY videoname, regiON 
         )b ON a.videoname=b.videoname
     )ff 
     GROUP BY deviceid
 )gg;
 
 
---------- 媒资标签 3.发行年限分类 标签个数：10
+--32.发行年限分类
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_yearslabel_dm PARTITION(date_time='${C_DAY}')
@@ -2217,7 +2203,7 @@ FROM
 )gg;
 
 
---------- 媒资标签 4.语言分类 标签个数：9
+-- 33.语言分类
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_languagelabel_dm PARTITION(date_time='${C_DAY}')
@@ -2268,7 +2254,7 @@ FROM
 )gg;
 
 
------------ 媒资标签 5.演员分类 标签个数：2
+-- 34.演员分类 
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_actorlabel_dm PARTITION(date_time='${C_DAY}')
@@ -2312,7 +2298,7 @@ GROUP BY gg.deviceid, gg.actorname;
 
 
 
------------- 媒资标签 6.导演分类 标签个数：2
+-- 35.导演分类 
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_directorlabel_dm PARTITION(date_time='${C_DAY}')
@@ -2358,28 +2344,29 @@ GROUP BY gg.deviceid, gg.directorname
 ;
 
 
+-- 36.电影电视剧少儿收视用户且未订购
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_demand_order_dm PARTITION(date_time='${C_DAY}')
 SELECT 
-    COALESCE(m1.deviceid,m2.deviceid,m3.deviceid) as deviceid,
-    (CASE WHEN m1.deviceid is not null then 1 else 0 end) as film_not_order,
-    (CASE WHEN m2.deviceid is not null then 1 else 0 end) as tv_not_order,
-    (CASE WHEN m3.deviceid is not null then 1 else 0 end) as child_not_order
+    COALESCE(m1.deviceid,m2.deviceid,m3.deviceid) AS deviceid,
+    (CASE WHEN m1.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS film_not_order,
+    (CASE WHEN m2.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS tv_not_order,
+    (CASE WHEN m3.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS child_not_order
 FROM
 (
     SELECT t0.deviceid --电影收视用户且未订购
     FROM
     (
         SELECT distinct deviceid FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
-        WHERE date_time='${C_DAY}' and contentType='电影' and playstatus ='1' and videotype='点播'
+        WHERE date_time='${C_DAY}' AND contentType='电影' AND playstatus ='1' AND videotype='点播'
     )t0
     LEFT JOIN 
     (
         SELECT distinct device_id FROM knowyou_jituan_edw.jk_list
         WHERE date_time='${C_DAY}' and
-        product_name  in ('增值业务','尊享专区','魔百和钻石尊享包','全家畅享VIP')
-    )t1 on t0.deviceid=t1.device_id
+        product_name  IN ('增值业务','尊享专区','魔百和钻石尊享包','全家畅享VIP')
+    )t1 ON t0.deviceid=t1.device_id
     WHERE t1.device_id is null
 )m1
 FULL JOIN
@@ -2388,820 +2375,960 @@ FULL JOIN
     FROM
     (
         SELECT distinct deviceid FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
-        WHERE date_time='${C_DAY}' and contentType='电视剧' and playstatus ='1' and videotype='点播' 
+        WHERE date_time='${C_DAY}' AND contentType='电视剧' AND playstatus ='1' AND videotype='点播' 
     )t0
     LEFT JOIN 
     (
         SELECT distinct device_id FROM knowyou_jituan_edw.jk_list
         WHERE date_time='${C_DAY}' and
-        product_name  in ('增值业务','尊享专区','魔百和钻石尊享包','全家畅享VIP')
-    )t1 on t0.deviceid=t1.device_id
+        product_name  IN ('增值业务','尊享专区','魔百和钻石尊享包','全家畅享VIP')
+    )t1 ON t0.deviceid=t1.device_id
     WHERE t1.device_id is null
-)m2 on m1.deviceid=m2.deviceid
+)m2 ON m1.deviceid=m2.deviceid
 FULL JOIN
 (
     SELECT t0.deviceid --少儿收视用户且未订购
     FROM
     (
         SELECT distinct deviceid FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
-        WHERE date_time='${C_DAY}' and contentType='少儿' and playstatus ='1' and videotype='点播'
+        WHERE date_time='${C_DAY}' AND contentType='少儿' AND playstatus ='1' AND videotype='点播'
     )t0 
     LEFT JOIN 
     (
         SELECT distinct device_id FROM knowyou_jituan_edw.jk_list
         WHERE date_time='${C_DAY}' and
-        product_name  in ('嘟嘟学堂','果果乐园','拉贝少儿','朵丫视界','迪士尼','爱家少儿','成长乐园','特惠少儿')
-    )t1 on t0.deviceid=t1.device_id
+        product_name  IN ('嘟嘟学堂','果果乐园','拉贝少儿','朵丫视界','迪士尼','爱家少儿','成长乐园','特惠少儿')
+    )t1 ON t0.deviceid=t1.device_id
     WHERE t1.device_id is null
-)m3 on m1.deviceid=m3.deviceid
+)m3 ON m1.deviceid=m3.deviceid
 ;
 
 
 
 
--- 电影点播类别偏好未订购表
+-- 37.电影点播类别偏好未订购表
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_film_order_dm PARTITION(date_time='${C_DAY}')
-select 
+SELECT 
     p1.deviceid,
-    (case when p2.device_id is null and p1.film_prefer_light=1 then 1 else 0 end) as film_light_not_order,
-    (case when p2.device_id is null and p1.film_prefer_middle=1 then 1 else 0 end) as film_middle_not_order,
-    (case when p2.device_id is null and p1.film_prefer_high=1 then 1 else 0 end) as film_high_not_order
-from
+    (CASE WHEN p2.device_id IS NULL AND p1.film_prefer_light=1 THEN 1 ELSE 0 END) AS film_light_not_order,
+    (CASE WHEN p2.device_id IS NULL AND p1.film_prefer_middle=1 THEN 1 ELSE 0 END) AS film_middle_not_order,
+    (CASE WHEN p2.device_id IS NULL AND p1.film_prefer_high=1 THEN 1 ELSE 0 END) AS film_high_not_order
+FROM
 (
-    select 
-        COALESCE(m1.deviceid,m2.deviceid,m3.deviceid) as deviceid,
-        (case when m1.deviceid is not null then 1 else 0 end) as film_prefer_light,
-        (case when m2.deviceid is not null then 1 else 0 end) as film_prefer_middle,
-        (case when m3.deviceid is not null then 1 else 0 end) as film_prefer_high
-    from
+    SELECT 
+        COALESCE(m1.deviceid,m2.deviceid,m3.deviceid) AS deviceid,
+        (CASE WHEN m1.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS film_prefer_light,
+        (CASE WHEN m2.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS film_prefer_middle,
+        (CASE WHEN m3.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS film_prefer_high
+    FROM
     (
-        select t0.deviceid from(
-            select deviceid,sum(playtime) as playduration from knowyou_jituan_edw.edw_uba_cn_videoplayinfo
-            where date_time='${C_DAY}' and contentType='电影' and playstatus ='1' and videotype='点播' group by deviceid
-        )t0 where t0.playduration<3600
+        SELECT t0.deviceid FROM(
+            SELECT deviceid,sum(playtime) AS playduratiON FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
+            WHERE date_time='${C_DAY}' AND contentType='电影' AND playstatus ='1' AND videotype='点播' GROUP BY deviceid
+        )t0 WHERE t0.playduration<3600
     )m1
-    full join
+    FULL JOIN
     (
-        select t1.deviceid from(
-            select deviceid,sum(playtime) as playduration from knowyou_jituan_edw.edw_uba_cn_videoplayinfo
-            where date_time='${C_DAY}' and contentType='电影' and playstatus ='1' and videotype='点播' group by deviceid 
-        )t1 where t1.playduration>3600 and t1.playduration<10800
-    )m2 on m1.deviceid=m2.deviceid
-    full join
+        SELECT t1.deviceid FROM(
+            SELECT deviceid,sum(playtime) AS playduratiON FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
+            WHERE date_time='${C_DAY}' AND contentType='电影' AND playstatus ='1' AND videotype='点播' GROUP BY deviceid 
+        )t1 WHERE t1.playduration>3600 AND t1.playduration<10800
+    )m2 ON m1.deviceid=m2.deviceid
+    FULL JOIN
     (
-        select t2.deviceid
-        from(
-            select deviceid,sum(playtime) as playduration from knowyou_jituan_edw.edw_uba_cn_videoplayinfo
-            where date_time='${C_DAY}' and contentType='电影' and playstatus ='1' and videotype='点播' group by deviceid
-        )t2 where t2.playduration>10800
-    )m3 on m1.deviceid=m3.deviceid
+        SELECT t2.deviceid
+        FROM(
+            SELECT deviceid,sum(playtime) AS playduratiON FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
+            WHERE date_time='${C_DAY}' AND contentType='电影' AND playstatus ='1' AND videotype='点播' GROUP BY deviceid
+        )t2 WHERE t2.playduration>10800
+    )m3 ON m1.deviceid=m3.deviceid
 )p1
-left join 
+LEFT JOIN 
 (
-    select distinct device_id from knowyou_jituan_edw.jk_list
-    where date_time='${C_DAY}' and product_name in ('增值业务','尊享专区','魔百和钻石尊享包','全家畅享VIP')
-)p2 on p1.deviceid=p2.device_id;
+    SELECT distinct device_id FROM knowyou_jituan_edw.jk_list
+    WHERE date_time='${C_DAY}' AND product_name IN ('增值业务','尊享专区','魔百和钻石尊享包','全家畅享VIP')
+)p2 ON p1.deviceid=p2.device_id;
 
 
 
--- 电视剧点播类别偏好未订购表
+-- 38.电视剧点播类别偏好未订购表
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_tv_order_dm PARTITION(date_time='${C_DAY}')
-select 
+SELECT 
     p1.deviceid,
-    (case when p2.device_id is null and p1.tv_prefer_light=1 then 1 else 0 end) as tv_light_not_order,
-    (case when p2.device_id is null and p1.tv_prefer_middle=1 then 1 else 0 end) as tv_middle_not_order,
-    (case when p2.device_id is null and p1.tv_prefer_high=1 then 1 else 0 end) as tv_high_not_order 
-from
+    (CASE WHEN p2.device_id IS NULL AND p1.tv_prefer_light=1 THEN 1 ELSE 0 END) AS tv_light_not_order,
+    (CASE WHEN p2.device_id IS NULL AND p1.tv_prefer_middle=1 THEN 1 ELSE 0 END) AS tv_middle_not_order,
+    (CASE WHEN p2.device_id IS NULL AND p1.tv_prefer_high=1 THEN 1 ELSE 0 END) AS tv_high_not_order 
+FROM
 (
-    select 
-        COALESCE(m1.deviceid,m2.deviceid,m3.deviceid) as deviceid,
-        (case when m1.deviceid is not null then 1 else 0 end) as tv_prefer_light,
-        (case when m2.deviceid is not null then 1 else 0 end) as tv_prefer_middle,
-        (case when m3.deviceid is not null then 1 else 0 end) as tv_prefer_high
-    from
+    SELECT 
+        COALESCE(m1.deviceid,m2.deviceid,m3.deviceid) AS deviceid,
+        (CASE WHEN m1.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS tv_prefer_light,
+        (CASE WHEN m2.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS tv_prefer_middle,
+        (CASE WHEN m3.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS tv_prefer_high
+    FROM
     (
-        select t0.deviceid from
+        SELECT t0.deviceid FROM
         (
-            select deviceid,sum(playtime) as playduration from knowyou_jituan_edw.edw_uba_cn_videoplayinfo
-            where date_time='${C_DAY}' and contentType='电视剧' and playstatus ='1' and videotype='点播' 
-            group by deviceid
-        )t0 where t0.playduration<3600
+            SELECT deviceid,sum(playtime) AS playduratiON FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
+            WHERE date_time='${C_DAY}' AND contentType='电视剧' AND playstatus ='1' AND videotype='点播' 
+            GROUP BY deviceid
+        )t0 WHERE t0.playduration<3600
     )m1
-    full join
+    FULL JOIN
     (
-        select t1.deviceid from
+        SELECT t1.deviceid FROM
         (
-            select deviceid,sum(playtime) as playduration from knowyou_jituan_edw.edw_uba_cn_videoplayinfo
-            where date_time='${C_DAY}' and contentType='电视剧' and playstatus ='1' and videotype='点播' group by deviceid
-        )t1 where t1.playduration>3600 and t1.playduration<10800
-    )m2 on m1.deviceid=m2.deviceid
-    full join
+            SELECT deviceid,sum(playtime) AS playduratiON FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
+            WHERE date_time='${C_DAY}' AND contentType='电视剧' AND playstatus ='1' AND videotype='点播' GROUP BY deviceid
+        )t1 WHERE t1.playduration>3600 AND t1.playduration<10800
+    )m2 ON m1.deviceid=m2.deviceid
+    FULL JOIN
     (
-        select t2.deviceid from
+        SELECT t2.deviceid FROM
         (
-            select deviceid,sum(playtime) as playduration from knowyou_jituan_edw.edw_uba_cn_videoplayinfo
-            where date_time='${C_DAY}' and contentType='电视剧' and playstatus ='1' and videotype='点播' 
-            group by deviceid
-        )t2 where t2.playduration>10800
-    )m3 on m1.deviceid=m3.deviceid
+            SELECT deviceid,sum(playtime) AS playduratiON FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
+            WHERE date_time='${C_DAY}' AND contentType='电视剧' AND playstatus ='1' AND videotype='点播' 
+            GROUP BY deviceid
+        )t2 WHERE t2.playduration>10800
+    )m3 ON m1.deviceid=m3.deviceid
 )p1
-left join 
+LEFT JOIN 
 (
-    select distinct device_id from knowyou_jituan_edw.jk_list
-    where date_time='${C_DAY}' and product_name in ('增值业务','尊享专区','魔百和钻石尊享包','全家畅享VIP')
-)p2 on p1.deviceid=p2.device_id;
+    SELECT distinct device_id FROM knowyou_jituan_edw.jk_list
+    WHERE date_time='${C_DAY}' AND product_name IN ('增值业务','尊享专区','魔百和钻石尊享包','全家畅享VIP')
+)p2 ON p1.deviceid=p2.device_id;
 
 
--- 少儿点播类别偏好未订购表
+-- 39.少儿点播类别偏好未订购表
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_child_order_dm PARTITION(date_time='${C_DAY}')
-select 
+SELECT 
     p1.deviceid,
-    (case when p2.device_id is null and p1.child_prefer_light=1 then 1 else 0 end) as child_light_not_order,
-    (case when p2.device_id is null and p1.child_prefer_middle=1 then 1 else 0 end) as child_middle_not_order,
-    (case when p2.device_id is null and p1.child_prefer_high=1 then 1 else 0 end) as child_high_not_order 
-from
+    (CASE WHEN p2.device_id IS NULL AND p1.child_prefer_light=1 THEN 1 ELSE 0 END) AS child_light_not_order,
+    (CASE WHEN p2.device_id IS NULL AND p1.child_prefer_middle=1 THEN 1 ELSE 0 END) AS child_middle_not_order,
+    (CASE WHEN p2.device_id IS NULL AND p1.child_prefer_high=1 THEN 1 ELSE 0 END) AS child_high_not_order 
+FROM
 (
-    select 
-        COALESCE(m1.deviceid,m2.deviceid,m3.deviceid) as deviceid,
-        (case when m1.deviceid is not null then 1 else 0 end) as child_prefer_light,
-        (case when m2.deviceid is not null then 1 else 0 end) as child_prefer_middle,
-        (case when m3.deviceid is not null then 1 else 0 end) as child_prefer_high
-    from
+    SELECT 
+        COALESCE(m1.deviceid,m2.deviceid,m3.deviceid) AS deviceid,
+        (CASE WHEN m1.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS child_prefer_light,
+        (CASE WHEN m2.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS child_prefer_middle,
+        (CASE WHEN m3.deviceid IS NOT NULL THEN 1 ELSE 0 END) AS child_prefer_high
+    FROM
     (
-        select t0.deviceid from
+        SELECT t0.deviceid FROM
         (
-            select deviceid,sum(playtime) as playduration from knowyou_jituan_edw.edw_uba_cn_videoplayinfo
-            where date_time='${C_DAY}' and contentType='少儿' and playstatus ='1' and videotype='点播' 
-            group by deviceid
-        )t0 where t0.playduration<3600
+            SELECT deviceid,sum(playtime) AS playduratiON FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
+            WHERE date_time='${C_DAY}' AND contentType='少儿' AND playstatus ='1' AND videotype='点播' 
+            GROUP BY deviceid
+        )t0 WHERE t0.playduration<3600
     )m1
-    full join
+    FULL JOIN
     (
-        select t1.deviceid from
+        SELECT t1.deviceid FROM
         (
-            select deviceid,sum(playtime) as playduration from knowyou_jituan_edw.edw_uba_cn_videoplayinfo
-            where date_time='${C_DAY}' and contentType='少儿' and playstatus ='1' and videotype='点播' 
-            group by deviceid
-        )t1 where t1.playduration>3600 and t1.playduration<10800
-    )m2 on m1.deviceid=m2.deviceid
-    full join
+            SELECT deviceid,sum(playtime) AS playduratiON FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
+            WHERE date_time='${C_DAY}' AND contentType='少儿' AND playstatus ='1' AND videotype='点播' 
+            GROUP BY deviceid
+        )t1 WHERE t1.playduration>3600 AND t1.playduration<10800
+    )m2 ON m1.deviceid=m2.deviceid
+    FULL JOIN
     (
-        select t2.deviceid from
+        SELECT t2.deviceid FROM
         (
-            select deviceid,sum(playtime) as playduration from knowyou_jituan_edw.edw_uba_cn_videoplayinfo
-            where date_time='${C_DAY}' and contentType='少儿' and playstatus ='1' and videotype='点播' 
-            group by deviceid
-        )t2 where t2.playduration>10800
-    )m3 on m1.deviceid=m3.deviceid
+            SELECT deviceid,sum(playtime) AS playduratiON FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
+            WHERE date_time='${C_DAY}' AND contentType='少儿' AND playstatus ='1' AND videotype='点播' 
+            GROUP BY deviceid
+        )t2 WHERE t2.playduration>10800
+    )m3 ON m1.deviceid=m3.deviceid
 )p1
-left join 
+LEFT JOIN 
 (
-    select distinct device_id from knowyou_jituan_edw.jk_list
-    where date_time='${C_DAY}' and product_name in ('嘟嘟学堂','果果乐园','拉贝少儿','朵丫视界','迪士尼','爱家少儿','成长乐园','特惠少儿')
-)p2 on p1.deviceid=p2.device_id;
+    SELECT distinct device_id FROM knowyou_jituan_edw.jk_list
+    WHERE date_time='${C_DAY}' AND product_name IN ('嘟嘟学堂','果果乐园','拉贝少儿','朵丫视界','迪士尼','爱家少儿','成长乐园','特惠少儿')
+)p2 ON p1.deviceid=p2.device_id;
 
 
 
 
 --------------------------------------------------------------------------------------------
 --  每日付费存量订购
---每日新增订购按栏目分类
+-- 40.每日新增订购按栏目分类
 set hive.exec.dynamic.partition=true;
 set hive.exec.dynamic.partition.mode=nonstrict;
 INSERT overwrite TABLE knowyou_ott_dmt.htv_secondlevel_increase partition(date_time)
-select aaa.device_id,
-(case when c.device_id is not null then 1 else 0 end) as film,
-(case when f.device_id is not null then 1 else 0 end) as child,
-(case when i.device_id is not null then 1 else 0 end) as comic,
-(case when l.device_id is not null then 1 else 0 end) as dianjing,
-(case when oo.device_id is not null then 1 else 0 end) as game,
-(case when q.device_id is not null then 1 else 0 end) as edu,
-(case when t.device_id is not null then 1 else 0 end) as health,
-(case when w.device_id is not null then 1 else 0 end) as life,
-(case when z.device_id is not null then 1 else 0 end) as phy,
-(case when cc.device_id is not null then 1 else 0 end) as pingpai,
-(case when ff.device_id is not null then 1 else 0 end) as music,
-(case when ii.device_id is not null then 1 else 0 end) as other,
-'${C_DAY}' as date_time 
-from
-(select distinct device_id from  knowyou_jituan_edw.jk_list where order_type=6 and date_time>=${C_DAY} and date_time<='${C_MONTH}30')aaa
-left join 
-(select a.device_id,a.product_name from 
-(select device_id,product_name from knowyou_jituan_edw.jk_list where date_time=${C_DAY} and order_type=6 and product_name in ('增值业务','尊享专区','魔百和钻石尊享包','全家畅享VIP'))a
-left join
-(select device_id,product_name from knowyou_jituan_edw.jk_list where date_time=${Y_DAY} and order_type=6 and product_name in ('增值业务','尊享专区','魔百和钻石尊享包','全家畅享VIP'))b on a.device_id=b.device_id and a.product_name=b.product_name 
-where b.device_id is NULL or b.product_name is NULL and a.device_id!='')c on aaa.device_id=c.device_id 
-left join
-(select d.device_id,d.product_name from 
-(select device_id,product_name from knowyou_jituan_edw.jk_list where date_time=${C_DAY} and order_type=6 and product_name in ('嘟嘟学堂','果果乐园','拉贝少儿','朵丫视界','迪士尼','爱家少儿','成长乐园','特惠少儿'))d
-left join
-(select device_id,product_name from knowyou_jituan_edw.jk_list where date_time=${Y_DAY} and order_type=6 and product_name in ('嘟嘟学堂','果果乐园','拉贝少儿','朵丫视界','迪士尼','爱家少儿','成长乐园','特惠少儿'))e on d.device_id=e.device_id and d.product_name=e.product_name 
-where e.device_id is NULL or e.product_name is NULL and d.device_id!='')f  on aaa.device_id=f.device_id 
-left join
-(select g.device_id,g.product_name from 
-(select device_id,product_name from knowyou_jituan_edw.jk_list where date_time=${C_DAY} and order_type=6 and product_name in ('动漫剧场','动漫天堂','动漫视界'))g
-left join
-(select device_id,product_name from knowyou_jituan_edw.jk_list where date_time=${Y_DAY} and order_type=6 and product_name in ('动漫剧场','动漫天堂','动漫视界'))h on g.device_id=h.device_id and g.product_name=h.product_name 
-where h.device_id is NULL or h.product_name is NULL and g.device_id!='')i  on aaa.device_id=i.device_id 
-left join 
-(select j.device_id,j.product_name from 
-(select device_id,product_name from knowyou_jituan_edw.jk_list where date_time=${C_DAY} and order_type=6 and product_name in ('游戏视界','电竞乐园'))j
-left join
-(select device_id,product_name from knowyou_jituan_edw.jk_list where date_time=${Y_DAY} and order_type=6 and product_name in ('游戏视界','电竞乐园'))k on j.device_id=k.device_id and j.product_name=k.product_name 
-where k.device_id is NULL or k.product_name is NULL and j.device_id!='')l  on aaa.device_id=l.device_id 
-left join
-(select m.device_id,m.product_name from 
-(select device_id,product_name from knowyou_jituan_edw.jk_list where date_time=${C_DAY} and order_type=6 and product_name in ('棋牌专区','光头熊城堡','梦想游戏厅','酷乐嘉年华','咪咕游戏','圣剑游戏','游戏畅玩包','爱家游戏'))m
-left join
-(select device_id,product_name from knowyou_jituan_edw.jk_list where date_time=${Y_DAY} and order_type=6 and product_name in ('棋牌专区','光头熊城堡','梦想游戏厅','酷乐嘉年华','咪咕游戏','圣剑游戏','游戏畅玩包','爱家游戏'))n on m.device_id=n.device_id and m.product_name=n.product_name 
-where n.device_id is NULL or n.product_name is NULL and m.device_id!='')oo  on aaa.device_id=oo.device_id 
-left join
-(select p.device_id,p.product_name from 
-(select device_id,product_name from knowyou_jituan_edw.jk_list where date_time=${C_DAY} and order_type=6 and product_name in ('彩虹童书','小学英语随堂练','脑力大冒险','学而思轻课','幼教小天才','新东方教育全课程','爱家教育','学而思小学','新东方教育','立画学堂','纳米盒','咪咕纳米盒','新东方高中'))o
-left join
-(select device_id,product_name from knowyou_jituan_edw.jk_list where date_time=${Y_DAY} and order_type=6 and product_name in ('彩虹童书','小学英语随堂练','脑力大冒险','学而思轻课','幼教小天才','新东方教育全课程','爱家教育','学而思小学','新东方教育','立画学堂','纳米盒','咪咕纳米盒','新东方高中'))p on o.device_id=p.device_id and o.product_name=p.product_name 
-where p.device_id is NULL or p.product_name is NULL and o.device_id!='')q  on aaa.device_id=q.device_id 
-left join
-(select r.device_id,r.product_name from 
-(select device_id,product_name from knowyou_jituan_edw.jk_list where date_time=${C_DAY} and order_type=6  and product_name in ('智慧健康','爱家健康'))r
-left join
-(select device_id,product_name from knowyou_jituan_edw.jk_list where date_time=${Y_DAY} and order_type=6 and product_name in ('智慧健康','爱家健康'))s on r.device_id=s.device_id and r.product_name=s.product_name 
-where s.device_id is NULL or s.product_name is NULL and r.device_id!='')t  on aaa.device_id=t.device_id 
-left join
-(select u.device_id,u.product_name from 
-(select device_id,product_name from knowyou_jituan_edw.jk_list where date_time=${C_DAY} and order_type=6 and product_name in ('幸福健身团','梨园行','和家亲','酷动健身'))u
-left join
-(select device_id,product_name from knowyou_jituan_edw.jk_list where date_time=${Y_DAY} and order_type=6 and product_name in ('幸福健身团','梨园行','和家亲','酷动健身'))v on u.device_id=v.device_id and u.product_name=v.product_name 
-where v.device_id is NULL or v.product_name is NULL and u.device_id!='')w  on aaa.device_id=w.device_id 
-left join
-(select x.device_id,x.product_name from 
-(select device_id,product_name from knowyou_jituan_edw.jk_list where date_time=${C_DAY} and order_type=6 and product_name in ('咪咕体育','魔百和-咪视通-NBA包月29元','NBA','英超'))x
-left join
-(select device_id,product_name from knowyou_jituan_edw.jk_list where date_time=${Y_DAY} and order_type=6 and product_name in ('咪咕体育','魔百和-咪视通-NBA包月29元','NBA','英超'))y on x.device_id=y.device_id and x.product_name=y.product_name 
-where y.device_id is NULL or y.product_name is NULL and x.device_id!='')z  on aaa.device_id=z.device_id 
-left join
-(select aa.device_id,aa.product_name from 
-(select device_id,product_name from knowyou_jituan_edw.jk_list where date_time=${C_DAY} and order_type=6 and product_name in ('酷喵专区','极光TV','影视VIP'))aa
-left join
-(select device_id,product_name from knowyou_jituan_edw.jk_list where date_time=${Y_DAY} and order_type=6 and product_name in ('酷喵专区','极光TV','影视VIP'))bb on aa.device_id=bb.device_id and aa.product_name=bb.product_name 
-where bb.device_id is NULL or bb.product_name is NULL and aa.device_id!='')cc  on aaa.device_id=cc.device_id 
-left join
-(select dd.device_id,dd.product_name from 
-(select device_id,product_name from knowyou_jituan_edw.jk_list where date_time=${C_DAY} and order_type=6 and product_name in ('悦听书吧','百灵K歌','视听盛宴','欢乐歌房','咪咕爱唱','曲韵风华'))dd
-left join
-(select device_id,product_name from knowyou_jituan_edw.jk_list where date_time=${Y_DAY} and order_type=6 and product_name in ('悦听书吧','百灵K歌','视听盛宴','欢乐歌房','咪咕爱唱','曲韵风华'))ee on dd.device_id=ee.device_id and dd.product_name=ee.product_name 
-where ee.device_id is NULL or ee.product_name is NULL and dd.device_id!='')ff  on aaa.device_id=ff.device_id 
-left join
-(select gg.device_id,gg.product_name from 
-(select device_id,product_name from knowyou_jituan_edw.jk_list where date_time=${C_DAY} and order_type=6 and product_name in ('智能语音包费'))gg
-left join
-(select device_id,product_name from knowyou_jituan_edw.jk_list where date_time=${Y_DAY} and order_type=6 and product_name in ('智能语音包费'))hh on gg.device_id=hh.device_id and gg.product_name=hh.product_name 
-where hh.device_id is NULL or hh.product_name is NULL and gg.device_id!='')ii  on aaa.device_id=ii.device_id;
+SELECT 
+    aaa.device_id,
+    (CASE WHEN c.device_id IS NOT NULL THEN 1 ELSE 0 END) AS film,
+    (CASE WHEN f.device_id IS NOT NULL THEN 1 ELSE 0 END) AS child,
+    (CASE WHEN i.device_id IS NOT NULL THEN 1 ELSE 0 END) AS comic,
+    (CASE WHEN l.device_id IS NOT NULL THEN 1 ELSE 0 END) AS esport,
+    (CASE WHEN oo.device_id IS NOT NULL THEN 1 ELSE 0 END) AS game,
+    (CASE WHEN q.device_id IS NOT NULL THEN 1 ELSE 0 END) AS edu,
+    (CASE WHEN t.device_id IS NOT NULL THEN 1 ELSE 0 END) AS health,
+    (CASE WHEN w.device_id IS NOT NULL THEN 1 ELSE 0 END) AS life,
+    (CASE WHEN z.device_id IS NOT NULL THEN 1 ELSE 0 END) AS sport,
+    (CASE WHEN cc.device_id IS NOT NULL THEN 1 ELSE 0 END) AS platform,
+    (CASE WHEN ff.device_id IS NOT NULL THEN 1 ELSE 0 END) AS music,
+    (CASE WHEN ii.device_id IS NOT NULL THEN 1 ELSE 0 END) AS other,
+    '${C_DAY}' AS date_time 
+FROM
+(
+    SELECT distinct device_id FROM knowyou_jituan_edw.jk_list 
+    WHERE order_type=6 AND date_time>=${C_DAY} AND date_time<='${C_MONTH}30'
+)aaa
+LEFT JOIN 
+(
+    SELECT a.device_id,a.product_name FROM 
+    (
+        SELECT device_id,product_name FROM knowyou_jituan_edw.jk_list 
+        WHERE date_time=${C_DAY} AND order_type=6 AND product_name IN ('增值业务','尊享专区','魔百和钻石尊享包','全家畅享VIP')
+    )a
+    LEFT JOIN
+    (
+        SELECT device_id,product_name FROM knowyou_jituan_edw.jk_list 
+        WHERE date_time=${Y_DAY} AND order_type=6 AND product_name IN ('增值业务','尊享专区','魔百和钻石尊享包','全家畅享VIP')
+    )b 
+    ON a.device_id=b.device_id AND a.product_name=b.product_name 
+    WHERE b.device_id is NULL or b.product_name IS NULL AND a.device_id != ''
+)c ON aaa.device_id=c.device_id 
+LEFT JOIN
+(
+    SELECT d.device_id,d.product_name FROM 
+    (
+        SELECT device_id,product_name FROM knowyou_jituan_edw.jk_list 
+        WHERE date_time=${C_DAY} AND order_type=6 AND product_name IN ('嘟嘟学堂','果果乐园','拉贝少儿','朵丫视界','迪士尼','爱家少儿','成长乐园','特惠少儿')
+    )d
+    LEFT JOIN
+    (
+        SELECT device_id,product_name FROM knowyou_jituan_edw.jk_list 
+        WHERE date_time=${Y_DAY} AND order_type=6 AND product_name IN ('嘟嘟学堂','果果乐园','拉贝少儿','朵丫视界','迪士尼','爱家少儿','成长乐园','特惠少儿')
+    )e 
+    ON d.device_id=e.device_id AND d.product_name=e.product_name 
+    WHERE e.device_id is NULL or e.product_name IS NULL AND d.device_id!=''
+)f ON aaa.device_id=f.device_id 
+LEFT JOIN
+(
+    SELECT g.device_id,g.product_name FROM 
+    (
+        SELECT device_id,product_name FROM knowyou_jituan_edw.jk_list 
+        WHERE date_time=${C_DAY} AND order_type=6 AND product_name IN ('动漫剧场','动漫天堂','动漫视界')
+    )g
+    LEFT JOIN
+    (
+        SELECT device_id,product_name FROM knowyou_jituan_edw.jk_list 
+        WHERE date_time=${Y_DAY} AND order_type=6 AND product_name IN ('动漫剧场','动漫天堂','动漫视界')
+    )h 
+    ON g.device_id=h.device_id AND g.product_name=h.product_name 
+    WHERE h.device_id is NULL or h.product_name IS NULL AND g.device_id!=''
+)i ON aaa.device_id=i.device_id 
+LEFT JOIN 
+(
+    SELECT j.device_id,j.product_name FROM 
+    (
+        SELECT device_id,product_name FROM knowyou_jituan_edw.jk_list 
+        WHERE date_time=${C_DAY} AND order_type=6 AND product_name IN ('游戏视界','电竞乐园')
+    )j
+    LEFT JOIN
+    (
+        SELECT device_id,product_name FROM knowyou_jituan_edw.jk_list 
+        WHERE date_time=${Y_DAY} AND order_type=6 AND product_name IN ('游戏视界','电竞乐园')
+    )k 
+    ON j.device_id=k.device_id AND j.product_name=k.product_name 
+    WHERE k.device_id is NULL or k.product_name IS NULL AND j.device_id!=''
+)l  ON aaa.device_id=l.device_id 
+LEFT JOIN
+(
+    SELECT m.device_id,m.product_name FROM 
+    (
+        SELECT device_id,product_name FROM knowyou_jituan_edw.jk_list 
+        WHERE date_time=${C_DAY} AND order_type=6 AND product_name IN ('棋牌专区','光头熊城堡','梦想游戏厅','酷乐嘉年华','咪咕游戏','圣剑游戏','游戏畅玩包','爱家游戏')
+    )m
+    LEFT JOIN
+    (
+        SELECT device_id,product_name FROM knowyou_jituan_edw.jk_list 
+        WHERE date_time=${Y_DAY} AND order_type=6 AND product_name IN ('棋牌专区','光头熊城堡','梦想游戏厅','酷乐嘉年华','咪咕游戏','圣剑游戏','游戏畅玩包','爱家游戏')
+    )n 
+    ON m.device_id=n.device_id AND m.product_name=n.product_name 
+    WHERE n.device_id is NULL or n.product_name IS NULL AND m.device_id!=''
+)oo  ON aaa.device_id=oo.device_id 
+LEFT JOIN
+(
+    SELECT p.device_id,p.product_name FROM 
+    (
+        SELECT device_id,product_name FROM knowyou_jituan_edw.jk_list 
+        WHERE date_time=${C_DAY} AND order_type=6 AND product_name IN ('彩虹童书','小学英语随堂练','脑力大冒险','学而思轻课','幼教小天才','新东方教育全课程','爱家教育','学而思小学','新东方教育','立画学堂','纳米盒','咪咕纳米盒','新东方高中')
+    )o
+    LEFT JOIN
+    (
+        SELECT device_id,product_name FROM knowyou_jituan_edw.jk_list 
+        WHERE date_time=${Y_DAY} AND order_type=6 AND product_name IN ('彩虹童书','小学英语随堂练','脑力大冒险','学而思轻课','幼教小天才','新东方教育全课程','爱家教育','学而思小学','新东方教育','立画学堂','纳米盒','咪咕纳米盒','新东方高中')
+    )p 
+    ON o.device_id=p.device_id AND o.product_name=p.product_name 
+    WHERE p.device_id is NULL or p.product_name IS NULL AND o.device_id!=''
+)q  ON aaa.device_id=q.device_id 
+LEFT JOIN
+(
+    SELECT r.device_id,r.product_name FROM 
+    (
+        SELECT device_id,product_name FROM knowyou_jituan_edw.jk_list 
+        WHERE date_time=${C_DAY} AND order_type=6  AND product_name IN ('智慧健康','爱家健康')
+    )r
+    LEFT JOIN
+    (
+        SELECT device_id,product_name FROM knowyou_jituan_edw.jk_list 
+        WHERE date_time=${Y_DAY} AND order_type=6 AND product_name IN ('智慧健康','爱家健康')
+    )s 
+    ON r.device_id=s.device_id AND r.product_name=s.product_name 
+    WHERE s.device_id is NULL or s.product_name IS NULL AND r.device_id!=''
+)t  ON aaa.device_id=t.device_id 
+LEFT JOIN
+(
+    SELECT u.device_id,u.product_name FROM 
+    (
+        SELECT device_id,product_name FROM knowyou_jituan_edw.jk_list 
+        WHERE date_time=${C_DAY} AND order_type=6 AND product_name IN ('幸福健身团','梨园行','和家亲','酷动健身')
+    )u
+    LEFT JOIN
+    (
+        SELECT device_id,product_name FROM knowyou_jituan_edw.jk_list 
+        WHERE date_time=${Y_DAY} AND order_type=6 AND product_name IN ('幸福健身团','梨园行','和家亲','酷动健身')
+    )v 
+    ON u.device_id=v.device_id AND u.product_name=v.product_name 
+    WHERE v.device_id is NULL or v.product_name IS NULL AND u.device_id!=''
+)w  ON aaa.device_id=w.device_id 
+LEFT JOIN
+(
+    SELECT x.device_id,x.product_name FROM 
+    (
+        SELECT device_id,product_name FROM knowyou_jituan_edw.jk_list 
+        WHERE date_time=${C_DAY} AND order_type=6 AND product_name IN ('咪咕体育','魔百和-咪视通-NBA包月29元','NBA','英超')
+    )x
+    LEFT JOIN
+    (
+        SELECT device_id,product_name FROM knowyou_jituan_edw.jk_list 
+        WHERE date_time=${Y_DAY} AND order_type=6 AND product_name IN ('咪咕体育','魔百和-咪视通-NBA包月29元','NBA','英超')
+    )y 
+    ON x.device_id=y.device_id AND x.product_name=y.product_name 
+    WHERE y.device_id is NULL or y.product_name IS NULL AND x.device_id!=''
+)z  ON aaa.device_id=z.device_id 
+LEFT JOIN
+(
+    SELECT aa.device_id,aa.product_name FROM 
+    (
+        SELECT device_id,product_name FROM knowyou_jituan_edw.jk_list 
+        WHERE date_time=${C_DAY} AND order_type=6 AND product_name IN ('酷喵专区','极光TV','影视VIP')
+    )aa
+    LEFT JOIN
+    (
+        SELECT device_id,product_name FROM knowyou_jituan_edw.jk_list 
+        WHERE date_time=${Y_DAY} AND order_type=6 AND product_name IN ('酷喵专区','极光TV','影视VIP')
+    )bb 
+    ON aa.device_id=bb.device_id AND aa.product_name=bb.product_name 
+    WHERE bb.device_id is NULL or bb.product_name IS NULL AND aa.device_id!=''
+)cc  ON aaa.device_id=cc.device_id 
+LEFT JOIN
+(
+    SELECT dd.device_id,dd.product_name FROM 
+    (
+        SELECT device_id,product_name FROM knowyou_jituan_edw.jk_list 
+        WHERE date_time=${C_DAY} AND order_type=6 AND product_name IN ('悦听书吧','百灵K歌','视听盛宴','欢乐歌房','咪咕爱唱','曲韵风华')
+    )dd
+    LEFT JOIN
+    (
+        SELECT device_id,product_name FROM knowyou_jituan_edw.jk_list 
+        WHERE date_time=${Y_DAY} AND order_type=6 AND product_name IN ('悦听书吧','百灵K歌','视听盛宴','欢乐歌房','咪咕爱唱','曲韵风华')
+    )ee 
+    ON dd.device_id=ee.device_id AND dd.product_name=ee.product_name 
+    WHERE ee.device_id is NULL or ee.product_name IS NULL AND dd.device_id!=''
+)ff  ON aaa.device_id=ff.device_id 
+LEFT JOIN
+(
+    SELECT gg.device_id,gg.product_name FROM 
+    (
+        SELECT device_id,product_name FROM knowyou_jituan_edw.jk_list 
+        WHERE date_time=${C_DAY} AND order_type=6 AND product_name IN ('智能语音包费')
+    )gg
+    LEFT JOIN
+    (
+        SELECT device_id,product_name FROM knowyou_jituan_edw.jk_list 
+        WHERE date_time=${Y_DAY} AND order_type=6 AND product_name IN ('智能语音包费')
+    )hh 
+    ON gg.device_id=hh.device_id AND gg.product_name=hh.product_name 
+    WHERE hh.device_id is NULL or hh.product_name IS NULL AND gg.device_id!=''
+)ii  ON aaa.device_id=ii.device_id;
 
+
+-- 41.arpu值
+set hive.exec.dynamic.partition=true;
+set hive.exec.dynamic.partition.mode=nonstrict;
+INSERT overwrite table knowyou_ott_dmt.htv_arpu_dm partition(date_time) 
+SELECT  
+    (CASE WHEN a.arpu>=5 THEN 1 ELSE 0 END) AS arpu_five, -- 当日arpu是否大于等于5
+    (CASE WHEN a.arpu>=10 THEN 1 ELSE 0 END) AS arpu_ten, -- 当日arpu是否大于等于10
+    (CASE WHEN a.arpu>=20 THEN 1 ELSE 0 END) AS arpu_twenty, -- 当日arpu是否大于等于20
+    (CASE WHEN a.arpu>=30 THEN 1 ELSE 0 END) AS arpu_thirty, -- 当日arpu是否大于等于30
+    '${C_DAY}' AS date_time
+FROM 
+(
+    SELECT sum(product_price)/count(*) AS arpu FROM knowyou_jituan_edw.jk_list 
+    WHERE order_type=6 AND date_time=${C_DAY}
+)a ;
 --------------------------------------------------------------------------------------------
 
 
 
 
--- 用户画像 分时段标签
-set hive.exec.dynamic.partition=true;
-set hive.exec.dynamic.partition.mode=nonstrict;
-INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_content_prefer_dm PARTITION(date_time)
-SELECT	
-deviceid,
-contenttype,
-hourtype,
-ranks,
-'${C_DAY}' AS date_time
--- 分区时间
-FROM(
-SELECT b.deviceid,b.contenttype,b.hourtype,row_number() over(PARTITION by b.deviceid,b.hourtype ORDER BY b.play_num desc) AS ranks
-FROM(
-SELECT a.deviceid,a.contenttype,a.hourtype,count(*) AS play_num
-FROM(
-SELECT deviceid,contenttype,
-(CASE WHEN substr(play_endtime,9,2) >='00' AND substr(play_endtime,9,2)<'06'  THEN 1
-WHEN substr(play_endtime,9,2) >='06' AND substr(play_endtime,9,2)<'11' THEN 2
-WHEN substr(play_endtime,9,2) >='11' AND substr(play_endtime,9,2)<'16' THEN 3
-WHEN substr(play_endtime,9,2) >='16' AND substr(play_endtime,9,2)<='23' THEN 4
-ELSE 1 END)  AS hourtype -- 小时段分类 
-FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo 
-WHERE date_time>'${Y_DAY}' AND date_time <='${C_DAY}'  --近一个月
-AND contenttype IN ('少儿','综艺','电影','电视剧','动漫','电竞','生活','纪实','音乐','体育','教育','爱家教育','新闻','云游戏','游戏') -- 可以设置类别固定内容类型
-union
-SELECT deviceid,contenttype,
-(CASE WHEN substr(play_endtime,9,2) >='00' AND substr(play_endtime,9,2)<'06'  THEN 1
-WHEN substr(play_endtime,9,2) >='06' AND substr(play_endtime,9,2)<'11' THEN 2
-WHEN substr(play_endtime,9,2) >='11' AND substr(play_endtime,9,2)<'16' THEN 3
-WHEN substr(play_endtime,9,2) >='16' AND substr(play_endtime,9,2)<='23' THEN 4
-ELSE 1 END)  AS hourtype -- 小时段分类 
-FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo 
-WHERE date_time>'${Y_DAY}' AND date_time <='${C_DAY}'  --近一个月
-AND contenttype IN ('少儿','综艺','电影','电视剧','动漫','电竞','生活','纪实','音乐','体育','教育','爱家教育','新闻','云游戏','游戏') -- 可以设置类别固定内容类型
-)a 
-GROUP BY a.deviceid,a.contenttype,a.hourtype
-)b
-)c WHERE c.ranks<=3
+                -- 用户画像 分时段标签
+                set hive.exec.dynamic.partition=true;
+                set hive.exec.dynamic.partition.mode=nonstrict;
+                INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_content_prefer_dm PARTITION(date_time)
+                SELECT	
+                    deviceid,
+                    contenttype,
+                    hourtype,
+                    ranks,
+                    '${C_DAY}' AS date_time
+                    -- 分区时间
+                FROM
+                (
+                    SELECT 
+                        b.deviceid,b.contenttype,b.hourtype,
+                        row_number() over(PARTITION by b.deviceid,b.hourtype ORDER BY b.play_num desc) AS ranks
+                    FROM
+                    (
+                        SELECT a.deviceid,a.contenttype,a.hourtype,count(*) AS play_num FROM
+                        (
+                            SELECT 
+                                deviceid,contenttype,
+                                (CASE WHEN substr(play_endtime,9,2) >='00' AND substr(play_endtime,9,2)<'06'  THEN 1
+                                WHEN substr(play_endtime,9,2) >='06' AND substr(play_endtime,9,2)<'11' THEN 2
+                                WHEN substr(play_endtime,9,2) >='11' AND substr(play_endtime,9,2)<'16' THEN 3
+                                WHEN substr(play_endtime,9,2) >='16' AND substr(play_endtime,9,2)<='23' THEN 4
+                                ELSE 1 END)  AS hourtype -- 小时段分类 
+                            FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo 
+                            WHERE date_time>'${THIRTY_DAY}' AND date_time <='${C_DAY}'  --近一个月
+                            AND contenttype IN ('少儿','综艺','电影','电视剧','动漫','电竞','生活','纪实','音乐','体育','教育','爱家教育','新闻','云游戏','游戏') -- 可以设置类别固定内容类型
+                            UNION
+                            SELECT 
+                                deviceid,contenttype,
+                                (CASE WHEN substr(play_endtime,9,2) >='00' AND substr(play_endtime,9,2)<'06'  THEN 1
+                                WHEN substr(play_endtime,9,2) >='06' AND substr(play_endtime,9,2)<'11' THEN 2
+                                WHEN substr(play_endtime,9,2) >='11' AND substr(play_endtime,9,2)<'16' THEN 3
+                                WHEN substr(play_endtime,9,2) >='16' AND substr(play_endtime,9,2)<='23' THEN 4
+                                ELSE 1 END)  AS hourtype -- 小时段分类 
+                            FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo 
+                            WHERE date_time>'${THIRTY_DAY}' AND date_time <='${C_DAY}'  --近一个月
+                            AND contenttype IN ('少儿','综艺','电影','电视剧','动漫','电竞','生活','纪实','音乐','体育','教育','爱家教育','新闻','云游戏','游戏') -- 可以设置类别固定内容类型
+                        )a 
+                        GROUP BY a.deviceid,a.contenttype,a.hourtype
+                    )b
+                )c WHERE c.ranks<=3
+                ;
+
+
+
+                -- 2.用户画像 分时段epg栏目top偏好
+                set hive.exec.dynamic.partition=true;
+                set hive.exec.dynamic.partition.mode=nonstrict;
+                INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_epg_prefer_dm PARTITION(date_time)
+                SELECT
+                    deviceid,
+                    t1.fivelevel AS fivelevel,
+                    hourtype,
+                    ranks,
+                    '${C_DAY}' AS date_time --分区时间
+                FROM
+                (
+                    SELECT	
+                        deviceid,
+                        fivelevel,
+                        hourtype,
+                        ranks
+                    FROM
+                    (
+                        SELECT 
+                            b.deviceid,b.fivelevel,b.hourtype,row_number() over(PARTITION by b.deviceid,b.hourtype ORDER BY b.play_num desc) AS ranks
+                        FROM
+                        (
+                            SELECT a.deviceid,a.fivelevel,a.hourtype,count(*) AS play_num FROM
+                            (
+                                SELECT 
+                                    deviceid,contenttype AS fivelevel,
+                                    (CASE WHEN substr(play_endtime,9,2) >='00' AND substr(play_endtime,9,2)<'06'  THEN 1
+                                    WHEN substr(play_endtime,9,2) >='06' AND substr(play_endtime,9,2)<'11' THEN 2
+                                    WHEN substr(play_endtime,9,2) >='11' AND substr(play_endtime,9,2)<'16' THEN 3
+                                    WHEN substr(play_endtime,9,2) >='16' AND substr(play_endtime,9,2)<='23' THEN 4
+                                    ELSE 1 END)  AS hourtype -- 小时段分类 
+                                FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
+                                WHERE date_time>'${THIRTY_DAY}' AND date_time <='${C_DAY}'  --近一个月
+                                AND contenttype !='$' AND contenttype!=''
+                                UNION ALL 
+                                SELECT 
+                                    deviceid,listsubtype AS fivelevel,
+                                    (CASE WHEN substr(play_endtime,9,2) >='00' AND substr(play_endtime,9,2)<'06'  THEN 1
+                                    WHEN substr(play_endtime,9,2) >='06' AND substr(play_endtime,9,2)<'11' THEN 2
+                                    WHEN substr(play_endtime,9,2) >='11' AND substr(play_endtime,9,2)<'16' THEN 3
+                                    WHEN substr(play_endtime,9,2) >='16' AND substr(play_endtime,9,2)<='23' THEN 4
+                                    ELSE 1 END)  AS hourtype 
+                                FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo 
+                                WHERE date_time>'${Y_DAY}' AND date_time <'${THIRTY_DAY}' AND listsubtype!='' AND listsubtype IS NOT NULL 
+                )a 
+                GROUP BY a.deviceid,a.fivelevel,a.hourtype
+                )b
+                )c WHERE c.ranks<=5
+                )t1;
+
+
+                SELECT luacpversion,collect_set(listsubtype) FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo WHERE date_time>='${C_DAY}' GROUP BY luacpversion
 
 
 
 
--- 2.用户画像 分时段epg栏目top偏好
-set hive.exec.dynamic.partition=true;
-set hive.exec.dynamic.partition.mode=nonstrict;
-INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_epg_prefer_dm PARTITION(date_time)
-SELECT
-deviceid,
-t1.fivelevel AS fivelevel,
-hourtype,
-ranks,
-'${C_DAY}' AS date_time --分区时间
-FROM
-(SELECT	
-deviceid,
-fivelevel,
-hourtype,
-ranks
-FROM(
-SELECT b.deviceid,b.fivelevel,b.hourtype,row_number() over(PARTITION by b.deviceid,b.hourtype ORDER BY b.play_num desc) AS ranks
-FROM(
-SELECT a.deviceid,a.fivelevel,a.hourtype,count(*) AS play_num
-FROM(
-SELECT deviceid,contenttype AS fivelevel,
-(CASE WHEN substr(play_endtime,9,2) >='00' AND substr(play_endtime,9,2)<'06'  THEN 1
-WHEN substr(play_endtime,9,2) >='06' AND substr(play_endtime,9,2)<'11' THEN 2
-WHEN substr(play_endtime,9,2) >='11' AND substr(play_endtime,9,2)<'16' THEN 3
-WHEN substr(play_endtime,9,2) >='16' AND substr(play_endtime,9,2)<='23' THEN 4
-ELSE 1 END)  AS hourtype -- 小时段分类 
-FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo
-WHERE date_time>'${Y_DAY}' AND date_time <'${THIRTY_DAY}'  --近一个月
-AND contenttype !='$' AND contenttype!=''
-UNION ALL 
-SELECT deviceid,listsubtype AS fivelevel,
-(CASE WHEN substr(play_endtime,9,2) >='00' AND substr(play_endtime,9,2)<'06'  THEN 1
-WHEN substr(play_endtime,9,2) >='06' AND substr(play_endtime,9,2)<'11' THEN 2
-WHEN substr(play_endtime,9,2) >='11' AND substr(play_endtime,9,2)<'16' THEN 3
-WHEN substr(play_endtime,9,2) >='16' AND substr(play_endtime,9,2)<='23' THEN 4
-ELSE 1 END)  AS hourtype 
-FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo 
-WHERE date_time>'${Y_DAY}' AND date_time <'${THIRTY_DAY}' AND listsubtype!='' AND listsubtype IS NOT NULL 
-)a 
-GROUP BY a.deviceid,a.fivelevel,a.hourtype
-)b
-)c WHERE c.ranks<=5
-)t1;
+                -- 3. 用户特征
+                INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_user_feature_dm PARTITION(date_time)
 
+                SELECT coalesce(t1.deviceid,t2.deviceid,'') AS deviceid,
+                t1.top1_content,t1.top2_content,t1.top3_content,t2.top1_epg,
+                t2.top2_epg,t2.top3_epg,t2.top4_epg,t2.top5_epg,
+                '1' AS hourtype,
+                coalesce(t1.date_time,t2.date_time,'') AS date_time
+                FROM(
+                SELECT	a.deviceid,
+                coalesce(a.contenttype,'') AS top1_content,
+                coalesce(b.contenttype,'') AS top2_content,
+                coalesce(c.contenttype,'') AS top3_content,
+                a.date_time
+                FROM(
+                SELECT deviceid,contenttype,date_time FROM knowyou_ott_dmt.htv_content_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='1' AND ranks='1'
+                )a
+                LEFT JOIN(
+                SELECT deviceid,contenttype,date_time FROM knowyou_ott_dmt.htv_content_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='1' AND ranks='2'
+                )b ON a.deviceid=b.deviceid
+                LEFT JOIN(
+                SELECT deviceid,contenttype,date_time FROM knowyou_ott_dmt.htv_content_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='1' AND ranks='3'
+                )c ON a.deviceid=c.deviceid
+                )t1
+                FULL JOIN(
+                SELECT	a.deviceid,
+                coalesce(a.fivelevel,'') AS top1_epg,
+                coalesce(b.fivelevel,'') AS top2_epg,
+                coalesce(c.fivelevel,'') AS top3_epg,
+                coalesce(d.fivelevel,'') AS top4_epg,
+                coalesce(e.fivelevel,'') AS top5_epg,
+                a.date_time
+                FROM(
+                SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='1' AND ranks='1'
+                )a
+                LEFT JOIN(
+                SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='1' AND ranks='2'
+                )b ON a.deviceid=b.deviceid
+                LEFT JOIN(
+                SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='1' AND ranks='3'
+                )c ON a.deviceid=c.deviceid
+                LEFT JOIN(
+                SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='1' AND ranks='4'
+                )d ON a.deviceid=d.deviceid
+                LEFT JOIN(
+                SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='1' AND ranks='5'
+                )e ON a.deviceid=e.deviceid
+                )t2 
+                ON t1.deviceid=t2.deviceid
 
-SELECT luacpversion,collect_set(listsubtype) FROM knowyou_jituan_edw.edw_uba_cn_videoplayinfo WHERE date_time>='${C_DAY}' GROUP BY luacpversion
+                UNION ALL
 
+                SELECT coalesce(t1.deviceid,t2.deviceid,'') AS deviceid,
+                t1.top1_content,t1.top2_content,t1.top3_content,t2.top1_epg,
+                t2.top2_epg,t2.top3_epg,t2.top4_epg,t2.top5_epg,
+                '2' AS hourtype,
+                coalesce(t1.date_time,t2.date_time,'') AS date_time
+                FROM(
+                SELECT	a.deviceid,
+                coalesce(a.contenttype,'') AS top1_content,
+                coalesce(b.contenttype,'') AS top2_content,
+                coalesce(c.contenttype,'') AS top3_content,
+                a.date_time
+                FROM(
+                SELECT deviceid,contenttype,date_time FROM knowyou_ott_dmt.htv_content_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='2' AND ranks='1'
+                )a
+                LEFT JOIN(
+                SELECT deviceid,contenttype,date_time FROM knowyou_ott_dmt.htv_content_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='2' AND ranks='2'
+                )b ON a.deviceid=b.deviceid
+                LEFT JOIN(
+                SELECT deviceid,contenttype,date_time FROM knowyou_ott_dmt.htv_content_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='2' AND ranks='3'
+                )c ON a.deviceid=c.deviceid
+                )t1
+                FULL JOIN(
+                SELECT	a.deviceid,
+                coalesce(a.fivelevel,'') AS top1_epg,
+                coalesce(b.fivelevel,'') AS top2_epg,
+                coalesce(c.fivelevel,'') AS top3_epg,
+                coalesce(d.fivelevel,'') AS top4_epg,
+                coalesce(e.fivelevel,'') AS top5_epg,
+                a.date_time
+                FROM(
+                SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='2' AND ranks='1'
+                )a
+                LEFT JOIN(
+                SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='2' AND ranks='2'
+                )b ON a.deviceid=b.deviceid
+                LEFT JOIN(
+                SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='2' AND ranks='3'
+                )c ON a.deviceid=c.deviceid
+                LEFT JOIN(
+                SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='2' AND ranks='4'
+                )d ON a.deviceid=d.deviceid
+                LEFT JOIN(
+                SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='2' AND ranks='5'
+                )e ON a.deviceid=e.deviceid
+                )t2 
+                ON t1.deviceid=t2.deviceid
 
+                UNION ALL 
 
+                SELECT coalesce(t1.deviceid,t2.deviceid,'') AS deviceid,
+                t1.top1_content,t1.top2_content,t1.top3_content,t2.top1_epg,
+                t2.top2_epg,t2.top3_epg,t2.top4_epg,t2.top5_epg,
+                '3' AS hourtype,
+                coalesce(t1.date_time,t2.date_time,'') AS date_time
+                FROM(
+                SELECT	a.deviceid,
+                coalesce(a.contenttype,'') AS top1_content,
+                coalesce(b.contenttype,'') AS top2_content,
+                coalesce(c.contenttype,'') AS top3_content,
+                a.date_time
+                FROM(
+                SELECT deviceid,contenttype,date_time FROM knowyou_ott_dmt.htv_content_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='3' AND ranks='1'
+                )a
+                LEFT JOIN(
+                SELECT deviceid,contenttype,date_time FROM knowyou_ott_dmt.htv_content_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='3' AND ranks='2'
+                )b ON a.deviceid=b.deviceid
+                LEFT JOIN(
+                SELECT deviceid,contenttype,date_time FROM knowyou_ott_dmt.htv_content_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='3' AND ranks='3'
+                )c ON a.deviceid=c.deviceid
+                )t1
+                FULL JOIN(
+                SELECT	a.deviceid,
+                coalesce(a.fivelevel,'') AS top1_epg,
+                coalesce(b.fivelevel,'') AS top2_epg,
+                coalesce(c.fivelevel,'') AS top3_epg,
+                coalesce(d.fivelevel,'') AS top4_epg,
+                coalesce(e.fivelevel,'') AS top5_epg,
+                a.date_time
+                FROM(
+                SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='3' AND ranks='1'
+                )a
+                LEFT JOIN(
+                SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='3' AND ranks='2'
+                )b ON a.deviceid=b.deviceid
+                LEFT JOIN(
+                SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='3' AND ranks='3'
+                )c ON a.deviceid=c.deviceid
+                LEFT JOIN(
+                SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='3' AND ranks='4'
+                )d ON a.deviceid=d.deviceid
+                LEFT JOIN(
+                SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='3' AND ranks='5'
+                )e ON a.deviceid=e.deviceid
+                )t2 
+                ON t1.deviceid=t2.deviceid
 
--- 3. 用户特征
-INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_user_feature_dm PARTITION(date_time)
+                UNION ALL 
 
-SELECT coalesce(t1.deviceid,t2.deviceid,'') AS deviceid,
-t1.top1_content,t1.top2_content,t1.top3_content,t2.top1_epg,
-t2.top2_epg,t2.top3_epg,t2.top4_epg,t2.top5_epg,
-'1' AS hourtype,
-coalesce(t1.date_time,t2.date_time,'') AS date_time
-FROM(
-SELECT	a.deviceid,
-coalesce(a.contenttype,'') AS top1_content,
-coalesce(b.contenttype,'') AS top2_content,
-coalesce(c.contenttype,'') AS top3_content,
-a.date_time
-FROM(
-SELECT deviceid,contenttype,date_time FROM knowyou_ott_dmt.htv_content_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='1' AND ranks='1'
-)a
-LEFT JOIN(
-SELECT deviceid,contenttype,date_time FROM knowyou_ott_dmt.htv_content_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='1' AND ranks='2'
-)b ON a.deviceid=b.deviceid
-LEFT JOIN(
-SELECT deviceid,contenttype,date_time FROM knowyou_ott_dmt.htv_content_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='1' AND ranks='3'
-)c ON a.deviceid=c.deviceid
-)t1
-FULL JOIN(
-SELECT	a.deviceid,
-coalesce(a.fivelevel,'') AS top1_epg,
-coalesce(b.fivelevel,'') AS top2_epg,
-coalesce(c.fivelevel,'') AS top3_epg,
-coalesce(d.fivelevel,'') AS top4_epg,
-coalesce(e.fivelevel,'') AS top5_epg,
-a.date_time
-FROM(
-SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='1' AND ranks='1'
-)a
-LEFT JOIN(
-SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='1' AND ranks='2'
-)b ON a.deviceid=b.deviceid
-LEFT JOIN(
-SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='1' AND ranks='3'
-)c ON a.deviceid=c.deviceid
-LEFT JOIN(
-SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='1' AND ranks='4'
-)d ON a.deviceid=d.deviceid
-LEFT JOIN(
-SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='1' AND ranks='5'
-)e ON a.deviceid=e.deviceid
-)t2 
-ON t1.deviceid=t2.deviceid
-
-UNION ALL
-
-SELECT coalesce(t1.deviceid,t2.deviceid,'') AS deviceid,
-t1.top1_content,t1.top2_content,t1.top3_content,t2.top1_epg,
-t2.top2_epg,t2.top3_epg,t2.top4_epg,t2.top5_epg,
-'2' AS hourtype,
-coalesce(t1.date_time,t2.date_time,'') AS date_time
-FROM(
-SELECT	a.deviceid,
-coalesce(a.contenttype,'') AS top1_content,
-coalesce(b.contenttype,'') AS top2_content,
-coalesce(c.contenttype,'') AS top3_content,
-a.date_time
-FROM(
-SELECT deviceid,contenttype,date_time FROM knowyou_ott_dmt.htv_content_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='2' AND ranks='1'
-)a
-LEFT JOIN(
-SELECT deviceid,contenttype,date_time FROM knowyou_ott_dmt.htv_content_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='2' AND ranks='2'
-)b ON a.deviceid=b.deviceid
-LEFT JOIN(
-SELECT deviceid,contenttype,date_time FROM knowyou_ott_dmt.htv_content_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='2' AND ranks='3'
-)c ON a.deviceid=c.deviceid
-)t1
-FULL JOIN(
-SELECT	a.deviceid,
-coalesce(a.fivelevel,'') AS top1_epg,
-coalesce(b.fivelevel,'') AS top2_epg,
-coalesce(c.fivelevel,'') AS top3_epg,
-coalesce(d.fivelevel,'') AS top4_epg,
-coalesce(e.fivelevel,'') AS top5_epg,
-a.date_time
-FROM(
-SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='2' AND ranks='1'
-)a
-LEFT JOIN(
-SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='2' AND ranks='2'
-)b ON a.deviceid=b.deviceid
-LEFT JOIN(
-SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='2' AND ranks='3'
-)c ON a.deviceid=c.deviceid
-LEFT JOIN(
-SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='2' AND ranks='4'
-)d ON a.deviceid=d.deviceid
-LEFT JOIN(
-SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='2' AND ranks='5'
-)e ON a.deviceid=e.deviceid
-)t2 
-ON t1.deviceid=t2.deviceid
-
-UNION ALL 
-
-SELECT coalesce(t1.deviceid,t2.deviceid,'') AS deviceid,
-t1.top1_content,t1.top2_content,t1.top3_content,t2.top1_epg,
-t2.top2_epg,t2.top3_epg,t2.top4_epg,t2.top5_epg,
-'3' AS hourtype,
-coalesce(t1.date_time,t2.date_time,'') AS date_time
-FROM(
-SELECT	a.deviceid,
-coalesce(a.contenttype,'') AS top1_content,
-coalesce(b.contenttype,'') AS top2_content,
-coalesce(c.contenttype,'') AS top3_content,
-a.date_time
-FROM(
-SELECT deviceid,contenttype,date_time FROM knowyou_ott_dmt.htv_content_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='3' AND ranks='1'
-)a
-LEFT JOIN(
-SELECT deviceid,contenttype,date_time FROM knowyou_ott_dmt.htv_content_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='3' AND ranks='2'
-)b ON a.deviceid=b.deviceid
-LEFT JOIN(
-SELECT deviceid,contenttype,date_time FROM knowyou_ott_dmt.htv_content_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='3' AND ranks='3'
-)c ON a.deviceid=c.deviceid
-)t1
-FULL JOIN(
-SELECT	a.deviceid,
-coalesce(a.fivelevel,'') AS top1_epg,
-coalesce(b.fivelevel,'') AS top2_epg,
-coalesce(c.fivelevel,'') AS top3_epg,
-coalesce(d.fivelevel,'') AS top4_epg,
-coalesce(e.fivelevel,'') AS top5_epg,
-a.date_time
-FROM(
-SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='3' AND ranks='1'
-)a
-LEFT JOIN(
-SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='3' AND ranks='2'
-)b ON a.deviceid=b.deviceid
-LEFT JOIN(
-SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='3' AND ranks='3'
-)c ON a.deviceid=c.deviceid
-LEFT JOIN(
-SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='3' AND ranks='4'
-)d ON a.deviceid=d.deviceid
-LEFT JOIN(
-SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='3' AND ranks='5'
-)e ON a.deviceid=e.deviceid
-)t2 
-ON t1.deviceid=t2.deviceid
-
-UNION ALL 
-
-SELECT coalesce(t1.deviceid,t2.deviceid,'') AS deviceid,
-t1.top1_content,t1.top2_content,t1.top3_content,t2.top1_epg,
-t2.top2_epg,t2.top3_epg,t2.top4_epg,t2.top5_epg,
-'4' AS hourtype,
-coalesce(t1.date_time,t2.date_time,'') AS date_time
-FROM(
-SELECT	a.deviceid,
-coalesce(a.contenttype,'') AS top1_content,
-coalesce(b.contenttype,'') AS top2_content,
-coalesce(c.contenttype,'') AS top3_content,
-a.date_time
-FROM(
-SELECT deviceid,contenttype,date_time FROM knowyou_ott_dmt.htv_content_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='4' AND ranks='1'
-)a
-LEFT JOIN(
-SELECT deviceid,contenttype,date_time FROM knowyou_ott_dmt.htv_content_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='4' AND ranks='2'
-)b ON a.deviceid=b.deviceid
-LEFT JOIN(
-SELECT deviceid,contenttype,date_time FROM knowyou_ott_dmt.htv_content_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='4' AND ranks='3'
-)c ON a.deviceid=c.deviceid
-)t1
-FULL JOIN(
-SELECT	a.deviceid,
-coalesce(a.fivelevel,'') AS top1_epg,
-coalesce(b.fivelevel,'') AS top2_epg,
-coalesce(c.fivelevel,'') AS top3_epg,
-coalesce(d.fivelevel,'') AS top4_epg,
-coalesce(e.fivelevel,'') AS top5_epg,
-a.date_time
-FROM(
-SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='4' AND ranks='1'
-)a
-LEFT JOIN(
-SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='4' AND ranks='2'
-)b ON a.deviceid=b.deviceid
-LEFT JOIN(
-SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='4' AND ranks='3'
-)c ON a.deviceid=c.deviceid
-LEFT JOIN(
-SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='4' AND ranks='4'
-)d ON a.deviceid=d.deviceid
-LEFT JOIN(
-SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
-WHERE date_time = '${C_DAY}'  AND hourtype='4' AND ranks='5'
-)e ON a.deviceid=e.deviceid
-)t2 
-ON t1.deviceid=t2.deviceid 
+                SELECT coalesce(t1.deviceid,t2.deviceid,'') AS deviceid,
+                t1.top1_content,t1.top2_content,t1.top3_content,t2.top1_epg,
+                t2.top2_epg,t2.top3_epg,t2.top4_epg,t2.top5_epg,
+                '4' AS hourtype,
+                coalesce(t1.date_time,t2.date_time,'') AS date_time
+                FROM(
+                SELECT	a.deviceid,
+                coalesce(a.contenttype,'') AS top1_content,
+                coalesce(b.contenttype,'') AS top2_content,
+                coalesce(c.contenttype,'') AS top3_content,
+                a.date_time
+                FROM(
+                SELECT deviceid,contenttype,date_time FROM knowyou_ott_dmt.htv_content_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='4' AND ranks='1'
+                )a
+                LEFT JOIN(
+                SELECT deviceid,contenttype,date_time FROM knowyou_ott_dmt.htv_content_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='4' AND ranks='2'
+                )b ON a.deviceid=b.deviceid
+                LEFT JOIN(
+                SELECT deviceid,contenttype,date_time FROM knowyou_ott_dmt.htv_content_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='4' AND ranks='3'
+                )c ON a.deviceid=c.deviceid
+                )t1
+                FULL JOIN(
+                SELECT	a.deviceid,
+                coalesce(a.fivelevel,'') AS top1_epg,
+                coalesce(b.fivelevel,'') AS top2_epg,
+                coalesce(c.fivelevel,'') AS top3_epg,
+                coalesce(d.fivelevel,'') AS top4_epg,
+                coalesce(e.fivelevel,'') AS top5_epg,
+                a.date_time
+                FROM(
+                SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='4' AND ranks='1'
+                )a
+                LEFT JOIN(
+                SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='4' AND ranks='2'
+                )b ON a.deviceid=b.deviceid
+                LEFT JOIN(
+                SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='4' AND ranks='3'
+                )c ON a.deviceid=c.deviceid
+                LEFT JOIN(
+                SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='4' AND ranks='4'
+                )d ON a.deviceid=d.deviceid
+                LEFT JOIN(
+                SELECT deviceid,fivelevel,date_time FROM knowyou_ott_dmt.htv_epg_prefer_dm 
+                WHERE date_time = '${C_DAY}'  AND hourtype='4' AND ranks='5'
+                )e ON a.deviceid=e.deviceid
+                )t2 
+                ON t1.deviceid=t2.deviceid 
 
 
 
 
--- 4.用户分时段评分明细表
-INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_user_rating_detail_dm PARTITION(date_time)
+                -- 4.用户分时段评分明细表
+                INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_user_rating_detail_dm PARTITION(date_time)
 
-SELECT  a.deviceid,
-a.hourtype,
-coalesce(m1.child_rate ,'0') AS child_top1_content_rate,
-coalesce(m1.teen_rate ,'0') AS teen_top1_content_rate,
-coalesce(m1.youth_rate ,'0') AS youth_top1_content_rate,
-coalesce(m1.mid_rate ,'0') AS mid_top1_content_rate,
-coalesce(m1.old_rate ,'0') AS old_top1_content_rate,
-coalesce(m1.male_rate ,'0') AS male_top1_content_rate,
-coalesce(m1.female_rate ,'0') AS female_top1_content_rate,
+                SELECT  a.deviceid,
+                a.hourtype,
+                coalesce(m1.child_rate ,'0') AS child_top1_content_rate,
+                coalesce(m1.teen_rate ,'0') AS teen_top1_content_rate,
+                coalesce(m1.youth_rate ,'0') AS youth_top1_content_rate,
+                coalesce(m1.mid_rate ,'0') AS mid_top1_content_rate,
+                coalesce(m1.old_rate ,'0') AS old_top1_content_rate,
+                coalesce(m1.male_rate ,'0') AS male_top1_content_rate,
+                coalesce(m1.female_rate ,'0') AS female_top1_content_rate,
 
-coalesce(0.8*m2.child_rate ,'0') AS child_top2_content_rate,
-coalesce(0.8*m2.teen_rate ,'0') AS teen_top2_content_rate,
-coalesce(0.8*m2.youth_rate ,'0') AS youth_top2_content_rate,
-coalesce(0.8*m2.mid_rate ,'0') AS mid_top2_content_rate,
-coalesce(0.8*m2.old_rate ,'0') AS old_top2_content_rate,
-coalesce(0.8*m2.male_rate ,'0') AS male_top2_content_rate,
-coalesce(0.8*m2.female_rate ,'0') AS female_top2_content_rate,
+                coalesce(0.8*m2.child_rate ,'0') AS child_top2_content_rate,
+                coalesce(0.8*m2.teen_rate ,'0') AS teen_top2_content_rate,
+                coalesce(0.8*m2.youth_rate ,'0') AS youth_top2_content_rate,
+                coalesce(0.8*m2.mid_rate ,'0') AS mid_top2_content_rate,
+                coalesce(0.8*m2.old_rate ,'0') AS old_top2_content_rate,
+                coalesce(0.8*m2.male_rate ,'0') AS male_top2_content_rate,
+                coalesce(0.8*m2.female_rate ,'0') AS female_top2_content_rate,
 
-coalesce(0.6*m3.child_rate ,'0') AS child_top3_content_rate,
-coalesce(0.6*m3.teen_rate ,'0') AS teen_top3_content_rate,
-coalesce(0.6*m3.youth_rate ,'0') AS youth_top3_content_rate,
-coalesce(0.6*m3.mid_rate ,'0') AS mid_top3_content_rate,
-coalesce(0.6*m3.old_rate ,'0') AS old_top3_content_rate,
-coalesce(0.6*m3.male_rate ,'0') AS male_top3_content_rate,
-coalesce(0.6*m3.female_rate ,'0') AS female_top3_content_rate,
+                coalesce(0.6*m3.child_rate ,'0') AS child_top3_content_rate,
+                coalesce(0.6*m3.teen_rate ,'0') AS teen_top3_content_rate,
+                coalesce(0.6*m3.youth_rate ,'0') AS youth_top3_content_rate,
+                coalesce(0.6*m3.mid_rate ,'0') AS mid_top3_content_rate,
+                coalesce(0.6*m3.old_rate ,'0') AS old_top3_content_rate,
+                coalesce(0.6*m3.male_rate ,'0') AS male_top3_content_rate,
+                coalesce(0.6*m3.female_rate ,'0') AS female_top3_content_rate,
 
-coalesce(t1.child_rate ,'0') AS child_top1_epg_rate,
-coalesce(t1.teen_rate ,'0') AS teen_top1_epg_rate,
-coalesce(t1.youth_rate ,'0') AS youth_top1_epg_rate,
-coalesce(t1.mid_rate ,'0') AS mid_top1_epg_rate,
-coalesce(t1.old_rate ,'0') AS old_top1_epg_rate,
-coalesce(t1.male_rate ,'0') AS male_top1_epg_rate,
-coalesce(t1.female_rate ,'0') AS female_top1_epg_rate,
+                coalesce(t1.child_rate ,'0') AS child_top1_epg_rate,
+                coalesce(t1.teen_rate ,'0') AS teen_top1_epg_rate,
+                coalesce(t1.youth_rate ,'0') AS youth_top1_epg_rate,
+                coalesce(t1.mid_rate ,'0') AS mid_top1_epg_rate,
+                coalesce(t1.old_rate ,'0') AS old_top1_epg_rate,
+                coalesce(t1.male_rate ,'0') AS male_top1_epg_rate,
+                coalesce(t1.female_rate ,'0') AS female_top1_epg_rate,
 
-coalesce(0.8*t2.child_rate ,'0') AS child_top2_epg_rate,
-coalesce(0.8*t2.teen_rate ,'0') AS teen_top2_epg_rate,
-coalesce(0.8*t2.youth_rate ,'0') AS youth_top2_epg_rate,
-coalesce(0.8*t2.mid_rate ,'0') AS mid_top2_epg_rate,
-coalesce(0.8*t2.old_rate ,'0') AS old_top2_epg_rate,
-coalesce(0.8*t2.male_rate ,'0') AS male_top2_epg_rate,
-coalesce(0.8*t2.female_rate ,'0') AS female_top2_epg_rate,
+                coalesce(0.8*t2.child_rate ,'0') AS child_top2_epg_rate,
+                coalesce(0.8*t2.teen_rate ,'0') AS teen_top2_epg_rate,
+                coalesce(0.8*t2.youth_rate ,'0') AS youth_top2_epg_rate,
+                coalesce(0.8*t2.mid_rate ,'0') AS mid_top2_epg_rate,
+                coalesce(0.8*t2.old_rate ,'0') AS old_top2_epg_rate,
+                coalesce(0.8*t2.male_rate ,'0') AS male_top2_epg_rate,
+                coalesce(0.8*t2.female_rate ,'0') AS female_top2_epg_rate,
 
-coalesce(0.6*t3.child_rate ,'0') AS child_top3_epg_rate,
-coalesce(0.6*t3.teen_rate ,'0') AS teen_top3_epg_rate,
-coalesce(0.6*t3.youth_rate ,'0') AS youth_top3_epg_rate,
-coalesce(0.6*t3.mid_rate ,'0') AS mid_top3_epg_rate,
-coalesce(0.6*t3.old_rate ,'0') AS old_top3_epg_rate,
-coalesce(0.6*t3.male_rate ,'0') AS male_top3_epg_rate,
-coalesce(0.6*t3.female_rate ,'0') AS female_top3_epg_rate,
+                coalesce(0.6*t3.child_rate ,'0') AS child_top3_epg_rate,
+                coalesce(0.6*t3.teen_rate ,'0') AS teen_top3_epg_rate,
+                coalesce(0.6*t3.youth_rate ,'0') AS youth_top3_epg_rate,
+                coalesce(0.6*t3.mid_rate ,'0') AS mid_top3_epg_rate,
+                coalesce(0.6*t3.old_rate ,'0') AS old_top3_epg_rate,
+                coalesce(0.6*t3.male_rate ,'0') AS male_top3_epg_rate,
+                coalesce(0.6*t3.female_rate ,'0') AS female_top3_epg_rate,
 
-coalesce(0.4*t4.child_rate ,'0') AS child_top4_epg_rate,
-coalesce(0.4*t4.teen_rate ,'0') AS teen_top4_epg_rate,
-coalesce(0.4*t4.youth_rate ,'0') AS youth_top4_epg_rate,
-coalesce(0.4*t4.mid_rate ,'0') AS mid_top4_epg_rate,
-coalesce(0.4*t4.old_rate ,'0') AS old_top4_epg_rate,
-coalesce(0.4*t4.male_rate ,'0') AS male_top4_epg_rate,
-coalesce(0.4*t4.female_rate ,'0') AS female_top4_epg_rate,
+                coalesce(0.4*t4.child_rate ,'0') AS child_top4_epg_rate,
+                coalesce(0.4*t4.teen_rate ,'0') AS teen_top4_epg_rate,
+                coalesce(0.4*t4.youth_rate ,'0') AS youth_top4_epg_rate,
+                coalesce(0.4*t4.mid_rate ,'0') AS mid_top4_epg_rate,
+                coalesce(0.4*t4.old_rate ,'0') AS old_top4_epg_rate,
+                coalesce(0.4*t4.male_rate ,'0') AS male_top4_epg_rate,
+                coalesce(0.4*t4.female_rate ,'0') AS female_top4_epg_rate,
 
-coalesce(0.2*t5.child_rate ,'0') AS child_top5_epg_rate,
-coalesce(0.2*t5.teen_rate ,'0') AS teen_top5_epg_rate,
-coalesce(0.2*t5.youth_rate ,'0') AS youth_top5_epg_rate,
-coalesce(0.2*t5.mid_rate ,'0') AS mid_top5_epg_rate,
-coalesce(0.2*t5.old_rate ,'0') AS old_top5_epg_rate,
-coalesce(0.2*t5.male_rate ,'0') AS male_top5_epg_rate,
-coalesce(0.2*t5.female_rate ,'0') AS female_top5_epg_rate,
-'${C_DAY}' AS date_time
-FROM(
-SELECT * FROM knowyou_ott_dmt.htv_user_feature_dm
-WHERE date_time = '${C_DAY}' 
-)a
-LEFT JOIN (
-SELECT * FROM knowyou_ott_dmt.imp_contenttype_grade
-)m1 
-ON a.top1_content=m1.content_type
-LEFT JOIN (
-SELECT * FROM knowyou_ott_dmt.imp_contenttype_grade
-)m2 
-ON a.top2_content=m2.content_type
-LEFT JOIN (
-SELECT * FROM knowyou_ott_dmt.imp_contenttype_grade
-)m3 
-ON a.top3_content=m3.content_type
-LEFT JOIN (
-SELECT * FROM knowyou_ott_dmt.imp_epg_type_grade
-)t1 
-ON a.top1_epg=t1.epg
-LEFT JOIN (
-SELECT * FROM knowyou_ott_dmt.imp_epg_type_grade
-)t2 
-ON a.top2_epg=t2.epg
-LEFT JOIN (
-SELECT * FROM knowyou_ott_dmt.imp_epg_type_grade
-)t3 
-ON a.top3_epg=t3.epg
-LEFT JOIN (
-SELECT * FROM knowyou_ott_dmt.imp_epg_type_grade
-)t4 
-ON a.top4_epg=t4.epg
-LEFT JOIN (
-SELECT * FROM knowyou_ott_dmt.imp_epg_type_grade
-)t5 
-ON a.top5_epg=t5.epg 
-
-
-
-
-
-
-
-
--- 5.用户分时段总评分表
-INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_user_rating_dm PARTITION(date_time)
-
-SELECT  deviceid,
-hourtype,
-(child_top1_content_rate + child_top2_content_rate + child_top3_content_rate +child_top1_epg_rate 
-+child_top2_epg_rate +child_top3_epg_rate +child_top4_epg_rate+child_top5_epg_rate) AS rate,	
-'child' AS grouptype,
-date_time
-FROM knowyou_ott_dmt.htv_user_rating_detail_dm WHERE date_time='${C_DAY}'
-UNION ALL 
-SELECT  deviceid,
-hourtype,
-(teen_top1_content_rate + teen_top2_content_rate + teen_top3_content_rate +teen_top1_epg_rate 
-+teen_top2_epg_rate +teen_top3_epg_rate +teen_top4_epg_rate+teen_top5_epg_rate) AS rate,
-'teen' AS grouptype,
-date_time
-FROM knowyou_ott_dmt.htv_user_rating_detail_dm WHERE date_time='${C_DAY}'
-UNION ALL
-SELECT  deviceid,
-hourtype,
-(youth_top1_content_rate + youth_top2_content_rate + youth_top3_content_rate +youth_top1_epg_rate 
-+youth_top2_epg_rate +youth_top3_epg_rate +youth_top4_epg_rate+youth_top5_epg_rate) AS rate,
-'youth' AS grouptype,
-date_time
-FROM knowyou_ott_dmt.htv_user_rating_detail_dm WHERE date_time='${C_DAY}'
-UNION ALL
-SELECT  deviceid,
-hourtype,
-(mid_top1_content_rate + mid_top2_content_rate + mid_top3_content_rate +mid_top1_epg_rate 
-+mid_top2_epg_rate +mid_top3_epg_rate +mid_top4_epg_rate+mid_top5_epg_rate) AS rate,
-'mid' AS grouptype,
-date_time
-FROM knowyou_ott_dmt.htv_user_rating_detail_dm WHERE date_time='${C_DAY}'
-UNION ALL
-SELECT  deviceid,
-hourtype,
-(old_top1_content_rate + old_top2_content_rate + old_top3_content_rate +old_top1_epg_rate 
-+old_top2_epg_rate +old_top3_epg_rate +old_top4_epg_rate+old_top5_epg_rate) AS rate,
-'old' AS grouptype,
-date_time
-FROM knowyou_ott_dmt.htv_user_rating_detail_dm WHERE date_time='${C_DAY}'
-UNION ALL
-SELECT  deviceid,
-hourtype,
-(male_top1_content_rate + male_top2_content_rate + male_top3_content_rate +male_top1_epg_rate 
-+male_top2_epg_rate +male_top3_epg_rate +male_top4_epg_rate+male_top5_epg_rate) AS rate,
-'male' AS grouptype,
-date_time
-FROM knowyou_ott_dmt.htv_user_rating_detail_dm WHERE date_time='${C_DAY}'
-UNION ALL
-SELECT  deviceid,
-hourtype,
-(female_top1_content_rate + female_top2_content_rate + female_top3_content_rate +female_top1_epg_rate 
-+female_top2_epg_rate +female_top3_epg_rate +female_top4_epg_rate+female_top5_epg_rate) AS rate,	
-'female' AS grouptype,
-date_time
-FROM knowyou_ott_dmt.htv_user_rating_detail_dm WHERE date_time='${C_DAY}' 
+                coalesce(0.2*t5.child_rate ,'0') AS child_top5_epg_rate,
+                coalesce(0.2*t5.teen_rate ,'0') AS teen_top5_epg_rate,
+                coalesce(0.2*t5.youth_rate ,'0') AS youth_top5_epg_rate,
+                coalesce(0.2*t5.mid_rate ,'0') AS mid_top5_epg_rate,
+                coalesce(0.2*t5.old_rate ,'0') AS old_top5_epg_rate,
+                coalesce(0.2*t5.male_rate ,'0') AS male_top5_epg_rate,
+                coalesce(0.2*t5.female_rate ,'0') AS female_top5_epg_rate,
+                '${C_DAY}' AS date_time
+                FROM(
+                SELECT * FROM knowyou_ott_dmt.htv_user_feature_dm
+                WHERE date_time = '${C_DAY}' 
+                )a
+                LEFT JOIN (
+                SELECT * FROM knowyou_ott_dmt.imp_contenttype_grade
+                )m1 
+                ON a.top1_content=m1.content_type
+                LEFT JOIN (
+                SELECT * FROM knowyou_ott_dmt.imp_contenttype_grade
+                )m2 
+                ON a.top2_content=m2.content_type
+                LEFT JOIN (
+                SELECT * FROM knowyou_ott_dmt.imp_contenttype_grade
+                )m3 
+                ON a.top3_content=m3.content_type
+                LEFT JOIN (
+                SELECT * FROM knowyou_ott_dmt.imp_epg_type_grade
+                )t1 
+                ON a.top1_epg=t1.epg
+                LEFT JOIN (
+                SELECT * FROM knowyou_ott_dmt.imp_epg_type_grade
+                )t2 
+                ON a.top2_epg=t2.epg
+                LEFT JOIN (
+                SELECT * FROM knowyou_ott_dmt.imp_epg_type_grade
+                )t3 
+                ON a.top3_epg=t3.epg
+                LEFT JOIN (
+                SELECT * FROM knowyou_ott_dmt.imp_epg_type_grade
+                )t4 
+                ON a.top4_epg=t4.epg
+                LEFT JOIN (
+                SELECT * FROM knowyou_ott_dmt.imp_epg_type_grade
+                )t5 
+                ON a.top5_epg=t5.epg 
 
 
 
 
 
---用户画像
-INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_user_personas_dm PARTITION(date_time)
-SELECT  m1.deviceid,
-m1.hourtype,
-m1.grouptype AS grouptype ,
-m2.grouptype AS sex_type,
-'${C_DAY}' AS date_time
-FROM(
-SELECT t1.deviceid,t1.hourtype,t1.grouptype
-FROM(
-SELECT  deviceid,
-hourtype,
-grouptype,
-row_number() over(PARTITION by deviceid,hourtype ORDER BY rate desc) AS ranks
-FROM knowyou_ott_dmt.htv_user_rating_dm
-WHERE date_time='${C_DAY}' AND grouptype IN ('child','teen','youth','mid','old')
-)t1 
-WHERE t1.ranks=1
-)m1
-LEFT JOIN (
-SELECT t2.deviceid,t2.hourtype,t2.grouptype
-FROM(
-SELECT  deviceid,
-hourtype,
-grouptype,
-row_number() over(PARTITION by deviceid,hourtype ORDER BY rate desc) AS ranks 
-FROM knowyou_ott_dmt.htv_user_rating_dm 
-WHERE date_time='${C_DAY}' AND grouptype IN ('male','female')
-)t2 
-WHERE t2.ranks=1
-)m2 ON m1.deviceid=m2.deviceid AND m1.hourtype=m2.hourtype 
+
+
+
+                -- 5.用户分时段总评分表
+                INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_user_rating_dm PARTITION(date_time)
+
+                SELECT  deviceid,
+                hourtype,
+                (child_top1_content_rate + child_top2_content_rate + child_top3_content_rate +child_top1_epg_rate 
+                +child_top2_epg_rate +child_top3_epg_rate +child_top4_epg_rate+child_top5_epg_rate) AS rate,	
+                'child' AS grouptype,
+                date_time
+                FROM knowyou_ott_dmt.htv_user_rating_detail_dm WHERE date_time='${C_DAY}'
+                UNION ALL 
+                SELECT  deviceid,
+                hourtype,
+                (teen_top1_content_rate + teen_top2_content_rate + teen_top3_content_rate +teen_top1_epg_rate 
+                +teen_top2_epg_rate +teen_top3_epg_rate +teen_top4_epg_rate+teen_top5_epg_rate) AS rate,
+                'teen' AS grouptype,
+                date_time
+                FROM knowyou_ott_dmt.htv_user_rating_detail_dm WHERE date_time='${C_DAY}'
+                UNION ALL
+                SELECT  deviceid,
+                hourtype,
+                (youth_top1_content_rate + youth_top2_content_rate + youth_top3_content_rate +youth_top1_epg_rate 
+                +youth_top2_epg_rate +youth_top3_epg_rate +youth_top4_epg_rate+youth_top5_epg_rate) AS rate,
+                'youth' AS grouptype,
+                date_time
+                FROM knowyou_ott_dmt.htv_user_rating_detail_dm WHERE date_time='${C_DAY}'
+                UNION ALL
+                SELECT  deviceid,
+                hourtype,
+                (mid_top1_content_rate + mid_top2_content_rate + mid_top3_content_rate +mid_top1_epg_rate 
+                +mid_top2_epg_rate +mid_top3_epg_rate +mid_top4_epg_rate+mid_top5_epg_rate) AS rate,
+                'mid' AS grouptype,
+                date_time
+                FROM knowyou_ott_dmt.htv_user_rating_detail_dm WHERE date_time='${C_DAY}'
+                UNION ALL
+                SELECT  deviceid,
+                hourtype,
+                (old_top1_content_rate + old_top2_content_rate + old_top3_content_rate +old_top1_epg_rate 
+                +old_top2_epg_rate +old_top3_epg_rate +old_top4_epg_rate+old_top5_epg_rate) AS rate,
+                'old' AS grouptype,
+                date_time
+                FROM knowyou_ott_dmt.htv_user_rating_detail_dm WHERE date_time='${C_DAY}'
+                UNION ALL
+                SELECT  deviceid,
+                hourtype,
+                (male_top1_content_rate + male_top2_content_rate + male_top3_content_rate +male_top1_epg_rate 
+                +male_top2_epg_rate +male_top3_epg_rate +male_top4_epg_rate+male_top5_epg_rate) AS rate,
+                'male' AS grouptype,
+                date_time
+                FROM knowyou_ott_dmt.htv_user_rating_detail_dm WHERE date_time='${C_DAY}'
+                UNION ALL
+                SELECT  deviceid,
+                hourtype,
+                (female_top1_content_rate + female_top2_content_rate + female_top3_content_rate +female_top1_epg_rate 
+                +female_top2_epg_rate +female_top3_epg_rate +female_top4_epg_rate+female_top5_epg_rate) AS rate,	
+                'female' AS grouptype,
+                date_time
+                FROM knowyou_ott_dmt.htv_user_rating_detail_dm WHERE date_time='${C_DAY}' 
+
+
+
+
+
+                --用户画像
+                INSERT OVERWRITE TABLE knowyou_ott_dmt.htv_user_personas_dm PARTITION(date_time)
+                SELECT  m1.deviceid,
+                m1.hourtype,
+                m1.grouptype AS grouptype ,
+                m2.grouptype AS sex_type,
+                '${C_DAY}' AS date_time
+                FROM(
+                SELECT t1.deviceid,t1.hourtype,t1.grouptype
+                FROM(
+                SELECT  deviceid,
+                hourtype,
+                grouptype,
+                row_number() over(PARTITION by deviceid,hourtype ORDER BY rate desc) AS ranks
+                FROM knowyou_ott_dmt.htv_user_rating_dm
+                WHERE date_time='${C_DAY}' AND grouptype IN ('child','teen','youth','mid','old')
+                )t1 
+                WHERE t1.ranks=1
+                )m1
+                LEFT JOIN (
+                SELECT t2.deviceid,t2.hourtype,t2.grouptype
+                FROM(
+                SELECT  deviceid,
+                hourtype,
+                grouptype,
+                row_number() over(PARTITION by deviceid,hourtype ORDER BY rate desc) AS ranks 
+                FROM knowyou_ott_dmt.htv_user_rating_dm 
+                WHERE date_time='${C_DAY}' AND grouptype IN ('male','female')
+                )t2 
+                WHERE t2.ranks=1
+                )m2 ON m1.deviceid=m2.deviceid AND m1.hourtype=m2.hourtype 
 
 
 
