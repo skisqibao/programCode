@@ -79,7 +79,7 @@ if __name__ == '__main__':
               'MCSMost_DL', 'MCSAvg_UL', 'MCSBest_UL', 'MCSMost_UL', 'CQI_Avg', 'CQI_Best', 'CQI_Most', 'PDSCH_BLER',
               'PUSCH_BLER']
     source_df = getSourceDataFrame(data_path)
-    print(source_df)
+    print('read kafka write data:\n', source_df)
     write_list = []
     tuple_list = []
 

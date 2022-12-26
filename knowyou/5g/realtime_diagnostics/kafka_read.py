@@ -90,7 +90,7 @@ if __name__ == '__main__':
     decodeTopic = "fvgiis-wireless-Message"
     exceptionTopic = "fvgiis-ai-alarm"
     write_path = 'file://' + os.path.join(dirname, 'kafka_train_df')
-    checkpoint_path = 'file://' + os.path.join(dirname, 'ck1')
+    checkpoint_path = 'file://' + os.path.join(dirname, 'cp1')
 
     # 连接kafka生产者并加载正常数据
     decodeDF = spark \
@@ -134,7 +134,6 @@ if __name__ == '__main__':
     joinDF = decodeDF.join(
         exceptionDF,
         F.expr("""
-            uuid1 = uuid and 
             device_sn = deviceSn and
             (unix_timestamp(dtSec, 'yyyy-MM-dd HH:mm') - unix_timestamp(dt_sec, 'yyyy-MM-dd HH:mm')) <= 240 and
             (unix_timestamp(dt_sec, 'yyyy-MM-dd HH:mm') - unix_timestamp(dtSec, 'yyyy-MM-dd HH:mm')) <= 240 
@@ -156,7 +155,7 @@ if __name__ == '__main__':
     # trainDF.writeStream \
     #     .format("console") \
     #     .outputMode("append") \
-    #     .trigger(processingTime='6 seconds') \
+    #     .trigger(processingTime='2 seconds') \
     #     .start() \
     #     .awaitTermination()
 
@@ -164,7 +163,7 @@ if __name__ == '__main__':
     trainDF.writeStream \
         .format("csv") \
         .outputMode("append") \
-        .trigger(processingTime='60 seconds') \
+        .trigger(processingTime='6 seconds') \
         .option("path", write_path) \
         .option("checkpointLocation", checkpoint_path) \
         .start() \
