@@ -551,6 +551,78 @@ PJscaSqcI0M=
 
 lftp -u cmccah,PJscaSqcI0M= sftp://183.204.51.186:22222
 
+ah_data_sync.sh
+#!/bin/bash
+
+start_time=`date`
+pid=`echo $$`
+echo "Start time: ${start_time}"
+echo "Current thread number: ${pid}"
+
+
+cur_date=`date -d yesterday +%Y%m%d`
+#cur_date=20220919
+SQLDIR=/hadoop/export_data/ah_data_sync/execute_sql
+DATADIR=/hadoop/export_data/ah_data_sync/sync_data/${cur_date}
+
+if [ ! -d ${DATADIR} ]; then
+    mkdir ${DATADIR}
+fi
+
+for sql in `ls ${SQLDIR}`
+do
+    echo "Execute --> ${sql}"
+    prefix=`echo ${sql} | awk 'BEGIN {FS="."} {print $1}'`
+    hive -hivevar cur_date=${cur_date} -f ${SQLDIR}/${sql} > ${DATADIR}/${prefix}.txt
+done
+
+echo "EVEREY SQL WORKS.\n Start uploading data files:"
+ 
+#SFTP配置信息
+#用户名
+USER=cmccah
+#密码
+PASSWORD=PJscaSqcI0M=
+#待上传文件根目录
+SRCDIR=/hadoop/export_data/ah_data_sync/sync_data/${cur_date}/
+#FTP目录
+DESDIR=/ah_data_sync/${cur_date}
+#IP
+IP=183.204.51.186
+#端口
+PORT=22222
+
+lftp -u ${USER},${PASSWORD} sftp://${IP}:${PORT} <<EOF
+rm -rf ${DESDIR}
+mkdir ${DESDIR}
+EOF
+
+ 
+#获取文件
+cd ${SRCDIR} ;
+#目录下的所有文件
+FILES=`ls` 
+#修改时间在执行时间五分钟之前的xml文件
+#FILES=`find ${SRCDIR} -mmin -50 -name '*.xml'`
+ 
+for FILE in ${FILES}
+do
+    echo "File: ${FILE} is sending ..."
+#发送文件 (关键部分）
+lftp -u ${USER},${PASSWORD} sftp://${IP}:${PORT} <<EOF
+cd ${DESDIR}/
+lcd ${SRCDIR}
+put ${FILE}
+by
+EOF
+done
+
+end_time=`date`
+echo "End time: ${end_time}"
+
+
+
+
 
 select dt,count(distinct deviceid) from knowyou_ott_ods.dim_mbh_user_itv_df 
 where dt>=20220801 and bootstatusday='1' group by dt order by dt;
